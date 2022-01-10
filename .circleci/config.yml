@@ -1,0 +1,48 @@
+version: 2.1
+
+orbs:
+  ruby: circleci/ruby@0.1.2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.7.5
+    working_directory: ~/dokotabe-app/src
+    steps:
+      - checkout:
+          path: ~/dokotabe-app
+      - ruby/install-deps
+
+  test:
+    docker:
+      - image: circleci/ruby:2.7.5
+      - image: circleci/postgres:13.5
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_DB: app_test
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      APP_DATABASE_HOST: "127.0.0.1"
+      RAILS_ENV: test
+    working_directory: ~/dokotabe-app/src
+    steps:
+      - checkout:
+          path: ~/dokotabe-app
+      - ruby/install-deps
+      - run:
+          name: Database setup
+          command: bundle exec rails db:migrate
+      - run:
+          name: test
+          command: bundle exec rake test
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
