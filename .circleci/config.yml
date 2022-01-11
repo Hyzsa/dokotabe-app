@@ -6,7 +6,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.7.5
+      - image: cimg/ruby:2.7.5
     working_directory: ~/dokotabe-app/src
     steps:
       - checkout:
@@ -15,7 +15,7 @@ jobs:
 
   test:
     docker:
-      - image: circleci/ruby:2.7.5
+      - image: cimg/ruby:2.7.5
       - image: circleci/postgres:13.5
         environment:
           POSTGRES_USER: postgres
@@ -31,6 +31,18 @@ jobs:
       - checkout:
           path: ~/dokotabe-app
       - ruby/install-deps
+      ####################################
+      # 調査用
+      - run:
+          name: ファイル構造
+          command: ls -a
+      - run:
+          name: Gemインストール先
+          command: gem environment
+      - run:
+          name: インストール済みのGem
+          command: gem list
+      ####################################
       - run:
           name: Database setup
           command: bundle exec rails db:migrate
