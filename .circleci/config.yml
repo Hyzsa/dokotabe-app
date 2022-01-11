@@ -31,18 +31,6 @@ jobs:
       - checkout:
           path: ~/dokotabe-app
       - ruby/install-deps
-      ####################################
-      # 調査用
-      - run:
-          name: ファイル構造
-          command: ls -a
-      - run:
-          name: Gemインストール先
-          command: gem environment
-      - run:
-          name: インストール済みのGem
-          command: gem list
-      ####################################
       - run:
           name: Database setup
           command: bundle exec rails db:migrate
