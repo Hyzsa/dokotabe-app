@@ -41,6 +41,9 @@ jobs:
           name: Database setup
           command: bundle exec rails db:migrate
       - run:
+          name: RuboCop
+          command: bundle exec rubocop
+      - run:
           name: RSpec
           command: bundle exec rspec
 
