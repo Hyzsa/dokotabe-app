@@ -1,5 +1,5 @@
 # 将来的には対応する規約の読込
-# inherit_from: .rubocop_todo.yml
+inherit_from: .rubocop_todo.yml
 
 # 追加した規約ファイル読込
 require:
@@ -14,8 +14,7 @@ AllCops:
   TargetRubyVersion: 2.7
   # チェック対象から除外するファイル
   Exclude:
-    - "node_modules/**/*" # rubocop config/default.yml
-    - "vendor/**/*" # rubocop config/default.yml
+    - "node_modules/**/*"
     - "db/schema.rb"
     - "config.ru"
     - "bin/**"
@@ -24,10 +23,12 @@ AllCops:
     - "tmp/**/*"
     - "vendor/**/*"
     - "config/**/*"
-    - "script/**/*"
+    - "Gemfile"
+    - "Gemfile.lock"
     - !ruby/regexp /old_and_unused\.rb$/
 
 #################### Rails #################################
+# 標準の規約 + Railsの規約
 Rails:
   Enabled: true
 
@@ -44,5 +45,31 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+# Use nested module/class definitions instead of compact style. を無視
 Style/ClassAndModuleChildren:
   Enabled: false
+
+# 空メソッドの場合だけ1行で書かなければいけない理由が無い
+# 「セミコロンは使わない」に寄せた方がルールがシンプル
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+# %w() と %i() が見分けづらいので Style/WordArray と合わせて無効に。
+# 書き手に委ねるという意味で、Enabled: false にしています。
+Style/SymbolArray:
+  Enabled: false
+
+# %w() と %i() が見分けづらいので Style/SymbolArray と合わせて無効に。
+# 書き手に委ねるという意味で、Enabled: false にしています。
+Style/WordArray:
+  Enabled: false
+
+# 式展開するときだけダブルコーテーションで書き直すという作業が煩雑になる
+# ことから EnforcedStyle: double_quotes 推奨
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+# 式展開中でもダブルクォートを使う
+# 普段の文字列リテラルがダブルクォートなので使い分けるのが面倒
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
