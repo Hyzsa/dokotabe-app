@@ -12,10 +12,13 @@
   </head>
 
   <body>
-    <%= render 'layouts/header'%>
-    <div class="container">
-      <%= yield %>
+    <%# トップページのみ背景画像を表示する。 %>
+    <div class="min-vh-100 <%= "bg-image" if current_page?(root_path)%>">
+      <%= render 'layouts/header'%>
+      <div class="container">
+        <%= yield %>
+      </div>
+      <%= render 'layouts/footer'%>
     </div>
-    <%= render 'layouts/footer'%>
   </body>
 </html>
