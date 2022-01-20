@@ -1,7 +1,12 @@
-// トップページの背景画像
+// トップページ
 .bg-image {
   background-image: image-url("bg-image.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.title {
+  width: 300px;
+  margin: 0 auto 8px;
 }
