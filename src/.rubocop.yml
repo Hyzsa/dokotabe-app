@@ -73,3 +73,10 @@ Style/StringLiterals:
 # 普段の文字列リテラルがダブルクォートなので使い分けるのが面倒
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
+
+#################### Metrics ###############################
+# RSpecは専用のDSLで記述する性質上、
+# 1つのブロックあたりの行数を25行以下に書き換えるのは現実的ではないため無効に。
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
