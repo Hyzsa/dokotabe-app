@@ -54,12 +54,12 @@ Style/ClassAndModuleChildren:
 Style/EmptyMethod:
   EnforcedStyle: expanded
 
-# %w() と %i() が見分けづらいので Style/WordArray と合わせて無効に。
+# %w() と %i() が見分けづらいので Style/WordArray と合わせて無効
 # 書き手に委ねるという意味で、Enabled: false にしています。
 Style/SymbolArray:
   Enabled: false
 
-# %w() と %i() が見分けづらいので Style/SymbolArray と合わせて無効に。
+# %w() と %i() が見分けづらいので Style/SymbolArray と合わせて無効
 # 書き手に委ねるという意味で、Enabled: false にしています。
 Style/WordArray:
   Enabled: false
@@ -76,7 +76,12 @@ Style/StringLiteralsInInterpolation:
 
 #################### Metrics ###############################
 # RSpecは専用のDSLで記述する性質上、
-# 1つのブロックあたりの行数を25行以下に書き換えるのは現実的ではないため無効に。
+# 1つのブロックあたりの行数を25行以下に書き換えるのは現実的ではないため無効
 Metrics/BlockLength:
   Exclude:
     - "spec/**/*"
+
+#################### RSpec #################################
+# 日本語で記述する方針に決めたため無効
+RSpec/ContextWording:
+  Enabled: false
