@@ -6,8 +6,44 @@
   background-repeat: no-repeat;
 }
 
-// ホーム画面
+// ホームページ
 .title {
   width: 300px;
   margin: 0 auto 8px;
+}
+
+// お問い合わせページ
+.f-size {
+  font-size: 2rem;
+}
+
+.bg-color {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+}
+
+.bg-width {
+  width: 50%;
+}
+
+/* Large
+-------------------------------- */
+@media (max-width: 992px) {
+  // お問い合わせページ
+  .f-size {
+    font-size: 1.3rem;
+  }
+
+  .bg-width {
+    width: 100%;
+  }
+}
+
+/* Extra large
+-------------------------------- */
+@media (max-width: 1200px) {
+  // お問い合わせページ
+  .bg-width {
+    width: 70%;
+  }
 }
