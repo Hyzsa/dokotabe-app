@@ -1,9 +1,5 @@
 <header class="container mt-3">
-  <% if current_page?(root_path) %>
-    <nav class="navbar navbar-expand-md navbar-light">
-  <% else %>
-    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-  <% end %>
+  <nav class="navbar navbar-expand-md navbar-light">
     <div class="container-fluid p-0">
       <%= link_to image_tag("logo.png", alt: "DokoTabeのロゴ", width: "110", height: "30"), root_path, class: "navbar-brand", id: "logo" %>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">

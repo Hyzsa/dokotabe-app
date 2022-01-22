@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "CommonParts", type: :system do
   describe "header" do
     shared_examples "homeページに遷移すること" do |id|
-      example do
+      example "homeページに遷移すること" do
         visit root_path
         click_link(id.to_s)
         expect(page).to have_selector("img[src$='title.png']")
@@ -11,7 +11,7 @@ RSpec.describe "CommonParts", type: :system do
     end
 
     shared_examples "activeクラスの設定箇所が正しいこと" do |id|
-      example do
+      example "activeクラスの設定箇所が正しいこと" do
         visit root_path
         click_link(id.to_s)
         expect(page).to have_selector "##{id}", class: "active"
@@ -19,7 +19,7 @@ RSpec.describe "CommonParts", type: :system do
     end
 
     shared_examples "activeクラスがページ内で1箇所だけ設定されていること" do |id|
-      example do
+      example "activeクラスがページ内で1箇所だけ設定されていること" do
         visit root_path
         click_link(id.to_s)
         expect(page.all(".active").size).to eq 1
@@ -42,7 +42,7 @@ RSpec.describe "CommonParts", type: :system do
       example "contactページに遷移すること" do
         visit root_path
         click_link("contact")
-        expect(page).to have_content("StaticPages#contact")
+        expect(page).to have_selector "h1", text: "お問い合わせ"
       end
 
       it_behaves_like "activeクラスの設定箇所が正しいこと", :contact
