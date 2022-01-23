@@ -1,4 +1,5 @@
-// トップページ
+/* common
+-------------------------------- */
 .bg-image {
   background-image: image-url("bg-image.jpg");
   background-size: cover;
@@ -6,13 +7,15 @@
   background-repeat: no-repeat;
 }
 
-// ホームページ
+/* home
+-------------------------------- */
 .title {
   width: 300px;
   margin: 0 auto 8px;
 }
 
-// お問い合わせページ
+/* contact
+-------------------------------- */
 .f-size {
   font-size: 2rem;
 }
@@ -26,10 +29,15 @@
   width: 50%;
 }
 
+.btn-width {
+  width: 25%;
+}
+
 /* Large
 -------------------------------- */
 @media (max-width: 992px) {
-  // お問い合わせページ
+  /* contact
+  ------------------------------ */
   .f-size {
     font-size: 1.3rem;
   }
@@ -37,12 +45,17 @@
   .bg-width {
     width: 100%;
   }
+
+  .btn-width {
+    width: 50%;
+  }
 }
 
 /* Extra large
 -------------------------------- */
 @media (max-width: 1200px) {
-  // お問い合わせページ
+  /* contact
+  ------------------------------ */
   .bg-width {
     width: 70%;
   }
