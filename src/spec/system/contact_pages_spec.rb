@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Contacts", type: :system do
+RSpec.describe "Contact Pages", type: :system do
   context "[TOP]ボタンを押下した場合" do
     example "homeページに遷移すること" do
       visit contact_path
