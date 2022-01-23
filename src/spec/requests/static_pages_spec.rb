@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "StaticPages", type: :request do
+RSpec.describe "Static Pages", type: :request do
   describe "GET /" do
     example "HomeページのHTTPリクエストが成功すること" do
       get root_path
