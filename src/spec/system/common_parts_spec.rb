@@ -40,6 +40,7 @@ RSpec.describe "Common Parts", type: :system do
         click_link("contact")
         expect(page).to have_selector "h1", text: "お問い合わせ"
       end
+
       it_behaves_like "activeクラスの設定箇所が正しいこと", :contact
     end
   end
