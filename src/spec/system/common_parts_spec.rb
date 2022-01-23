@@ -1,9 +1,9 @@
 require "rails_helper"
 
-RSpec.describe "CommonParts", type: :system do
+RSpec.describe "Common Parts", type: :system do
   describe "header" do
     shared_examples "homeページに遷移すること" do |id|
-      example "homeページに遷移すること" do
+      example do
         visit root_path
         click_link(id.to_s)
         expect(page).to have_selector("img[src$='title.png']")
@@ -11,14 +11,12 @@ RSpec.describe "CommonParts", type: :system do
     end
 
     shared_examples "activeクラスの設定箇所が正しいこと" do |id|
-      example "activeクラスの設定箇所が正しいこと" do
+      example "クリックしたタブにactiveクラスが設定されていること" do
         visit root_path
         click_link(id.to_s)
         expect(page).to have_selector "##{id}", class: "active"
       end
-    end
 
-    shared_examples "activeクラスがページ内で1箇所だけ設定されていること" do |id|
       example "activeクラスがページ内で1箇所だけ設定されていること" do
         visit root_path
         click_link(id.to_s)
@@ -29,13 +27,11 @@ RSpec.describe "CommonParts", type: :system do
     context "ロゴ画像をクリックした場合" do
       it_behaves_like "homeページに遷移すること", :logo
       it_behaves_like "activeクラスの設定箇所が正しいこと", :home
-      it_behaves_like "activeクラスがページ内で1箇所だけ設定されていること", :home
     end
 
     context "ホームタブをクリックした場合" do
       it_behaves_like "homeページに遷移すること", :home
       it_behaves_like "activeクラスの設定箇所が正しいこと", :home
-      it_behaves_like "activeクラスがページ内で1箇所だけ設定されていること", :home
     end
 
     context "お問い合わせタブをクリックした場合" do
@@ -44,9 +40,7 @@ RSpec.describe "CommonParts", type: :system do
         click_link("contact")
         expect(page).to have_selector "h1", text: "お問い合わせ"
       end
-
       it_behaves_like "activeクラスの設定箇所が正しいこと", :contact
-      it_behaves_like "activeクラスがページ内で1箇所だけ設定されていること", :contact
     end
   end
 end
