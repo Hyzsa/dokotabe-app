@@ -18,7 +18,9 @@
         <%= form.select :budget, [["料金：こだわらない", "1"], ["a", "2"], ["b", "3"], ["c", "4"], ["d", "5"]], {}, { class: "form-select text-wrap", "aria-label": "Default select example" } %>
       </section>
       <section class="col-md-2">
-        <%= form.submit "検索", class: "btn btn-primary w-100 bi bi-search" %>
+        <%= button_tag(type: "submit", class: "btn btn-primary w-100") do %>
+          <i class="bi bi-search"></i> 検索
+        <% end %>
       </section>
     </section>
   <% end %>
