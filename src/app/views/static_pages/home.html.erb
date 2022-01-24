@@ -6,7 +6,7 @@
     お近くの飲食店から１店舗だけ選んでくれるサービスです！
   </p>
 
-  <%= form_with url: search_results_path do |form| %>
+  <%= form_with scope: :selected, url: search_results_path do |form| %>
     <section class="row mb-3">
       <section class="col-md mb-4">
         <%= form.select :range, [ ["検索範囲：300m", "1"], ["検索範囲：500m", "2"], ["検索範囲：1000m", "3"], ["検索範囲：2000m", "4"], ["検索範囲：3000m", "5"] ], { selected: 3 }, { class: "form-select text-wrap", "aria-label": "Default select example" } %>
@@ -19,7 +19,7 @@
       </section>
       <section class="col-md-2">
         <%= button_tag(type: "submit", class: "btn btn-primary w-100") do %>
-          <i class="bi bi-search"></i> 検索
+          <i class="bi bi-search"> 検索</i>
         <% end %>
       </section>
     </section>

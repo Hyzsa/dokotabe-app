@@ -6,7 +6,7 @@ RSpec.describe "Common Parts", type: :system do
       example do
         visit root_path
         click_link(id.to_s)
-        expect(page).to have_selector("img[src$='title.png']")
+        expect(page).to have_current_path root_path, ignore_query: true
       end
     end
 
@@ -38,7 +38,7 @@ RSpec.describe "Common Parts", type: :system do
       example "contactページに遷移すること" do
         visit root_path
         click_link("contact")
-        expect(page).to have_selector "h1", text: "お問い合わせ"
+        expect(page).to have_current_path contact_path, ignore_query: true
       end
 
       it_behaves_like "activeクラスの設定箇所が正しいこと", :contact
