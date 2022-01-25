@@ -5,7 +5,7 @@ RSpec.describe "Contact Pages", type: :system do
     example "homeページに遷移すること" do
       visit contact_path
       click_link "top_btn"
-      expect(page).to have_selector("img[src$='title.png']")
+      expect(page).to have_current_path root_path, ignore_query: true
     end
   end
 end
