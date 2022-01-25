@@ -6,7 +6,7 @@ class SearchResultsController < ApplicationController
   end
 
   def create
-    @shop_info = shop_information
-    redirect_to new_search_result_path(shop_info: @shop_info)
+    shop_info = shop_information
+    redirect_to new_search_result_path(shop_info: shop_info)
   end
 end
