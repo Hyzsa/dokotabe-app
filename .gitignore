@@ -38,3 +38,5 @@ src/.yarn-integrity
 src/tmp/db
 
 src/.env
+
+src/app/.DS_Store

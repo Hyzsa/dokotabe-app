@@ -1,5 +1,10 @@
 /* common
 -------------------------------- */
+.frame {
+  min-height: 100vh; // カスタムプロパティ未対応ブラウザ用
+  min-height: calc(var(--vh, 1vh) * 100);
+}
+
 .bg-image {
   background-image: image-url("bg-image.jpg");
   background-size: cover;
