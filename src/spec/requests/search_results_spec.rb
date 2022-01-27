@@ -16,14 +16,16 @@ RSpec.describe "Search Results", type: :request do
 
     context "位置情報が取得できた場合" do
       example "/search_results/new へのリダイレクトが成功すること" do
-        post search_results_path, params: { selected: { range: "", genre: "", budget: "", latitude: "1", longitude: "1", } }
+        post search_results_path,
+             params: { selected: { range: "", genre: "", budget: "", latitude: "1", longitude: "1" } }
         expect(response).to redirect_to(new_search_result_path(shop_info: shop_info))
       end
     end
 
     context "位置情報が取得できなかった場合" do
       example "/ にリダイレクトすること" do
-        post search_results_path, params: { selected: { range: "", genre: "", budget: "", latitude: "", longitude: "", } }
+        post search_results_path,
+             params: { selected: { range: "", genre: "", budget: "", latitude: "", longitude: "" } }
         expect(response).to redirect_to(root_path)
       end
     end
