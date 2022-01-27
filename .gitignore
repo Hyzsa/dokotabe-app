@@ -36,3 +36,5 @@ src/yarn-debug.log*
 src/.yarn-integrity
 
 src/tmp/db
+
+src/.env
