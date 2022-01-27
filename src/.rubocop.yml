@@ -85,6 +85,10 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Max: 20
 
+# 現状可読性は問題ない(主観)のでチェックが通るようにしておく
+Metrics/AbcSize:
+  Max: 30
+
 #################### RSpec #################################
 # 日本語で記述する方針に決めたため無効
 RSpec/ContextWording:
