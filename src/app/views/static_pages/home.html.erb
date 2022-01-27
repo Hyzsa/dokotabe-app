@@ -6,6 +6,8 @@
     お近くの飲食店から１店舗だけ選んでくれるサービスです！
   </p>
 
+  <%= render "layouts/flash" %>
+
   <%= form_with(url: search_results_path, scope: :selected, html: { onsubmit: "return false", name: "shop_search_form" }) do |f| %>
     <section class="row mb-3">
       <section class="col-md mb-4">

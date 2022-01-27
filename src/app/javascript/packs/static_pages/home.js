@@ -17,5 +17,5 @@ function successCallback(position) {
 
 // 取得に失敗したときの処理
 function errorCallback(error) {
-  alert("位置情報が取得できませんでした");
+  alert("位置情報が取得できませんでした。");
 };

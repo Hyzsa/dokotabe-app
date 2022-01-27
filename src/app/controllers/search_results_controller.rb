@@ -6,7 +6,12 @@ class SearchResultsController < ApplicationController
   end
 
   def create
-    logger.debug "latitude: #{params[:selected][:latitude]} longitude: #{params[:selected][:longitude]}"
-    redirect_to new_search_result_path(shop_info: shop_information)
+    if params[:selected][:latitude].empty? || params[:selected][:longitude].empty?
+      flash[:danger] = "位置情報が取得できませんでした。"
+      redirect_to root_path
+    else
+      logger.debug "latitude: #{params[:selected][:latitude]} longitude: #{params[:selected][:longitude]}"
+      redirect_to new_search_result_path(shop_info: shop_information)
+    end
   end
 end
