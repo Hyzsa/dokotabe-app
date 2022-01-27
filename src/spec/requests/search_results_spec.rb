@@ -23,11 +23,7 @@ RSpec.describe "Search Results", type: :request do
     end
 
     context "位置情報が取得できなかった場合" do
-      example "/ にリダイレクトすること" do
-        post search_results_path,
-             params: { selected: { range: "", genre: "", budget: "", latitude: "", longitude: "" } }
-        expect(response).to redirect_to(root_path)
-      end
+      example "javascriptのアラートが表示されること"
     end
   end
 end
