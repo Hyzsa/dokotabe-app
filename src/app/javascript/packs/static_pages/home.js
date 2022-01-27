@@ -16,6 +16,5 @@ function successCallback(position) {
 
 // 取得に失敗したときの処理
 function errorCallback(error) {
-  alert("位置情報が取得できませんでした。");
-  document.shop_search_form.submit();
+  alert("位置情報が取得できませんでした。\nお手持ちの端末にて、位置情報の利用を許可してください。");
 };
