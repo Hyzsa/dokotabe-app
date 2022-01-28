@@ -1,16 +1,32 @@
 module SearchResultsHelper
-  # 店舗情報を返す
-  def shop_information
+  SEARCH_COUNT = 20 # 検索数指定
+
+  # 表示に必要な店舗情報を返す。
+  def shop_information(shop_info)
     {
-      name: "ここに店名が表示されます。",
-      address: "ここに店舗の住所が表示されます。",
-      mobile_access: "ここに店舗へのアクセス方法が表示されます。",
-      genre: "ジャンル", # genre - name
-      budget: "XXXX円～XXXX円", # budget - average
-      urls: "#",
-      photo: "", # photo - pc - l
-      open: "ここに営業時間が表示されます。",
-      close: "ここに定休日が表示されます。"
+      name: shop_info[:name],
+      address: shop_info[:address],
+      mobile_access: shop_info[:mobile_access],
+      genre: shop_info[:genre][:name],
+      budget: shop_info[:budget][:average],
+      urls: shop_info[:urls][:pc],
+      photo: shop_info[:photo][:pc][:l],
+      open: shop_info[:open],
+      close: shop_info[:close]
     }
+  end
+
+  # ランダムに１店舗の情報を取得する。
+  def fetch_at_random_1_shop_information
+    response = gourmet_search_api
+    json_hash = JSON.parse(response, symbolize_names: true)
+    json_hash[:results][:shop].sample
+  end
+
+  # グルメサーチAPI
+  def gourmet_search_api
+    url = "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=#{ENV["HOTPEPPER_API"]}&lat=#{params[:selected][:latitude]}&lng=#{params[:selected][:longitude]}&range=#{params[:selected][:range]}&genre=#{params[:selected][:genre]}&budget=#{params[:selected][:budget]}&count=#{SEARCH_COUNT}&format=json"
+    uri = URI.parse(url)
+    Net::HTTP.get(uri)
   end
 end
