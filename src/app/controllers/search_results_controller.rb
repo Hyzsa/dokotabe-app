@@ -6,6 +6,12 @@ class SearchResultsController < ApplicationController
   end
 
   def create
-    redirect_to new_search_result_path(shop_info: shop_information(fetch_at_random_1_shop_information))
+    shop_info = fetch_at_random_1_shop_information
+    if shop_info.nil?
+      flash[:danger] = "選択した条件に一致する店舗が見つかりませんでした。"
+      redirect_to root_url
+    else
+      redirect_to new_search_result_url(shop_info: shop_information(shop_info))
+    end
   end
 end
