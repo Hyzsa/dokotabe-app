@@ -11,7 +11,8 @@ class SearchResultsController < ApplicationController
       flash[:danger] = "選択した条件に一致する店舗が見つかりませんでした。"
       redirect_to root_url
     else
-      redirect_to new_search_result_url(shop_info: shop_information(shop_info))
+      @extracted_shop_info = extract_required_shop_information(shop_info)
+      redirect_to new_search_result_url(shop_info: @extracted_shop_info)
     end
   end
 end

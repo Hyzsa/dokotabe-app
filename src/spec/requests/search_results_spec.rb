@@ -2,28 +2,29 @@ require "rails_helper"
 
 RSpec.describe "Search Results", type: :request do
   describe "POST /search_results" do
-    shop_info = {
-      name: "ここに店名が表示されます。",
-      address: "ここに店舗の住所が表示されます。",
-      mobile_access: "ここに店舗へのアクセス方法が表示されます。",
-      genre: "ジャンル",
-      budget: "XXXX円～XXXX円",
-      urls: "#",
-      photo: "",
-      open: "ここに営業時間が表示されます。",
-      close: "ここに定休日が表示されます。"
-    }
-
-    context "位置情報が取得できた場合" do
-      example "/search_results/new へのリダイレクトが成功すること" do
-        post search_results_path,
-             params: { selected: { range: "", genre: "", budget: "", latitude: "1", longitude: "1" } }
-        expect(response).to redirect_to(new_search_result_path(shop_info: shop_info))
+    context "店舗が見つからなかった場合" do
+      example "ホーム画面にリダイレクトすること" do
+        # 必ず店舗が見つからないように、緯度経度にヌル島(0度)を指定
+        post search_results_path, params: { selected: { range: "3",
+                                                        genre: "",
+                                                        budget: "",
+                                                        latitude: "0",
+                                                        longitude: "0" } }
+        expect(response).to redirect_to(root_url)
       end
     end
 
-    context "位置情報が取得できなかった場合" do
-      example "javascriptのアラートが表示されること"
+    context "店舗が見つかった場合" do
+      example "検索結果表示画面にリダイレクトすること" do
+        # 必ず店舗が見つかるように、緯度経度に東京駅を指定
+        post search_results_path, params: { selected: { range: "3",
+                                                        genre: "",
+                                                        budget: "",
+                                                        latitude: "35.6809591",
+                                                        longitude: "139.7673068" } }
+        extracted_shop_info = controller.instance_variable_get(:@extracted_shop_info)
+        expect(response).to redirect_to(new_search_result_path(shop_info: extracted_shop_info))
+      end
     end
   end
 end

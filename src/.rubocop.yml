@@ -93,3 +93,8 @@ Metrics/AbcSize:
 # 日本語で記述する方針に決めたため無効
 RSpec/ContextWording:
   Enabled: false
+
+# Layout/LineLengthを対応するとこっちに引っかかる。
+# とりあえず条件を緩和して様子を見る。
+RSpec/ExampleLength:
+  Max: 8
