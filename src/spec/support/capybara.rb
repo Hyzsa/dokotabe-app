@@ -1,4 +1,4 @@
-require 'capybara/rspec'
+require "capybara/rspec"
 
 RSpec.configure do |config|
   config.before(:each, type: :system) do
@@ -26,5 +26,6 @@ Capybara.register_driver :remote_chrome do |app|
       ]
     }
   )
+  # ブラウザーを起動
   Capybara::Selenium::Driver.new(app, browser: :remote, url: url, desired_capabilities: caps)
 end

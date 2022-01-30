@@ -25,6 +25,7 @@ AllCops:
     - "config/**/*"
     - "Gemfile"
     - "Gemfile.lock"
+    - "spec/rails_helper.rb"
     - !ruby/regexp /old_and_unused\.rb$/
 
 #################### Rails #################################
