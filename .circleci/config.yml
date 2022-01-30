@@ -25,6 +25,8 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_HOST_AUTH_METHOD: trust
           POSTGRES_DB: app_test
+      - image: selenium/standalone-chrome:latest
+        name: chrome
     environment:
       BUNDLE_JOBS: "3"
       BUNDLE_RETRY: "3"
