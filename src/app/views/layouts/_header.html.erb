@@ -23,9 +23,9 @@
           </li>
           <li class="nav-item">
             <% if request.path == "#" %>
-              <%= link_to " ログイン", "#", class: "nav-link bi bi-box-arrow-in-right active" %>
+              <%= link_to " ログイン", new_user_session_path, class: "nav-link bi bi-box-arrow-in-right active" %>
             <% else %>
-              <%= link_to " ログイン", "#", class: "nav-link bi bi-box-arrow-in-right" %>
+              <%= link_to " ログイン", new_user_session_path, class: "nav-link bi bi-box-arrow-in-right" %>
             <% end %>
           </li>
           <%# <li class="nav-item dropdown">

@@ -17,6 +17,14 @@
   border-radius: 20px;
 }
 
+.bg-width {
+  width: 50%;
+}
+
+.validation_error_font_size {
+  font-size: 1rem;
+}
+
 /* home
 -------------------------------- */
 .title {
@@ -32,10 +40,6 @@
 -------------------------------- */
 .f-size {
   font-size: 2rem;
-}
-
-.bg-width {
-  width: 50%;
 }
 
 .btn-width {
@@ -78,7 +82,7 @@
 /* Extra large
 -------------------------------- */
 @media (max-width: 1200px) {
-  /* contact
+  /* common
   ------------------------------ */
   .bg-width {
     width: 70%;
@@ -94,14 +98,20 @@
 /* Large
 -------------------------------- */
 @media (max-width: 992px) {
+  /* common
+  ------------------------------ */
+  .bg-width {
+    width: 100%;
+  }
+
+  .validation_error_font_size {
+    font-size: 0.8rem;
+  }
+
   /* contact
   ------------------------------ */
   .f-size {
-    font-size: 1.3rem;
-  }
-
-  .bg-width {
-    width: 100%;
+    font-size: 1.7rem;
   }
 
   .btn-width {
