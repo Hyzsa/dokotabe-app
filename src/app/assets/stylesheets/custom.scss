@@ -21,6 +21,10 @@
   width: 50%;
 }
 
+.validation_error_font_size {
+  font-size: 1rem;
+}
+
 /* home
 -------------------------------- */
 .title {
@@ -98,6 +102,10 @@
   ------------------------------ */
   .bg-width {
     width: 100%;
+  }
+
+  .validation_error_font_size {
+    font-size: 0.8rem;
   }
 
   /* contact

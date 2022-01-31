@@ -6,21 +6,18 @@
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="field mb-3">
-        <%= f.label :email, class: "form-label" %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-100 form-control" %>
+        <%= f.label :email, class: "form-label" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-100 form-control", placeholder: "name@example.com" %>
       </div>
 
       <div class="field mb-3">
         <%= f.label :password, class: "form-label" %>
-        <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %>文字以上)</em>
-        <% end %><br />
-        <%= f.password_field :password, autocomplete: "new-password", class: "w-100 form-control" %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "w-100 form-control", placeholder: "6文字以上" %>
       </div>
 
       <div class="field mb-3">
-        <%= f.label :password_confirmation, class: "form-label" %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-100 form-control" %>
+        <%= f.label :password_confirmation, class: "form-label" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-100 form-control", placeholder: "6文字以上" %>
       </div>
 
       <div class="actions mb-2">
