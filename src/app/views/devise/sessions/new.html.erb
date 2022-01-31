@@ -2,9 +2,9 @@
   <section class="border p-5 mx-auto mt-5 bg-color bg-width">
     <h1 class="text-center f-size text-decoration-underline mb-4">ログイン</h1>
 
-    <%= render "devise/shared/flash" %>
-
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= render "devise/shared/flash" %>
+
       <div class="field mb-3">
         <%= f.label :email, class: "form-label" %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-100 form-control" %>
@@ -26,6 +26,7 @@
         <%= f.submit "ログイン", class: "w-100 btn btn-primary"  %>
       </div>
     <% end %>
+
     <div class="form-text">
       <%= render "devise/shared/links" %>
     </div>
