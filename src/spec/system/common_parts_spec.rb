@@ -43,5 +43,15 @@ RSpec.describe "Common Parts", type: :system do
 
       it_behaves_like "activeクラスの設定箇所が正しいこと", :contact
     end
+
+    context "ログインタブをクリックした場合" do
+      example "ログインページに遷移すること" do
+        visit root_path
+        click_link("login")
+        expect(page).to have_current_path new_user_session_path, ignore_query: true
+      end
+
+      it_behaves_like "activeクラスの設定箇所が正しいこと", :login
+    end
   end
 end

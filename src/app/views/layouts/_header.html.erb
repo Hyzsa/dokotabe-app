@@ -35,9 +35,9 @@
           <% else %>
             <li class="nav-item">
               <% if request.path == new_user_session_path %>
-                <%= link_to " ログイン", new_user_session_path, class: "nav-link bi bi-box-arrow-in-right active" %>
+                <%= link_to " ログイン", new_user_session_path, class: "nav-link bi bi-box-arrow-in-right active", id: "login"  %>
               <% else %>
-                <%= link_to " ログイン", new_user_session_path, class: "nav-link bi bi-box-arrow-in-right" %>
+                <%= link_to " ログイン", new_user_session_path, class: "nav-link bi bi-box-arrow-in-right", id: "login" %>
               <% end %>
             </li>
           <% end %>
