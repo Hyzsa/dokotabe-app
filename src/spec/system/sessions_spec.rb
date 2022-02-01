@@ -1,8 +1,9 @@
 require "rails_helper"
 
 RSpec.describe "Sessions", type: :system do
+  let(:user) { create(:user) }
+
   before do
-    @user = FactoryBot.create(:user)
     visit new_user_session_path
   end
 
@@ -30,7 +31,7 @@ RSpec.describe "Sessions", type: :system do
 
     context "正しい情報でログインした場合" do
       before do
-        fill_in "メールアドレス", with: @user.email
+        fill_in "メールアドレス", with: user.email
         fill_in "パスワード", with: "password"
         click_button "ログイン"
       end
@@ -52,7 +53,7 @@ RSpec.describe "Sessions", type: :system do
 
   describe "ログアウト" do
     before do
-      fill_in "メールアドレス", with: @user.email
+      fill_in "メールアドレス", with: user.email
       fill_in "パスワード", with: "password"
       click_button "ログイン"
       click_link "ログアウト"

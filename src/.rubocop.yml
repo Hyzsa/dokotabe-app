@@ -99,3 +99,7 @@ RSpec/ContextWording:
 # とりあえず条件を緩和して様子を見る。
 RSpec/ExampleLength:
   Max: 8
+
+# to_notで統一する。(個人的な好み)
+RSpec/NotToNot:
+  EnforcedStyle: to_not
