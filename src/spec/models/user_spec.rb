@@ -14,8 +14,8 @@ RSpec.describe User, type: :model do
     end
 
     example "既に登録されているメールアドレスでは登録できないこと" do
-      FactoryBot.create(:user)
-      user = FactoryBot.build(:user)
+      FactoryBot.create(:user, email: "user@example.com")
+      user = FactoryBot.build(:user, email: "user@example.com")
       user.valid?
       expect(user.errors[:email]).to include("はすでに存在します")
     end
