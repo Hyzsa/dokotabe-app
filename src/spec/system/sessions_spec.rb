@@ -19,9 +19,11 @@ RSpec.describe "Sessions", type: :system do
       example "ログイン画面から遷移しないこと" do
         expect(page).to have_current_path new_user_session_path, ignore_query: true
       end
+
       example "ログイン失敗時のflashメッセージが表示されること" do
         expect(page).to have_selector(".alert-warning", text: "メールアドレスまたはパスワードが違います。")
       end
+
       example "リロードでflashメッセージが消えること" do
         visit new_user_session_path
         expect(page).to_not have_selector(".alert-warning", text: "メールアドレスまたはパスワードが違います。")
@@ -38,9 +40,11 @@ RSpec.describe "Sessions", type: :system do
       example "ログイン画面から遷移しないこと" do
         expect(page).to have_current_path new_user_session_path, ignore_query: true
       end
+
       example "本人確認未実施のflashメッセージが表示されること" do
         expect(page).to have_selector(".alert-warning", text: "メールアドレスの本人確認が必要です。")
       end
+
       example "リロードでflashメッセージが消えること" do
         visit root_path
         expect(page).to_not have_selector(".alert-warning", text: "メールアドレスの本人確認が必要です。")
@@ -57,9 +61,11 @@ RSpec.describe "Sessions", type: :system do
       example "ホーム画面に遷移すること" do
         expect(page).to have_current_path root_path, ignore_query: true
       end
+
       example "ログイン成功時のflashメッセージが表示されること" do
         expect(page).to have_selector(".alert-success", text: "ログインしました。")
       end
+
       example "リロードでflashメッセージが消えること" do
         visit root_path
         expect(page).to_not have_selector(".alert-success", text: "ログインしました。")
@@ -78,9 +84,11 @@ RSpec.describe "Sessions", type: :system do
     example "ホーム画面に遷移すること" do
       expect(page).to have_current_path root_path, ignore_query: true
     end
+
     example "ログアウト時のflashメッセージが表示されること" do
       expect(page).to have_selector(".alert-success", text: "ログアウトしました。")
     end
+
     example "リロードでflashメッセージが消えること" do
       visit root_path
       expect(page).to_not have_selector(".alert-success", text: "ログアウトしました。")
