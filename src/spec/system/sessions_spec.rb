@@ -31,7 +31,7 @@ RSpec.describe "Sessions", type: :system do
     context "本人確認未実施のログイン情報でログインした場合" do
       before do
         fill_in "メールアドレス", with: invalid_user.email
-        fill_in "パスワード", with: "password"
+        fill_in "パスワード", with: invalid_user.password
         click_button "ログイン"
       end
 
@@ -50,7 +50,7 @@ RSpec.describe "Sessions", type: :system do
     context "本人確認実施済みのログイン情報でログインした場合" do
       before do
         fill_in "メールアドレス", with: valid_user.email
-        fill_in "パスワード", with: "password"
+        fill_in "パスワード", with: valid_user.password
         click_button "ログイン"
       end
 
@@ -70,7 +70,7 @@ RSpec.describe "Sessions", type: :system do
   describe "ログアウト" do
     before do
       fill_in "メールアドレス", with: valid_user.email
-      fill_in "パスワード", with: "password"
+      fill_in "パスワード", with: valid_user.password
       click_button "ログイン"
       click_link "ログアウト"
     end
