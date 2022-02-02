@@ -103,3 +103,8 @@ RSpec/ExampleLength:
 # to_notで統一する。(個人的な好み)
 RSpec/NotToNot:
   EnforcedStyle: to_not
+
+# registrations_spec.rbでデフォルトの3だと引っかかる。
+# 後々3に戻すせるようにリファクタリング予定。
+RSpec/NestedGroups:
+  Max: 4
