@@ -58,7 +58,7 @@ ja:
       password_change:
         greeting: "%{recipient}様"
         message: パスワードが再設定されました。
-        subject: パスワードの変更について
+        subject: パスワード変更通知
       reset_password_instructions:
         action: パスワード変更
         greeting: "%{recipient}様"

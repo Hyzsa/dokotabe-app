@@ -4,12 +4,12 @@ class DeviseMailerPreview < ActionMailer::Preview
     Devise::Mailer.confirmation_instructions(User.new, Devise.friendly_token(10))
   end
 
-  def email_changed
-    Devise::Mailer.email_changed(User.new)
-  end
+  # def email_changed
+  #   Devise::Mailer.email_changed(User.new)
+  # end
 
-  def password_changed
-    Devise::Mailer.email_changed(User.new)
+  def password_change
+    Devise::Mailer.password_change(User.new)
   end
 
   def reset_password_instructions
