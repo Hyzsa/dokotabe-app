@@ -7,11 +7,11 @@
 
       <div class="field mb-3">
         <%= f.label :email, class: "form-label" %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: "w-100 form-control", placeholder: "name@example.com"  %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: "w-100 form-control", placeholder: "name@example.com" %>
       </div>
 
       <div class="actions mb-2">
-        <%= f.submit "認証メールを送信する", class: "w-100 btn btn-primary" %>
+        <%= f.submit "認証メールを再送信する", class: "w-100 btn btn-primary" %>
       </div>
     <% end %>
 
