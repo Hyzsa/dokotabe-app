@@ -22,12 +22,20 @@ RSpec.describe "Devise Pages", type: :system do
     end
   end
 
+  shared_examples "パスワード再設定画面に遷移できること" do
+    example do
+      click_link "パスワードを忘れた方はこちら"
+      expect(page).to have_current_path new_user_password_path, ignore_query: true
+    end
+  end
+
   describe "ログイン画面" do
     before do
       visit new_user_session_path
     end
 
     it_behaves_like "新規登録画面に遷移できること"
+    it_behaves_like "パスワード再設定画面に遷移できること"
     it_behaves_like "認証メール再送画面に遷移できること"
   end
 
@@ -47,5 +55,16 @@ RSpec.describe "Devise Pages", type: :system do
 
     it_behaves_like "ログイン画面に遷移できること"
     it_behaves_like "新規登録画面に遷移できること"
+    it_behaves_like "パスワード再設定画面に遷移できること"
+  end
+
+  describe "パスワード再設定画面" do
+    before do
+      visit new_user_password_path
+    end
+
+    it_behaves_like "ログイン画面に遷移できること"
+    it_behaves_like "新規登録画面に遷移できること"
+    it_behaves_like "認証メール再送画面に遷移できること"
   end
 end

@@ -21,4 +21,11 @@ RSpec.describe "devise", type: :request do
       expect(response).to have_http_status(:success)
     end
   end
+
+  describe "GET /users/password/new" do
+    example "パスワード再設定画面のHTTPリクエストが成功すること" do
+      get new_user_password_path
+      expect(response).to have_http_status(:success)
+    end
+  end
 end
