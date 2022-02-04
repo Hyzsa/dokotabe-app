@@ -99,6 +99,9 @@ RSpec/ContextWording:
 # とりあえず条件を緩和して様子を見る。
 RSpec/ExampleLength:
   Max: 8
+  # system specは一旦無効にする。
+  Exclude:
+    - "spec/system/*"
 
 # to_notで統一する。(個人的な好み)
 RSpec/NotToNot:
@@ -108,3 +111,7 @@ RSpec/NotToNot:
 # 後々3に戻すせるようにリファクタリング予定。
 RSpec/NestedGroups:
   Max: 4
+
+# system specではチェック項目が多くなるので一旦無効にする。
+RSpec/MultipleExpectations:
+  Enabled: false
