@@ -4,7 +4,6 @@ RSpec.describe "Registrations", type: :system do
   before do
     ActionMailer::Base.deliveries.clear
     visit root_path
-    expect(page).to have_http_status(:success)
   end
 
   def extract_url(mail)
