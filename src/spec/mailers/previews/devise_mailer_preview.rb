@@ -8,9 +8,9 @@ class DeviseMailerPreview < ActionMailer::Preview
   #   Devise::Mailer.email_changed(User.new)
   # end
 
-  def password_change
-    Devise::Mailer.password_change(User.new)
-  end
+  # def password_change
+  #   Devise::Mailer.password_change(User.new)
+  # end
 
   def reset_password_instructions
     Devise::Mailer.reset_password_instructions(User.new, Devise.friendly_token(10))
