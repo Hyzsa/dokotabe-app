@@ -4,94 +4,69 @@ RSpec.describe "Sessions", type: :system do
   let(:valid_user) { create(:user) }
   let(:invalid_user) { create(:user, confirmed_at: nil) }
 
-  before do
-    visit new_user_session_path
+  def fill_in_login_form(user)
+    fill_in "メールアドレス", with: user.email
+    fill_in "パスワード", with: user.password
   end
 
   describe "ログイン" do
-    context "誤ったログイン情報でログインした場合" do
-      before do
-        fill_in "メールアドレス", with: ""
-        fill_in "パスワード", with: ""
+    before do
+      visit root_path
+      click_link "ログイン"
+      expect(page).to have_current_path new_user_session_path, ignore_query: true
+    end
+
+    context "本人確認実施済みのログイン情報でログインした場合" do
+      example "ログインできること" do
+        fill_in_login_form(valid_user)
         click_button "ログイン"
-      end
-
-      example "ログイン画面から遷移しないこと" do
-        expect(page).to have_current_path new_user_session_path, ignore_query: true
-      end
-
-      example "ログイン失敗時のflashメッセージが表示されること" do
-        expect(page).to have_selector(".alert-warning", text: "メールアドレスまたはパスワードが違います。")
-      end
-
-      example "リロードでflashメッセージが消えること" do
-        visit new_user_session_path
-        expect(page).to_not have_selector(".alert-warning", text: "メールアドレスまたはパスワードが違います。")
+        expect(page).to have_current_path root_path, ignore_query: true
+        expect(page).to have_content "ログインしました。"
       end
     end
 
     context "本人確認未実施のログイン情報でログインした場合" do
-      before do
-        fill_in "メールアドレス", with: invalid_user.email
-        fill_in "パスワード", with: invalid_user.password
+      example "ログインできないこと" do
+        fill_in_login_form(invalid_user)
         click_button "ログイン"
-      end
-
-      example "ログイン画面から遷移しないこと" do
         expect(page).to have_current_path new_user_session_path, ignore_query: true
-      end
-
-      example "本人確認未実施のflashメッセージが表示されること" do
-        expect(page).to have_selector(".alert-warning", text: "メールアドレスの本人確認が必要です。")
-      end
-
-      example "リロードでflashメッセージが消えること" do
-        visit root_path
-        expect(page).to_not have_selector(".alert-warning", text: "メールアドレスの本人確認が必要です。")
+        expect(page).to have_content "メールアドレスの本人確認が必要です。"
       end
     end
 
-    context "本人確認実施済みのログイン情報でログインした場合" do
-      before do
-        fill_in "メールアドレス", with: valid_user.email
-        fill_in "パスワード", with: valid_user.password
+    context "誤ったログイン情報でログインした場合" do
+      example "ログインできないこと" do
+        fill_in_login_form(build(:user, email: "", password: ""))
         click_button "ログイン"
-      end
-
-      example "ホーム画面に遷移すること" do
-        expect(page).to have_current_path root_path, ignore_query: true
-      end
-
-      example "ログイン成功時のflashメッセージが表示されること" do
-        expect(page).to have_selector(".alert-success", text: "ログインしました。")
-      end
-
-      example "リロードでflashメッセージが消えること" do
-        visit root_path
-        expect(page).to_not have_selector(".alert-success", text: "ログインしました。")
+        expect(page).to have_current_path new_user_session_path, ignore_query: true
+        expect(page).to have_content "メールアドレスまたはパスワードが違います。"
       end
     end
   end
 
   describe "ログアウト" do
-    before do
-      fill_in "メールアドレス", with: valid_user.email
-      fill_in "パスワード", with: valid_user.password
-      click_button "ログイン"
-      click_link "ログアウト"
+    context "ログインしている場合" do
+      example "ログアウトできること" do
+        visit root_path
+        click_link "ログイン"
+        expect(page).to have_current_path new_user_session_path, ignore_query: true
+        fill_in_login_form(valid_user)
+        click_button "ログイン"
+
+        expect(page).to have_current_path root_path, ignore_query: true
+        expect(page).to have_selector(".dropdown-toggle", text: "アカウント")
+        expect(page).to have_link "ログアウト"
+        click_link "ログアウト"
+        expect(page).to have_content "ログアウトしました。"
+      end
     end
 
-    example "ホーム画面に遷移すること" do
-      expect(page).to have_current_path root_path, ignore_query: true
-    end
-
-    example "ログアウト時のflashメッセージが表示されること" do
-      expect(page).to have_selector(".alert-success", text: "ログアウトしました。")
-    end
-
-    example "リロードでflashメッセージが消えること" do
-      visit root_path
-      expect(page).to_not have_selector(".alert-success", text: "ログアウトしました。")
+    context "ログインしていない場合" do
+      example "ログアウトできないこと" do
+        visit root_path
+        expect(page).to_not have_selector(".dropdown-toggle", text: "アカウント")
+        expect(page).to_not have_link "ログアウト"
+      end
     end
   end
 end
