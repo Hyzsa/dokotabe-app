@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Devise Pages", type: :system do
+RSpec.describe "Links", type: :system do
   shared_examples "ログイン画面に遷移できること" do
     example do
       click_link "ログインはこちら"
