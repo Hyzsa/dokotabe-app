@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "Home Pages", type: :system, js: true do
-  describe "submit" do
+  describe "検索機能" do
     context "ユーザーが位置情報の取得を許可しなかった場合" do
       example "アラートメッセージが表示され、ページ遷移しないこと" do
         visit root_path
