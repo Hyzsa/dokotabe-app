@@ -33,7 +33,6 @@ RSpec.describe "Links", type: :system do
     before do
       visit root_path
       click_link "ログイン"
-      expect(page).to have_current_path new_user_session_path, ignore_query: true
     end
 
     it_behaves_like "新規登録画面に遷移できること"
@@ -46,7 +45,6 @@ RSpec.describe "Links", type: :system do
       visit root_path
       click_link "ログイン"
       click_link "アカウントの新規登録はこちら"
-      expect(page).to have_current_path new_user_registration_path, ignore_query: true
     end
 
     it_behaves_like "ログイン画面に遷移できること"
@@ -58,7 +56,6 @@ RSpec.describe "Links", type: :system do
       visit root_path
       click_link "ログイン"
       click_link "認証メールが届かなかった場合はこちら"
-      expect(page).to have_current_path new_user_confirmation_path, ignore_query: true
     end
 
     it_behaves_like "ログイン画面に遷移できること"
@@ -71,7 +68,6 @@ RSpec.describe "Links", type: :system do
       visit root_path
       click_link "ログイン"
       click_link "パスワードを忘れた方はこちら"
-      expect(page).to have_current_path new_user_password_path, ignore_query: true
     end
 
     it_behaves_like "ログイン画面に遷移できること"
@@ -83,7 +79,6 @@ RSpec.describe "Links", type: :system do
     before do
       # 適当なトークンをクエリで渡してパスワード変更画面にアクセスする
       visit edit_user_password_url(reset_password_token: Devise.friendly_token(10))
-      expect(page).to have_current_path edit_user_password_path, ignore_query: true
     end
 
     it_behaves_like "ログイン画面に遷移できること"

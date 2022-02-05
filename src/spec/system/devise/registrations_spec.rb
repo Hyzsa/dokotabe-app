@@ -33,7 +33,7 @@ RSpec.describe "Registrations", type: :system do
         fill_in_signup_form(user)
         expect { click_button "アカウントを作成" }.to \
           change { ActionMailer::Base.deliveries.size }.by(1).and \
-          change { User.all.size }.by(1)
+            change { User.all.size }.by(1)
         expect(page).to have_current_path root_path, ignore_query: true
         expect(page).to have_content "本人確認用のメールを送信しました。メール内のリンクからアカウントを有効化させてください。"
 
@@ -56,7 +56,7 @@ RSpec.describe "Registrations", type: :system do
         fill_in_signup_form(user)
         expect { click_button "アカウントを作成" }.to \
           change { ActionMailer::Base.deliveries.size }.by(1).and \
-          change { User.all.size }.by(1)
+            change { User.all.size }.by(1)
         expect(page).to have_current_path root_path, ignore_query: true
         expect(page).to have_content "本人確認用のメールを送信しました。メール内のリンクからアカウントを有効化させてください。"
 
@@ -88,7 +88,7 @@ RSpec.describe "Registrations", type: :system do
         fill_in_signup_form(user)
         expect { click_button "アカウントを作成" }.to \
           change { ActionMailer::Base.deliveries.size }.by(0).and \
-          change { User.all.size }.by(0)
+            change { User.all.size }.by(0)
         expect(page).to have_current_path users_path, ignore_query: true
         expect(page).to have_content "メールアドレスを入力してください"
       end
@@ -104,7 +104,7 @@ RSpec.describe "Registrations", type: :system do
         fill_in_signup_form(user)
         expect { click_button "アカウントを作成" }.to \
           change { ActionMailer::Base.deliveries.size }.by(0).and \
-          change { User.all.size }.by(0)
+            change { User.all.size }.by(0)
         expect(page).to have_current_path users_path, ignore_query: true
         expect(page).to have_content "パスワードを入力してください"
       end
@@ -120,7 +120,7 @@ RSpec.describe "Registrations", type: :system do
         fill_in_signup_form(user)
         expect { click_button "アカウントを作成" }.to \
           change { ActionMailer::Base.deliveries.size }.by(0).and \
-          change { User.all.size }.by(0)
+            change { User.all.size }.by(0)
         expect(page).to have_current_path users_path, ignore_query: true
         expect(page).to have_content "パスワード（確認用）とパスワードの入力が一致しません"
       end
@@ -136,7 +136,7 @@ RSpec.describe "Registrations", type: :system do
         fill_in_signup_form(user)
         expect { click_button "アカウントを作成" }.to \
           change { ActionMailer::Base.deliveries.size }.by(0).and \
-          change { User.all.size }.by(0)
+            change { User.all.size }.by(0)
         expect(page).to have_current_path users_path, ignore_query: true
         expect(page).to have_content "パスワード（確認用）とパスワードの入力が一致しません"
       end
@@ -152,7 +152,7 @@ RSpec.describe "Registrations", type: :system do
         fill_in_signup_form(user)
         expect { click_button "アカウントを作成" }.to \
           change { ActionMailer::Base.deliveries.size }.by(0).and \
-          change { User.all.size }.by(0)
+            change { User.all.size }.by(0)
         expect(page).to have_current_path users_path, ignore_query: true
         expect(page).to have_content "パスワードは6文字以上で入力してください"
       end

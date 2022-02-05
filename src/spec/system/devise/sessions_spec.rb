@@ -13,11 +13,11 @@ RSpec.describe "Sessions", type: :system do
     before do
       visit root_path
       click_link "ログイン"
-      expect(page).to have_current_path new_user_session_path, ignore_query: true
     end
 
     context "本人確認実施済みのログイン情報でログインした場合" do
       example "ログインできること" do
+        expect(page).to have_current_path new_user_session_path, ignore_query: true
         fill_in_login_form(valid_user)
         click_button "ログイン"
         expect(page).to have_current_path root_path, ignore_query: true
@@ -27,6 +27,7 @@ RSpec.describe "Sessions", type: :system do
 
     context "本人確認未実施のログイン情報でログインした場合" do
       example "ログインできないこと" do
+        expect(page).to have_current_path new_user_session_path, ignore_query: true
         fill_in_login_form(invalid_user)
         click_button "ログイン"
         expect(page).to have_current_path new_user_session_path, ignore_query: true
@@ -36,6 +37,7 @@ RSpec.describe "Sessions", type: :system do
 
     context "誤ったログイン情報でログインした場合" do
       example "ログインできないこと" do
+        expect(page).to have_current_path new_user_session_path, ignore_query: true
         fill_in_login_form(build(:user, email: "", password: ""))
         click_button "ログイン"
         expect(page).to have_current_path new_user_session_path, ignore_query: true

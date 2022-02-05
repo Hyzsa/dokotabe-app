@@ -101,7 +101,7 @@ RSpec/ExampleLength:
   Max: 8
   # system specは一旦無効にする。
   Exclude:
-    - "spec/system/*"
+    - "spec/system/**/*"
 
 # to_notで統一する。(個人的な好み)
 RSpec/NotToNot:
