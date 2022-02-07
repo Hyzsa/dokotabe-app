@@ -28,5 +28,8 @@ module App
 
     # deviseを日本語化
     config.i18n.default_locale = :ja
+
+    # タイムゾーンの設定
+    config.time_zone = 'Asia/Tokyo'
   end
 end
