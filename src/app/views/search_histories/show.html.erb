@@ -8,7 +8,7 @@
           <% @histories.each_with_index do |history, i| %>
             <% if i < 5 %>
               <a href="<%= history.shop_url %>" class="text-decoration-none text-body" target="_blank" rel="noopener noreferrer">
-                <li class="mb-2 border border-secondary list-style list-text-size d-flex align-items-center">
+                <li class="mb-2 border border-secondary list-style d-flex align-items-center">
                   <div class="search-histories-shop-photo-border">
                     <img src="<%= history.shop_photo %>" alt="" class="search-histories-shop-photo">
                   </div>
@@ -31,7 +31,7 @@
           <% @histories.each_with_index do |history, i| %>
             <% if i >= 5 %>
               <a href="<%= history.shop_url %>" class="text-decoration-none text-body" target="_blank" rel="noopener noreferrer">
-                <li class="mb-2 border border-secondary list-style list-text-size d-flex align-items-center">
+                <li class="mb-2 border border-secondary list-style d-flex align-items-center">
                   <div class="search-histories-shop-photo-border">
                     <img src="<%= history.shop_photo %>" alt="" class="search-histories-shop-photo">
                   </div>
@@ -50,7 +50,7 @@
             <% end %>
           <% end %>
         </section>
-        <p class="m-0 text-end">【画像提供：ホットペッパー グルメ】</p>
+        <p class="m-0 text-end footer-size">【画像提供：ホットペッパー グルメ】</p>
       </section>
     </section>
   </div>
