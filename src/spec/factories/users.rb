@@ -3,6 +3,6 @@ FactoryBot.define do
     sequence(:email) { |n| "tester#{n}@example.com" }
     password { "password" }
     password_confirmation { "password" }
-    confirmed_at { DateTime.now }
+    confirmed_at { Time.current }
   end
 end
