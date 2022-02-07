@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resources :search_results, only: [:new, :create]
 
+  resources :search_histories, only: [:show]
+
   get '/users/edit', to: 'static_pages#home'
   devise_for :users
   devise_scope :user do

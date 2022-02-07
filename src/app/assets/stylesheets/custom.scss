@@ -25,7 +25,22 @@
   font-size: 1rem;
 }
 
-/* home
+/* ページネーション
+-------------------------------- */
+.pagination > li > a {
+  border: none;
+  color: #696969;
+}
+
+.pagination > .active > a {
+  border-radius: 15px;
+}
+
+.pagination > li > a:hover {
+  border-radius: 15px;
+}
+
+/* ホーム画面
 -------------------------------- */
 .title {
   width: 300px;
@@ -36,7 +51,7 @@
   text-align: center;
 }
 
-/* contact
+/* お問い合わせ画面
 -------------------------------- */
 .f-size {
   font-size: 2rem;
@@ -46,7 +61,7 @@
   width: 25%;
 }
 
-/* search_result
+/* 検索結果画面
 -------------------------------- */
 .shop-info {
   width: 50%;
@@ -79,6 +94,32 @@
   border-radius: 5px;
 }
 
+/* 検索履歴画面
+-------------------------------- */
+.search-histories-width {
+  width: 90%;
+}
+
+.list-style {
+  font-size: 1rem;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.search-histories-shop-photo-border {
+  width: 90px;
+  height: 90px;
+  background-color: #191818;
+}
+
+.search-histories-shop-photo {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
 /* Extra large
 -------------------------------- */
 @media (max-width: 1200px) {
@@ -88,10 +129,16 @@
     width: 70%;
   }
 
-  /* search_result
+  /* 検索結果画面
   ------------------------------ */
   .shop-info {
     width: 70%;
+  }
+
+  /* 検索履歴画面
+  ------------------------------ */
+  .list-text-size {
+    font-size: 0.9rem;
   }
 }
 
@@ -108,7 +155,7 @@
     font-size: 0.8rem;
   }
 
-  /* contact
+  /* お問い合わせ画面
   ------------------------------ */
   .f-size {
     font-size: 1.7rem;
@@ -118,7 +165,7 @@
     width: 50%;
   }
 
-  /* search_result
+  /* 検索結果画面
   ------------------------------ */
   .shop-info {
     width: 95%;
@@ -144,9 +191,15 @@
     font-size: 0.7rem;
   }
 
-  /* home
+  /* ホーム画面
   -------------------------------- */
   .text-position {
     text-align: start;
+  }
+
+  /* 検索履歴画面
+  ------------------------------ */
+  .list-text-size {
+    font-size: 0.9rem;
   }
 }
