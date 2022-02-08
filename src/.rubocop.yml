@@ -115,3 +115,8 @@ RSpec/NestedGroups:
 # system specではチェック項目が多くなるので一旦無効にする。
 RSpec/MultipleExpectations:
   Enabled: false
+
+# block の方がテスト対象が`{}`の前後のスペースと相まって目立つ
+# 普段書く形と同じなので自然に脳内に入ってくる
+RSpec/ExpectChange:
+  EnforcedStyle: block
