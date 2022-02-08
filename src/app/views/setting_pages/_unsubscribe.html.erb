@@ -1,0 +1,17 @@
+<section id="unsubscribe">
+  <h2 class="fw-bold fst-italic">退会手続き</h2>
+
+  <p class="lh-lg my-4">
+    退会手続きが完了した時点で、現在保存されているお客様データ（検索履歴）は完全に削除されます。<br>
+    <span class="text-danger">復元することはできません</span>ので、ご理解の程よろしくお願いいたします。
+  </p>
+
+  <section class="row text-center">
+    <section class="col-md mb-2">
+      <%= link_to "退会をやめる", root_path, type: "button", class: "btn btn-secondary btn-lg rounded-pill btn-width" %>
+    </section>
+    <section class="col-md">
+      <%= button_to "退会する", registration_path(:user), data: { confirm: "本当に退会しますか？" }, method: :delete, class: "btn btn-primary btn-lg rounded-pill btn-width" %>
+    </section>
+  </section>
+</section>

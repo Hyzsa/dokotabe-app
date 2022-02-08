@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   end
 
   get '/settings', to: 'setting_pages#settings'
+  get '/settings/unsubscribe', to: 'setting_pages#unsubscribe', as: 'unsubscribe'
 end
