@@ -1,0 +1,2 @@
+module SettingPagesHelper
+end
