@@ -12,4 +12,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/users', to: 'devise/registrations#new'
   end
+
+  get '/settings', to: 'setting_pages#settings'
+  get '/settings/unsubscribe', to: 'setting_pages#unsubscribe', as: 'unsubscribe'
 end
