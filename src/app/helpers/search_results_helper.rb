@@ -29,4 +29,15 @@ module SearchResultsHelper
       close: shop_info[:close]
     }
   end
+
+  # 検索結果を保存する。
+  def save_search_result(shop_info)
+    current_user.displayed_shops.create(
+      shop_id: shop_info[:id],
+      shop_name: shop_info[:name],
+      shop_photo: shop_info[:photo][:pc][:m],
+      shop_url: shop_info[:urls][:pc],
+      displayed_date: Time.current
+    )
+  end
 end
