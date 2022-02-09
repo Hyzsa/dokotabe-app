@@ -21,7 +21,7 @@ RSpec.describe "Search Result Save", type: :system do
         change { SearchHistory.all.size }.by(1).and \
           change { user_first.search_histories.all.size }.by(1).and \
             change { user_second.search_histories.all.size }.by(0)
-      expect(page).to have_current_path new_search_result_path, ignore_query: true
+      expect(page).to have_current_path search_result_path, ignore_query: true
     end
   end
 
@@ -33,7 +33,7 @@ RSpec.describe "Search Result Save", type: :system do
       find("#selected_longitude", visible: false).set "139.7673068"
 
       expect { click_button "検索" }.to change { SearchHistory.all.size }.by(0)
-      expect(page).to have_current_path new_search_result_path, ignore_query: true
+      expect(page).to have_current_path search_result_path, ignore_query: true
     end
   end
 end
