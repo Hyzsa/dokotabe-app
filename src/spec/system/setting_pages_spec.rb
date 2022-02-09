@@ -4,7 +4,7 @@ RSpec.describe "Search Result Save", type: :system do
   describe "退会" do
     example "退会が正常にできること", js: true do
       user = create(:user)
-      create_list(:displayed_shop, 10, user_id: user.id)
+      create_list(:search_history, 10, user_id: user.id)
 
       # ログインする
       log_in_as(user)
@@ -34,7 +34,7 @@ RSpec.describe "Search Result Save", type: :system do
         expect(page).to have_content "退会手続き"
       end.to \
         change { User.count }.by(0).and \
-          change { user.displayed_shops.count }.by(0)
+          change { user.search_histories.count }.by(0)
 
       # 退会確認で[OK]を選択する
       expect do
@@ -43,7 +43,7 @@ RSpec.describe "Search Result Save", type: :system do
         expect(page).to have_content "アカウントを削除しました。またのご利用をお待ちしております。"
       end.to \
         change { User.count }.by(-1).and \
-          change { user.displayed_shops.count }.by(-10)
+          change { user.search_histories.count }.by(-10)
     end
   end
 end

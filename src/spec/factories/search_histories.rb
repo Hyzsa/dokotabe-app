@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :displayed_shop do
+  factory :search_history do
     user_id { 1 }
     shop_name { "XXXXXXXXXXX店" }
     shop_photo do

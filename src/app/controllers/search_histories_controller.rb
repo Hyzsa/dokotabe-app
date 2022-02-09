@@ -3,7 +3,7 @@ class SearchHistoriesController < ApplicationController
   before_action :check_if_login_user, only: [:show]
 
   def show
-    @histories = current_user.displayed_shops.page(params[:page]).per(10)
+    @histories = current_user.search_histories.page(params[:page]).per(10)
   end
 
   private

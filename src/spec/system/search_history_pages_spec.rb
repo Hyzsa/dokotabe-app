@@ -15,7 +15,7 @@ RSpec.describe "Search History", type: :system do
     describe "表示確認" do
       context "検索履歴が10件より多くある場合" do
         example "ページネーションが表示されること" do
-          create_list(:displayed_shop, 11, user_id: user.id)
+          create_list(:search_history, 11, user_id: user.id)
 
           click_link "検索履歴"
           expect(page).to have_current_path search_history_path(user.id), ignore_query: true
@@ -25,7 +25,7 @@ RSpec.describe "Search History", type: :system do
 
       context "検索履歴が10件以下の場合" do
         example "ページネーションが表示されないこと" do
-          create_list(:displayed_shop, 10, user_id: user.id)
+          create_list(:search_history, 10, user_id: user.id)
 
           click_link "検索履歴"
           expect(page).to have_current_path search_history_path(user.id), ignore_query: true
@@ -36,7 +36,7 @@ RSpec.describe "Search History", type: :system do
 
     describe "遷移確認" do
       example "ページネーションの遷移処理に問題がないこと" do
-        create_list(:displayed_shop, 15, user_id: user.id)
+        create_list(:search_history, 15, user_id: user.id)
 
         click_link "検索履歴"
         expect(page).to have_current_path search_history_path(user.id), ignore_query: true

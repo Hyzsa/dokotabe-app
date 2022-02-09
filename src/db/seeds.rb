@@ -8,7 +8,7 @@ end
 
 User.all.each_with_index do |user, i|
   (i+1).times do |n|
-    user.displayed_shops.create(
+    user.search_histories.create(
       user_id: 1,
       shop_id: "#{n}",
       shop_name: "XXXXXXXXXXX店",
