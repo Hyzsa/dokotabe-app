@@ -24,6 +24,12 @@
   width: 50%;
 }
 
+.title {
+  font-size: 2rem;
+  text-align: center;
+  text-decoration: underline;
+}
+
 .validation_error_font_size {
   font-size: 1rem;
 }
@@ -55,11 +61,7 @@
 
 /* お問い合わせ画面
 -------------------------------- */
-.f-size {
-  font-size: 2rem;
-}
-
-.btn-width {
+.top-btn {
   width: 25%;
 }
 
@@ -163,17 +165,17 @@
     width: 100%;
   }
 
+  .title {
+    font-size: 1.7rem;
+  }
+
   .validation_error_font_size {
     font-size: 0.8rem;
   }
 
   /* お問い合わせ画面
   ------------------------------ */
-  .f-size {
-    font-size: 1.7rem;
-  }
-
-  .btn-width {
+  .top-btn {
     width: 50%;
   }
 

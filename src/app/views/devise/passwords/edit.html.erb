@@ -1,6 +1,6 @@
 <div class="flex-grow-1 flex-column">
   <section class="border p-5 mx-auto mt-5 bg-color bg-width">
-    <h1 class="text-center f-size text-decoration-underline mb-4">パスワード再設定</h1>
+    <h1 class="title mb-4">パスワード再設定</h1>
 
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
