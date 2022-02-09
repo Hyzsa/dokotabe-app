@@ -1,17 +1,17 @@
-<div class="flex-grow-1 flex-column">
-  <section class="border p-5 mx-auto mt-5 bg-color bg-width">
+<div class="flex-grow-1">
+  <section class="p-5 mx-auto mt-5 bg-color bg-width">
     <h1 class="title mb-4">ログイン</h1>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <%= render "layouts/flash" %>
 
       <div class="field mb-3">
-        <%= f.label :email, class: "form-label" %><br />
+        <%= f.label :email, class: "form-label" %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-100 form-control" %>
       </div>
 
       <div class="field mb-3">
-        <%= f.label :password, class: "form-label" %><br />
+        <%= f.label :password, class: "form-label" %>
         <%= f.password_field :password, autocomplete: "current-password", class: "w-100 form-control" %>
       </div>
 
