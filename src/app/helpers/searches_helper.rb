@@ -1,4 +1,4 @@
-module SearchResultsHelper
+module SearchesHelper
   SEARCH_COUNT = 20 # 検索数指定
 
   # ランダムに１店舗の情報を取得する。
