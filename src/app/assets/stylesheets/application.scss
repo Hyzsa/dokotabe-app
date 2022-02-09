@@ -30,8 +30,9 @@
   text-decoration: underline;
 }
 
-.validation_error_font_size {
+.validation-error {
   font-size: 1rem;
+  color: #dc3444;
 }
 
 /* ページネーション
@@ -169,7 +170,7 @@
     font-size: 1.7rem;
   }
 
-  .validation_error_font_size {
+  .validation-error {
     font-size: 0.8rem;
   }
 
