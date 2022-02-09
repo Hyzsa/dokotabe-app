@@ -1,15 +1,18 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css");
+
 /* common
 -------------------------------- */
-.frame {
-  min-height: 100vh; // カスタムプロパティ未対応ブラウザ用
+.full-screen {
+  background-image: image-url("bg-image.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh; /* カスタムプロパティ未対応ブラウザ用 */
   min-height: calc(var(--vh, 1vh) * 100);
 }
 
-.bg-image {
-  background-image: image-url("bg-image.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+.text-position {
+  text-align: center;
 }
 
 .bg-color {
@@ -42,13 +45,12 @@
 
 /* ホーム画面
 -------------------------------- */
-.title {
-  width: 300px;
+.service-name {
   margin: 0 auto 8px;
-}
 
-.text-position {
-  text-align: center;
+  img {
+    width: 300px;
+  }
 }
 
 /* お問い合わせ画面
@@ -197,14 +199,12 @@
 @media (max-width: 768px) {
   /* common
   -------------------------------- */
-  .footer-size {
-    font-size: 0.7rem;
-  }
-
-  /* ホーム画面
-  -------------------------------- */
   .text-position {
     text-align: start;
+  }
+
+  .footer-size {
+    font-size: 0.7rem;
   }
 
   /* 検索履歴画面

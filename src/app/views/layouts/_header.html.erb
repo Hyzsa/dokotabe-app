@@ -1,48 +1,46 @@
-<header class="container mt-3">
-  <nav class="navbar navbar-expand-md navbar-light">
-    <div class="container-fluid p-0">
-      <%= link_to image_tag("logo.png", alt: "DokoTabeのロゴ", width: "110", height: "30"), root_path, class: "navbar-brand", id: "logo" %>
+<nav class="navbar navbar-expand-md navbar-light">
+  <div class="container-fluid p-0">
+    <%= link_to image_tag("logo.png", alt: "DokoTabeのロゴ", width: "110", height: "30"), root_path, class: "navbar-brand", id: "logo" %>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <% if request.path == root_path %>
-              <%= link_to " ホーム", root_path, class: "nav-link bi bi-house-door active", id: "home" %>
-            <% else %>
-              <%= link_to " ホーム", root_path, class: "nav-link bi bi-house-door", id: "home"  %>
-            <% end %>
-          </li>
-          <li class="nav-item">
-            <% if request.path == contact_path %>
-              <%= link_to " お問い合わせ", contact_path, class: "nav-link bi bi-chat-right-text active", id: "contact" %>
-            <% else %>
-              <%= link_to " お問い合わせ", contact_path, class: "nav-link bi bi-chat-right-text", id: "contact" %>
-            <% end %>
-          </li>
-          <% if user_signed_in? %>
-            <li class="nav-item dropdown">
-              <%= link_to " アカウント", "#", class: "nav-link dropdown-toggle bi bi-person", id: "navbarDropdownMenuLink", role: "button", "data-bs-toggle": "dropdown", "aria-expanded": "false" %>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><%= link_to "検索履歴", search_history_path(current_user.id), class: "dropdown-item" %></li>
-                <li><%= link_to "設定", settings_path, class: "dropdown-item border-bottom" %></li>
-                <li><%= link_to " ログアウト", destroy_user_session_path, method: "delete", class: "dropdown-item bi bi-box-arrow-left" %></li>
-              </ul>
-            </li>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <% if request.path == root_path %>
+            <%= link_to " ホーム", root_path, class: "nav-link bi bi-house-door active", id: "home" %>
           <% else %>
-            <li class="nav-item">
-              <% if request.path == new_user_session_path %>
-                <%= link_to " ログイン", new_user_session_path, class: "nav-link bi bi-box-arrow-in-right active", id: "login"  %>
-              <% else %>
-                <%= link_to " ログイン", new_user_session_path, class: "nav-link bi bi-box-arrow-in-right", id: "login" %>
-              <% end %>
-            </li>
+            <%= link_to " ホーム", root_path, class: "nav-link bi bi-house-door", id: "home"  %>
           <% end %>
-        </ul>
-      </div>
+        </li>
+        <li class="nav-item">
+          <% if request.path == contact_path %>
+            <%= link_to " お問い合わせ", contact_path, class: "nav-link bi bi-chat-right-text active", id: "contact" %>
+          <% else %>
+            <%= link_to " お問い合わせ", contact_path, class: "nav-link bi bi-chat-right-text", id: "contact" %>
+          <% end %>
+        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown">
+            <%= link_to " アカウント", "#", class: "nav-link dropdown-toggle bi bi-person", id: "navbarDropdownMenuLink", role: "button", "data-bs-toggle": "dropdown", "aria-expanded": "false" %>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><%= link_to "検索履歴", search_history_path(current_user.id), class: "dropdown-item" %></li>
+              <li><%= link_to "設定", settings_path, class: "dropdown-item border-bottom" %></li>
+              <li><%= link_to " ログアウト", destroy_user_session_path, method: "delete", class: "dropdown-item bi bi-box-arrow-left" %></li>
+            </ul>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <% if request.path == new_user_session_path %>
+              <%= link_to " ログイン", new_user_session_path, class: "nav-link bi bi-box-arrow-in-right active", id: "login"  %>
+            <% else %>
+              <%= link_to " ログイン", new_user_session_path, class: "nav-link bi bi-box-arrow-in-right", id: "login" %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
     </div>
-  </nav>
-</header>
+  </div>
+</nav>
