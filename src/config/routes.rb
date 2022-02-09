@@ -3,7 +3,8 @@ Rails.application.routes.draw do
 
   get '/contact', to: 'static_pages#contact'
 
-  resources :search_results, only: [:new, :create]
+  post '/search', to: 'searches#search'
+  get '/result', to: 'searches#result', as: 'search_result'
 
   resources :search_histories, only: [:show]
 
