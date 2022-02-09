@@ -32,7 +32,7 @@ module SearchResultsHelper
 
   # 検索結果を保存する。
   def save_search_result(shop_info)
-    current_user.displayed_shops.create(
+    current_user.search_histories.create(
       shop_id: shop_info[:id],
       shop_name: shop_info[:name],
       shop_photo: shop_info[:photo][:pc][:m],
