@@ -20,7 +20,7 @@ RSpec.describe "Common Parts", type: :system do
 
     context "ロゴ画像をクリックした場合" do
       example "ホーム画面に遷移すること" do
-        click_link "logo"
+        click_link "DokoTabeのロゴ"
         expect(page).to have_current_path root_path, ignore_query: true
       end
 
