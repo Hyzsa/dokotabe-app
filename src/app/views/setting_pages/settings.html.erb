@@ -1,6 +1,6 @@
-<div class="flex-grow-1 d-flex flex-column bg-color" id="settings">
-  <section class="width mx-auto">
-    <h1 class="text-center f-size text-decoration-underline my-4">設定画面</h1>
+<div class="flex-grow-1 bg-color">
+  <section class="settings mx-auto">
+    <h1 class="title my-4">設定画面</h1>
 
     <section class="row">
       <section class="col-md-4 mb-2">
@@ -8,6 +8,7 @@
           <%= link_to "退会", unsubscribe_path, class: "list-group-item list-group-item-action active", remote: true %>
         </div>
       </section>
+
       <section class="col-md-8">
         <section class="content-area bg-white p-4 rounded">
           <%# デフォルトで退会画面が表示されるのはよろしくないので、他が追加されたらそちらをデフォルトにする。 %>

@@ -1,0 +1,19 @@
+<a href="<%= history.shop_url %>" class="text-decoration-none text-body" target="_blank" rel="noopener noreferrer">
+  <li class="mb-2 border border-secondary d-flex align-items-center list-style">
+    <div class="history-photo">
+      <img src="<%= history.shop_photo %>" alt="店舗写真">
+    </div>
+
+    <div class="p-2">
+      <div class="d-flex">
+        <p class="m-0 text-nowrap">日付　：</p>
+        <p class="m-0"><%= history.displayed_date.strftime("%Y/%m/%d %H:%M:%S") %></p>
+      </div>
+
+      <div class="d-flex">
+        <p class="m-0 text-nowrap">店舗名：</p>
+        <p class="m-0"><%= history.shop_name %></p>
+      </div>
+    </div>
+  </li>
+</a>
