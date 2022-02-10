@@ -1,30 +1,33 @@
-<div class="flex-grow-1 d-flex flex-column bg-color">
+<div class="flex-grow-1 bg-color">
   <section class="shop-info mx-auto text-break">
-    <h1 class="fs-5 fw-bold fst-italic text-decoration-underline m-0 mt-3"><%= @shop_info[:name] %></h1>
-    <p class="m-0 my-1 shop-info-text-size">
+    <h1 class="fs-5 m-0 mt-3">
+      <%= @shop_info[:name] %>
+    </h1>
+
+    <p class="m-0 my-1">
       【<%= @shop_info[:genre] %>】平均予算：<%= @shop_info[:budget] %>
     </p>
 
-    <section class="shop-photo-border mx-auto">
-      <a href=<%= @shop_info[:urls] %> class="d-block w-100 h-100 position-relative" target="_blank" rel="noopener noreferrer">
-        <img src=<%= @shop_info[:photo] %> class="shop-photo" alt="店舗トップ写真">
-        <p class="m-0 credit position-absolute bottom-0 end-0">
+    <section class="result-photo">
+      <a href=<%= @shop_info[:urls] %> target="_blank" rel="noopener noreferrer">
+        <img src=<%= @shop_info[:photo] %> alt="店舗トップ写真">
+        <p class="m-0">
           【画像提供：ホットペッパー グルメ】<br>
           画像クリックで予約サイトを表示します。
         </p>
       </a>
     </section>
 
-    <section class="p-1 my-2 shop-info-text-size">
-      <h2 class="fs-6 fw-bold bg-color-gray">住所・アクセス</h2>
-      <p class="m-0">
+    <section class="mt-1">
+      <h2 class="p-1 m-0">住所・アクセス</h2>
+      <p>
         <%= @shop_info[:address] %><br>
         <%= @shop_info[:mobile_access] %>
       </p>
     </section>
 
-    <section class="p-1 shop-info-text-size">
-      <h2 class="fs-6 fw-bold bg-color-gray">営業時間・定休日</h2>
+    <section>
+      <h2 class="p-1 m-0">営業時間・定休日</h2>
       <p class="m-0">
         <%= @shop_info[:open] %><br>
         定休日：<%= @shop_info[:close] %>
