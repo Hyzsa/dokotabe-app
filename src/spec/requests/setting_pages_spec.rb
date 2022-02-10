@@ -2,10 +2,9 @@ require "rails_helper"
 
 RSpec.describe "SettingPages", type: :request do
   describe "GET /settings" do
-    let(:user) { create(:user) }
-
-    context "ログイン中の場合" do
-      example "設定画面のHTTPリクエストが成功すること" do
+    context "ログインしている場合" do
+      example "設定画面の表示に成功すること" do
+        user = create(:user)
         sign_in user
         get settings_path
         expect(response).to have_http_status(:success)
