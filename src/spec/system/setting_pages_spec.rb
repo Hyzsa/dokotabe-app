@@ -1,8 +1,34 @@
 require "rails_helper"
 
-RSpec.describe "Search Result Save", type: :system do
+RSpec.describe "Search Result Save", type: :system, js: true do
+  describe "レイアウト確認" do
+    before do
+      user = create(:user)
+      log_in_as(user)
+    end
+
+    example "設定画面の要素が正しく表示されること" do
+      visit settings_path
+      expect(page).to have_current_path settings_path
+
+      expect(page).to have_selector "h1", text: "設定画面"
+      expect(page).to have_link "退会", href: unsubscribe_path
+    end
+
+    example "退会画面の要素が正しく表示されること" do
+      visit settings_path
+      click_link "退会", href: unsubscribe_path
+      expect(page).to have_current_path settings_path
+
+      expect(page).to have_selector "h2", text: "退会手続き"
+      expect(page).to have_selector "p", text: "退会手続きが完了した時点で"
+      expect(page).to have_link "退会をやめる", href: root_path
+      expect(page).to have_button "退会する"
+    end
+  end
+
   describe "退会" do
-    example "退会が正常にできること", js: true do
+    example "退会が正常にできること" do
       user = create(:user)
       create_list(:search_history, 10, user_id: user.id)
 

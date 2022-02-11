@@ -26,6 +26,6 @@ Capybara.register_driver :remote_chrome do |app|
       ]
     }
   )
-  # ブラウザーを起動
+  # ブラウザを起動
   Capybara::Selenium::Driver.new(app, browser: :remote, url: url, desired_capabilities: caps)
 end

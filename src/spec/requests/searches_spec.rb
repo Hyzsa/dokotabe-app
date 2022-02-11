@@ -10,6 +10,7 @@ RSpec.describe "Searches", type: :request do
                                                 budget: "",
                                                 latitude: "0",
                                                 longitude: "0" } }
+        expect(response).to have_http_status(:found)
         expect(response).to redirect_to(root_url)
       end
     end
@@ -23,6 +24,7 @@ RSpec.describe "Searches", type: :request do
                                                 latitude: "35.6809591",
                                                 longitude: "139.7673068" } }
         extracted_shop_info = controller.instance_variable_get(:@extracted_shop_info)
+        expect(response).to have_http_status(:found)
         expect(response).to redirect_to(search_result_url(shop_info: extracted_shop_info))
       end
     end
