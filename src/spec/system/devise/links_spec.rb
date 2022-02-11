@@ -9,6 +9,7 @@ RSpec.describe "Links", type: :system do
     end
 
     it { expect(page).to have_current_path new_user_session_path }
+
     it_behaves_like "新規登録画面に遷移できること"
     it_behaves_like "パスワード再設定画面（メール送信用）に遷移できること"
     it_behaves_like "認証メール再送画面に遷移できること"
@@ -22,6 +23,7 @@ RSpec.describe "Links", type: :system do
     end
 
     it { expect(page).to have_current_path new_user_registration_path }
+
     it_behaves_like "ログイン画面に遷移できること"
     it_behaves_like "認証メール再送画面に遷移できること"
   end
@@ -34,6 +36,7 @@ RSpec.describe "Links", type: :system do
     end
 
     it { expect(page).to have_current_path new_user_confirmation_path }
+
     it_behaves_like "ログイン画面に遷移できること"
     it_behaves_like "新規登録画面に遷移できること"
     it_behaves_like "パスワード再設定画面（メール送信用）に遷移できること"
@@ -47,6 +50,7 @@ RSpec.describe "Links", type: :system do
     end
 
     it { expect(page).to have_current_path new_user_password_path }
+
     it_behaves_like "ログイン画面に遷移できること"
     it_behaves_like "新規登録画面に遷移できること"
     it_behaves_like "認証メール再送画面に遷移できること"
@@ -59,6 +63,7 @@ RSpec.describe "Links", type: :system do
     end
 
     it { expect(page).to have_current_path edit_user_password_path, ignore_query: true }
+
     it_behaves_like "ログイン画面に遷移できること"
     it_behaves_like "新規登録画面に遷移できること"
     it_behaves_like "認証メール再送画面に遷移できること"
