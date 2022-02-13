@@ -12,12 +12,9 @@ RSpec.describe "Search History", type: :system do
       visit search_history_path(user.id)
       expect(page).to have_current_path search_history_path(user.id)
 
-      expect(page).to have_selector "h1", text: "検索履歴"
-      expect(all("li > .history-photo").size).to eq history_num
-      history_num.times do
-        expect(page).to have_selector "li p", text: "日付　："
-        expect(page).to have_selector "li p", text: "店舗名："
-      end
+      expect(all(".list-box").size).to eq history_num
+      expect(all(".list-box .history-photo").size).to eq history_num
+      expect(all(".list-box .credit").size).to eq history_num
     end
   end
 

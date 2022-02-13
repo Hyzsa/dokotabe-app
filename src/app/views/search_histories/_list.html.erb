@@ -1,10 +1,11 @@
-<a href="<%= history.shop_url %>" class="text-decoration-none text-body" target="_blank" rel="noopener noreferrer">
-  <li class="mb-2 border border-secondary d-flex align-items-center list-style">
+<div class="list-box">
+  <li class="mb-2 d-flex align-items-center">
     <div class="history-photo">
       <img src="<%= history.shop_photo %>" alt="店舗写真">
+      <i class="bi bi-heart-fill"></i>
     </div>
 
-    <div class="p-2">
+    <div class="p-2 w-100">
       <div class="d-flex">
         <p class="m-0 text-nowrap">日付　：</p>
         <p class="m-0"><%= history.displayed_date.strftime("%Y/%m/%d %H:%M:%S") %></p>
@@ -12,8 +13,11 @@
 
       <div class="d-flex">
         <p class="m-0 text-nowrap">店舗名：</p>
-        <p class="m-0"><%= history.shop_name %></p>
+        <a href="<%= history.shop_url %>" target="_blank" rel="noopener noreferrer">
+          <p class="m-0"><%= history.shop_name %></p>
+        </a>
       </div>
     </div>
   </li>
-</a>
+  <p class="m-0 credit">【画像提供：ホットペッパー グルメ】</p>
+</div>
