@@ -129,6 +129,7 @@
     height: 100%;
   }
 
+  a,
   i {
     position: absolute;
     top: 5px;
@@ -150,6 +151,10 @@
   &:hover {
     color: red;
   }
+}
+
+.bi-heart-fill.red {
+  color: red;
 }
 
 // .sticky {

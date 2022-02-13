@@ -2,7 +2,11 @@
   <li class="mb-2 d-flex align-items-center">
     <div class="history-photo">
       <img src="<%= history.shop_photo %>" alt="店舗写真">
-      <i class="bi bi-heart-fill"></i>
+      <% if current_user.favorite?(history.shop_id) %>
+        <%= link_to "", favorite_path(history.id), method: :delete, class: "bi bi-heart-fill red" %>
+      <% else %>
+        <%= link_to "", favorites_path(history_id: history.id), method: :post, class: "bi bi-heart-fill" %>
+      <% end %>
     </div>
 
     <div class="p-2 w-100">

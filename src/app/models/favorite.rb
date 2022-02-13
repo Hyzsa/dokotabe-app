@@ -1,4 +1,4 @@
 class Favorite < ApplicationRecord
   belongs_to :user
-  has_one :search_history
+  belongs_to :search_history
 end

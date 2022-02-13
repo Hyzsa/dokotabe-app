@@ -1,4 +1,4 @@
 class SearchHistory < ApplicationRecord
   belongs_to :user
-  belongs_to :favorite
+  has_one :favorite
 end
