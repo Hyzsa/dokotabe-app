@@ -149,12 +149,12 @@
   color: gray;
 
   &:hover {
-    color: red;
+    color: rgba(255, 0, 0, 0.7);
   }
 }
 
 .bi-heart-fill.red {
-  color: red;
+  color: rgb(255, 0, 0);
 }
 
 // .sticky {

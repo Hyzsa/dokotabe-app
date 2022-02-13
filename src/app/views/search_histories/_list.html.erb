@@ -1,27 +1,25 @@
-<div class="list-box">
-  <li class="mb-2 d-flex align-items-center">
-    <div class="history-photo">
-      <img src="<%= history.shop_photo %>" alt="店舗写真">
-      <% if current_user.favorite?(history.shop_id) %>
-        <%= link_to "", favorite_path(history.id), method: :delete, class: "bi bi-heart-fill red" %>
-      <% else %>
-        <%= link_to "", favorites_path(history_id: history.id), method: :post, class: "bi bi-heart-fill" %>
-      <% end %>
+<li class="mb-2 d-flex align-items-center">
+  <div class="history-photo">
+    <img src="<%= history.shop_photo %>" alt="店舗写真">
+    <% if current_user.favorite_shop?(history.shop_id) %>
+      <%= link_to "", favorite_path(history_id: history.id), method: :delete, remote: true, class: "bi bi-heart-fill red" %>
+    <% else %>
+      <%= link_to "", favorite_path(history_id: history.id), method: :post, remote: true, class: "bi bi-heart-fill" %>
+    <% end %>
+  </div>
+
+  <div class="p-2 w-100">
+    <div class="d-flex">
+      <p class="m-0 text-nowrap">日付　：</p>
+      <p class="m-0"><%= history.displayed_date.strftime("%Y/%m/%d %H:%M:%S") %></p>
     </div>
 
-    <div class="p-2 w-100">
-      <div class="d-flex">
-        <p class="m-0 text-nowrap">日付　：</p>
-        <p class="m-0"><%= history.displayed_date.strftime("%Y/%m/%d %H:%M:%S") %></p>
-      </div>
-
-      <div class="d-flex">
-        <p class="m-0 text-nowrap">店舗名：</p>
-        <a href="<%= history.shop_url %>" target="_blank" rel="noopener noreferrer">
-          <p class="m-0"><%= history.shop_name %></p>
-        </a>
-      </div>
+    <div class="d-flex">
+      <p class="m-0 text-nowrap">店舗名：</p>
+      <a href="<%= history.shop_url %>" target="_blank" rel="noopener noreferrer">
+        <p class="m-0"><%= history.shop_name %></p>
+      </a>
     </div>
-  </li>
-  <p class="m-0 credit">【画像提供：ホットペッパー グルメ】</p>
-</div>
+  </div>
+</li>
+<p class="m-0 credit">【画像提供：ホットペッパー グルメ】</p>

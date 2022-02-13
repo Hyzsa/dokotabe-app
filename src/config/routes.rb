@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   post '/search', to: 'searches#search'
   get '/result', to: 'searches#result', as: 'search_result'
 
+  get '/settings', to: 'setting_pages#settings'
+  get '/settings/unsubscribe', to: 'setting_pages#unsubscribe', as: 'unsubscribe'
+
   get '/users/edit', to: 'static_pages#home'
   devise_for :users
   devise_scope :user do
@@ -13,9 +16,5 @@ Rails.application.routes.draw do
   end
 
   resources :search_histories, only: [:show]
-
-  resources :favorites
-
-  get '/settings', to: 'setting_pages#settings'
-  get '/settings/unsubscribe', to: 'setting_pages#unsubscribe', as: 'unsubscribe'
+  resource :favorite, only: [:show, :create, :destroy]
 end

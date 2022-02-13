@@ -4,7 +4,9 @@
       <section class="col-md">
         <% @histories.each_with_index do |history, i| %>
           <% if i < 5 %>
-            <%= render "search_histories/list", history: history %>
+            <div class="list-box" id="shop_<%= history.id %>">
+              <%= render "search_histories/list", history: history %>
+            </div>
           <% end %>
         <% end %>
       </section>
@@ -12,7 +14,9 @@
       <section class="col-md">
         <% @histories.each_with_index do |history, i| %>
           <% if i >= 5 %>
-            <%= render "search_histories/list", history: history %>
+            <div class="list-box" id="shop_<%= history.id %>">
+              <%= render "search_histories/list", history: history %>
+            </div>
           <% end %>
         <% end %>
       </section>

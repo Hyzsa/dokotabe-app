@@ -7,8 +7,8 @@ class User < ApplicationRecord
   has_many :search_histories, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
-  # 店舗をお気に入りにしているかを判定
-  def favorite?(shop_id)
+  # 店舗をお気に入りにしているかを判定する
+  def favorite_shop?(shop_id)
     favorites.where(shop_id: shop_id).exists?
   end
 end
