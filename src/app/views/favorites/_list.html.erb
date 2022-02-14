@@ -1,16 +1,14 @@
 <li class="mb-2 d-flex align-items-center">
   <div class="history-photo">
-    <img src="<%= favorite.shop_photo %>" alt="店舗写真">
-    <% if current_user.favorite_shop?(favorite.shop_id) %>
-      <%= link_to "", favorite_path(history_id: favorite.id, redirect: true), method: :delete, remote: true, class: "bi bi-heart-fill favorite", data: { confirm: "お気に入りを解除するとメモ情報も完全に削除されます。\n本当に削除しますか？" } %>
-    <% end %>
+    <img src="<%= dependent_shop.shop_photo %>" alt="店舗写真">
+    <%= link_to "", favorite_path(history_id: dependent_shop.id, redirect: true), method: :delete, remote: true, class: "bi bi-heart-fill favorite", data: { confirm: "お気に入りを解除するとメモ情報も完全に削除されます。\n本当に削除しますか？" } %>
   </div>
 
   <div class="p-2 w-100">
     <div class="d-flex">
       <p class="m-0 text-nowrap">店舗名：</p>
-      <a href="<%= favorite.shop_url %>" target="_blank" rel="noopener noreferrer">
-        <p class="m-0"><%= favorite.shop_name %></p>
+      <a href="<%= dependent_shop.shop_url %>" target="_blank" rel="noopener noreferrer">
+        <p class="m-0"><%= dependent_shop.shop_name %></p>
       </a>
     </div>
 
