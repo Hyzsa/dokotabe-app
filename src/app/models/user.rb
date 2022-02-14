@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :search_histories, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :favorite_shops, through: :favorites, source: :search_history
 
   # 店舗をお気に入りにしているかを判定する
   def favorite_shop?(shop_id)

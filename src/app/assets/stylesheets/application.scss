@@ -185,6 +185,67 @@
   width: 90%;
 }
 
+/* お気に入り画面
+-------------------------------- */
+.memo-btn a {
+  display: block;
+  position: relative;
+  padding: 0.5em 2em 0.5em 50px;
+  width: 90%;
+  color: #333;
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 2px solid;
+  border-image: linear-gradient(
+    90deg,
+    #2285b1 0px,
+    #2285b1 30px,
+    #aaa 30px,
+    #aaa 100%
+  );
+  border-image-slice: 1;
+  transition: 0.3s;
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 100%;
+    background-color: #2285b1;
+    transition: 0.3s;
+    opacity: 0;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%) rotate(45deg);
+    width: 5px;
+    height: 5px;
+    border-top: 2px solid #2285b1;
+    border-right: 2px solid #2285b1;
+  }
+
+  &:hover {
+    text-decoration: none;
+    background-color: #cccccc;
+
+    &::before {
+      opacity: 1;
+    }
+
+    &::after {
+      border-top: 2px solid #f2f2f2;
+      border-right: 2px solid #f2f2f2;
+    }
+  }
+}
+
 ///////////////////////////////////
 //          レスポンシブ         //
 ///////////////////////////////////

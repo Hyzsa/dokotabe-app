@@ -3,6 +3,7 @@ class FavoritesController < ApplicationController
   before_action :find_same_shop_history, only: [:create, :destroy]
 
   def show
+    @favorites = current_user.favorite_shops.page(params[:page]).per(10)
   end
 
   def create
@@ -19,6 +20,9 @@ class FavoritesController < ApplicationController
       favorite = Favorite.find_by(user_id: current_user.id, shop_id: history.shop_id)
       favorite.destroy
     end
+
+    # お気に入り画面から呼ばれた場合はリダイレクトする。
+    redirect_to favorite_url unless params[:redirect].nil?
   end
 
   private
