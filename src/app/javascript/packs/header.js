@@ -13,10 +13,11 @@ $(window).on('turbolinks:load', function() {
   else if (path == "/users/sign_in") {
     $("#login").addClass("active")
   }
-  else if (path.match(/\/search_histories\/[\d]*/) != null) {
-    $("#history").addClass("active")
+  else if (path == "/favorite") {
+    $("#favorite").addClass("active")
   }
-  else if (path.match(/\/settings/) != null) {
+  else if ( path.match(/\/search_histories\/[\d]*/) != null ||
+            path.match(/\/settings/) != null) {
     $("#navbarDropdownMenuLink").addClass("active")
   }
 });

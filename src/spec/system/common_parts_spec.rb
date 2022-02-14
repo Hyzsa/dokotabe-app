@@ -13,8 +13,8 @@ RSpec.describe "Common Parts", type: :system do
           expect(page).to have_link "ホーム", href: root_path
           expect(page).to have_link "お問い合わせ", href: contact_path
           expect(page).to have_link "ログイン", href: new_user_session_path
-          expect(page).to have_no_link "検索履歴", href: search_history_path(user.id)
           expect(page).to have_no_link "アカウント", href: "#"
+          expect(page).to have_no_link "検索履歴", href: search_history_path(user.id)
           expect(page).to have_no_link "設定", href: settings_path
           expect(page).to have_no_link "ログアウト", href: destroy_user_session_path
         end
@@ -28,10 +28,10 @@ RSpec.describe "Common Parts", type: :system do
           expect(page).to have_link "ホーム", href: root_path
           expect(page).to have_link "お問い合わせ", href: contact_path
           expect(page).to have_no_link "ログイン", href: new_user_session_path
-          expect(page).to have_link "検索履歴", href: search_history_path(user.id)
           expect(page).to have_link "アカウント", href: "#"
 
           click_link "アカウント"
+          expect(page).to have_link "検索履歴", href: search_history_path(user.id)
           expect(page).to have_link "設定", href: settings_path
           expect(page).to have_link "ログアウト", href: destroy_user_session_path
         end
@@ -75,13 +75,13 @@ RSpec.describe "Common Parts", type: :system do
         end
       end
 
-      context "検索履歴タブをクリックした場合" do
-        example "検索履歴画面に遷移すること" do
+      context "お気に入りタブをクリックした場合" do
+        example "お気に入り画面に遷移すること" do
           log_in_as(user)
 
-          click_link "検索履歴"
-          expect(page).to have_current_path search_history_path(user.id)
-          expect(page).to have_selector ".active", text: "検索履歴"
+          click_link "お気に入り"
+          expect(page).to have_current_path favorite_path
+          expect(page).to have_selector ".active", text: "お気に入り"
           expect(page.all(".active").size).to eq 1
         end
       end
@@ -96,6 +96,18 @@ RSpec.describe "Common Parts", type: :system do
           click_link "アカウント"
           expect(page).to have_link "設定", href: settings_path
           expect(page).to have_link "ログアウト", href: destroy_user_session_path
+        end
+      end
+
+      context "検索履歴タブをクリックした場合" do
+        example "検索履歴画面に遷移すること" do
+          log_in_as(user)
+
+          click_link "アカウント"
+          click_link "検索履歴"
+          expect(page).to have_current_path search_history_path(user.id)
+          expect(page).to have_selector ".active", text: "アカウント"
+          expect(page.all(".active").size).to eq 1
         end
       end
 

@@ -154,6 +154,7 @@ RSpec.describe "Search History", type: :system do
       # ユーザー1でログインする
       log_in_as(user1)
 
+      click_link "アカウント"
       click_link "検索履歴"
       expect(page).to have_current_path search_history_path(user1.id)
 
@@ -201,6 +202,7 @@ RSpec.describe "Search History", type: :system do
 
       log_in_as(user2)
 
+      click_link "アカウント"
       click_link "検索履歴"
       expect(page).to have_current_path search_history_path(user2.id)
 
