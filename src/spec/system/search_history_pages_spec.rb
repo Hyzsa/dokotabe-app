@@ -143,25 +143,21 @@ RSpec.describe "Search History", type: :system do
 
   describe "お気に入り機能", js: true do
     example "お気に入り機能が正常に動作すること" do
-      user1 = create(:user)
-      u1_history_list_1 = create_list(:search_history, 5, user_id: user1.id, shop_id: "J000000001" )
-      u1_history_list_2 = create_list(:search_history, 5, user_id: user1.id, shop_id: "J000000002" )
+      user = create(:user)
+      history_list_1 = create_list(:search_history, 5, user_id: user.id, shop_id: "J000000001" )
+      history_list_2 = create_list(:search_history, 5, user_id: user.id, shop_id: "J000000002" )
 
-      user2 = create(:user)
-      u2_history_list_1 = create_list(:search_history, 5, user_id: user2.id, shop_id: "J000000001" )
-      u2_history_list_2 = create_list(:search_history, 5, user_id: user2.id, shop_id: "J000000002" )
-
-      # ユーザー1でログインする
-      log_in_as(user1)
+      # ログインする
+      log_in_as(user)
 
       click_link "アカウント"
       click_link "検索履歴"
-      expect(page).to have_current_path search_history_path(user1.id)
+      expect(page).to have_current_path search_history_path(user.id)
 
       # お気に入り設定用のリンクがあることを確認する
       5.times do |n|
-        expect(page).to have_link "", href: favorite_path(history_id: u1_history_list_1[n].id)
-        expect(page).to have_link "", href: favorite_path(history_id: u1_history_list_2[n].id)
+        expect(page).to have_link "", href: favorite_path(history_id: history_list_1[n].id)
+        expect(page).to have_link "", href: favorite_path(history_id: history_list_2[n].id)
       end
 
       # お気に入り状態を確認する
@@ -170,48 +166,84 @@ RSpec.describe "Search History", type: :system do
       expect(all(".favorite").size).to eq 0
 
       # 1番目に表示されている店舗をお気に入りに登録する
-      click_link "", href: favorite_path(history_id: u1_history_list_1[0].id)
-      sleep(0.5)  # ajax処理待ち
+      expect do
+        click_link "", href: favorite_path(history_id: history_list_1[0].id)
+        sleep(0.5)  # ajax処理待ち
+      end.to change { Favorite.count }.by(1)
 
-      # 同店舗の履歴がお気に入り状態になることを確認する
+      # 1番目と同店舗の履歴がお気に入り状態になることを確認する
       expect(all("a[data-method=post]").size).to eq 5
       expect(all("a[data-method=delete]").size).to eq 5
       expect(all(".favorite").size).to eq 5
 
       # 1番目と同じ店舗のお気に入りを解除する
-      click_link "", href: favorite_path(history_id: u1_history_list_1[1].id)
-      sleep(0.5)  # ajax処理待ち
+      expect do
+        # お気に入りを解除確認で[キャンセル]を選択する
+        dismiss_confirm("お気に入りを解除するとメモ情報も完全に削除されます。\n本当に削除しますか？") do
+          click_link "", href: favorite_path(history_id: history_list_1[1].id)
+        end
+        sleep(0.5)  # ajax処理待ち
+      end.to change { Favorite.count }.by(0)
 
-      # 同店舗の履歴がお気に入り状態から解除されることを確認する
-      expect(all("a[data-method=post]").size).to eq 10
+      expect do
+        # お気に入りを解除確認で[OK]を選択する
+        accept_confirm("お気に入りを解除するとメモ情報も完全に削除されます。\n本当に削除しますか？") do
+          click_link "", href: favorite_path(history_id: history_list_1[1].id)
+        end
+        sleep(0.5)  # ajax処理待ち
+
+        # 同店舗の履歴がお気に入り状態から解除されることを確認する
+        expect(all("a[data-method=post]").size).to eq 10
+        expect(all("a[data-method=delete]").size).to eq 0
+        expect(all(".favorite").size).to eq 0
+      end.to change { Favorite.count }.by(-1)
+    end
+
+    example "お気に入り状態がユーザー間で干渉しないこと" do
+      user1 = create(:user)
+      user1_history = create(:search_history, user_id: user1.id, shop_id: "J000000001")
+
+      user2 = create(:user)
+      user2_history = create(:search_history, user_id: user2.id, shop_id: "J000000001")
+
+      # ユーザー1でログインする
+      log_in_as(user1)
+
+      click_link "アカウント"
+      click_link "検索履歴"
+      expect(page).to have_current_path search_history_path(user1.id)
+
+      # ユーザー1のお気に入り状態を確認する
+      expect(page).to have_link "", href: favorite_path(history_id: user1_history.id)
+
+      expect(all("a[data-method=post]").size).to eq 1
       expect(all("a[data-method=delete]").size).to eq 0
       expect(all(".favorite").size).to eq 0
 
-      # 全店舗お気に入り状態にする
-      click_link "", href: favorite_path(history_id: u1_history_list_1[0].id)
-      click_link "", href: favorite_path(history_id: u1_history_list_2[0].id)
-      sleep(0.5)  # ajax処理待ち
+      # ユーザー1のお気に入りに登録する
+      expect do
+        click_link "", href: favorite_path(history_id: user1_history.id)
+        sleep(0.5)  # ajax処理待ち
+      end.to change { Favorite.count }.by(1)
 
       expect(all("a[data-method=post]").size).to eq 0
-      expect(all("a[data-method=delete]").size).to eq 10
-      expect(all(".favorite").size).to eq 10
+      expect(all("a[data-method=delete]").size).to eq 1
+      expect(all(".favorite").size).to eq 1
 
-      # ユーザー2のお気に入り状態に影響していないことを確認する
       click_link "アカウント"
       click_link "ログアウト"
 
+      # ユーザー2でログインする
       log_in_as(user2)
 
       click_link "アカウント"
       click_link "検索履歴"
       expect(page).to have_current_path search_history_path(user2.id)
 
-      5.times do |n|
-        expect(page).to have_link "", href: favorite_path(history_id: u2_history_list_1[n].id)
-        expect(page).to have_link "", href: favorite_path(history_id: u2_history_list_2[n].id)
-      end
+      # ユーザー2のお気に入り状態に影響していないことを確認する
+      expect(page).to have_link "", href: favorite_path(history_id: user2_history.id)
 
-      expect(all("a[data-method=post]").size).to eq 10
+      expect(all("a[data-method=post]").size).to eq 1
       expect(all("a[data-method=delete]").size).to eq 0
       expect(all(".favorite").size).to eq 0
     end
