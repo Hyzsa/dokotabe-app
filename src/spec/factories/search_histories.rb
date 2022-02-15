@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :search_history do
-    user_id { 1 }
+    association :user
     sequence(:shop_id) { |n| "J#{n}" }
     shop_name { "XXXXXXXXXXX店" }
     shop_photo do
