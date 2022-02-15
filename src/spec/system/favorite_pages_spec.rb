@@ -18,7 +18,7 @@ RSpec.describe "favorite", type: :system do
     context "お気に入りに登録されている場合" do
       example "お気に入り画面の要素が正しく表示されること" do
         history = create(:search_history, user_id: user.id)
-        favorite = create(:favorite, user_id: user.id, search_history_id: history.id, shop_id: history.shop_id)
+        create(:favorite, user_id: user.id, search_history_id: history.id, shop_id: history.shop_id)
 
         # ユーザがお気に入りしている店舗を取得する
         dependent_shops = user.favorite_shops
@@ -31,7 +31,7 @@ RSpec.describe "favorite", type: :system do
         expect(page).to have_selector ".history-photo img"
         expect(page).to have_link "", href: favorite_path(history_id: dependent_shops[0].id, redirect: true)
         expect(page).to have_selector "p", text: "店舗名："
-        expect(page).to have_link "#{dependent_shops[0].shop_name}", href: dependent_shops[0].shop_url
+        expect(page).to have_link dependent_shops[0].shop_name.to_s, href: dependent_shops[0].shop_url
         expect(page).to have_link "Memo", href: "#"
         expect(page).to have_selector "p", text: "【画像提供：ホットペッパー グルメ】"
       end
@@ -187,7 +187,7 @@ RSpec.describe "favorite", type: :system do
         dismiss_confirm("お気に入りを解除するとメモ情報も完全に削除されます。\n本当に削除しますか？") do
           click_link "", href: favorite_path(history_id: favorite.search_history_id, redirect: true)
         end
-        sleep(0.5)  # 処理待ち
+        sleep(0.5) # 処理待ち
         expect(all(".history-photo").size).to eq(1)
       end.to change { Favorite.count }.by(0)
 
@@ -196,7 +196,7 @@ RSpec.describe "favorite", type: :system do
         accept_confirm("お気に入りを解除するとメモ情報も完全に削除されます。\n本当に削除しますか？") do
           click_link "", href: favorite_path(history_id: favorite.search_history_id, redirect: true)
         end
-        sleep(0.5)  # 処理待ち
+        sleep(0.5) # 処理待ち
         expect(all(".history-photo").size).to eq(0)
       end.to change { Favorite.count }.by(-1)
     end

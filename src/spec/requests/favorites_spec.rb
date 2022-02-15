@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Favorites", type: :request do
   let(:user) { create(:user) }

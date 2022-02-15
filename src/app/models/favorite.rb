@@ -9,7 +9,7 @@ class Favorite < ApplicationRecord
 
   # 同じお店のお気に入り追加を防止する
   def same_shop_cannot_be_a_favorite
-    if shop_id.present? && Favorite.where(user_id: user_id ,shop_id: shop_id).exists?
+    if shop_id.present? && Favorite.exists?(user_id: user_id, shop_id: shop_id)
       errors.add(:shop_id, ": 同じ店舗はお気に入りできません。")
     end
   end

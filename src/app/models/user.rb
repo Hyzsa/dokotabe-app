@@ -10,6 +10,6 @@ class User < ApplicationRecord
 
   # 店舗をお気に入りにしているかを判定する
   def favorite_shop?(shop_id)
-    favorites.where(shop_id: shop_id).exists?
+    favorites.exists?(shop_id: shop_id)
   end
 end

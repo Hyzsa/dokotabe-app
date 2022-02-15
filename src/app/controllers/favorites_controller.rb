@@ -8,14 +8,18 @@ class FavoritesController < ApplicationController
 
   def create
     history = SearchHistory.find(params[:history_id])
-    unless current_user.favorite_shop?(history.shop_id)
-      favorite = current_user.favorites.build(search_history_id: params[:history_id], shop_id: history.shop_id)
-      favorite.save
-    end
+
+    # 既に店舗をお気に入りにしてたら追加しない。
+    return if current_user.favorite_shop?(history.shop_id)
+
+    favorite = current_user.favorites.build(search_history_id: params[:history_id], shop_id: history.shop_id)
+    favorite.save
   end
 
   def destroy
     history = SearchHistory.find(params[:history_id])
+
+    # 店舗をお気に入りにしてる場合のみ削除する。
     if current_user.favorite_shop?(history.shop_id)
       favorite = Favorite.find_by(user_id: current_user.id, shop_id: history.shop_id)
       favorite.destroy
