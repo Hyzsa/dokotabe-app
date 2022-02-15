@@ -173,7 +173,7 @@ RSpec.describe "favorite", type: :system do
   describe "お気に入り機能", js: true do
     before { log_in_as(user) }
 
-    example "お気に入りを解除することができること" do
+    example "お気に入りの解除ができること" do
       history = create(:search_history, user_id: user.id)
       favorite = create(:favorite, user_id: user.id, search_history_id: history.id, shop_id: history.shop_id)
 
