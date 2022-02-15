@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Search Result Save", type: :system, js: true do
+RSpec.describe "Setting Pages", type: :system, js: true do
   describe "レイアウト確認" do
     before do
       user = create(:user)

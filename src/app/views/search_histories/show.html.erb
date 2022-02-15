@@ -1,12 +1,12 @@
 <div class="flex-grow-1">
-  <section class="px-3 bg-color">
-    <h1 class="title pt-3">検索履歴</h1>
-
+  <section class="px-3">
     <section class="row mt-3">
       <section class="col-md">
         <% @histories.each_with_index do |history, i| %>
           <% if i < 5 %>
-            <%= render "search_histories/list", history: history %>
+            <div class="list-box" id="shop_<%= history.id %>">
+              <%= render "search_histories/list", history: history %>
+            </div>
           <% end %>
         <% end %>
       </section>
@@ -14,12 +14,12 @@
       <section class="col-md">
         <% @histories.each_with_index do |history, i| %>
           <% if i >= 5 %>
-            <%= render "search_histories/list", history: history %>
+            <div class="list-box" id="shop_<%= history.id %>">
+              <%= render "search_histories/list", history: history %>
+            </div>
           <% end %>
         <% end %>
       </section>
-
-      <p class="m-0 text-end footer-size">【画像提供：ホットペッパー グルメ】</p>
     </section>
   </section>
 

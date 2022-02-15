@@ -1,19 +1,25 @@
-<a href="<%= history.shop_url %>" class="text-decoration-none text-body" target="_blank" rel="noopener noreferrer">
-  <li class="mb-2 border border-secondary d-flex align-items-center list-style">
-    <div class="history-photo">
-      <img src="<%= history.shop_photo %>" alt="店舗写真">
+<li class="mb-2 d-flex align-items-center">
+  <div class="history-photo">
+    <img src="<%= history.shop_photo %>" alt="店舗写真">
+    <% if current_user.favorite_shop?(history.shop_id) %>
+      <%= link_to "", favorite_path(history_id: history.id), method: :delete, remote: true, class: "bi bi-heart-fill favorite", data: { confirm: "お気に入りを解除するとメモ情報も完全に削除されます。\n本当に削除しますか？" } %>
+    <% else %>
+      <%= link_to "", favorite_path(history_id: history.id), method: :post, remote: true, class: "bi bi-heart-fill" %>
+    <% end %>
+  </div>
+
+  <div class="p-2 w-100">
+    <div class="d-flex">
+      <p class="m-0 text-nowrap">日付　：</p>
+      <p class="m-0"><%= history.displayed_date.strftime("%Y/%m/%d %H:%M:%S") %></p>
     </div>
 
-    <div class="p-2">
-      <div class="d-flex">
-        <p class="m-0 text-nowrap">日付　：</p>
-        <p class="m-0"><%= history.displayed_date.strftime("%Y/%m/%d %H:%M:%S") %></p>
-      </div>
-
-      <div class="d-flex">
-        <p class="m-0 text-nowrap">店舗名：</p>
+    <div class="d-flex">
+      <p class="m-0 text-nowrap">店舗名：</p>
+      <a href="<%= history.shop_url %>" target="_blank" rel="noopener noreferrer">
         <p class="m-0"><%= history.shop_name %></p>
-      </div>
+      </a>
     </div>
-  </li>
-</a>
+  </div>
+</li>
+<p class="m-0 credit">【画像提供：ホットペッパー グルメ】</p>

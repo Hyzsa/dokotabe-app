@@ -75,6 +75,11 @@ Style/StringLiterals:
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
 
+# ガード節を使用してるかのチェック
+# 4行以上の場合にチェックするように設定
+GuardClause:
+  MinBodyLength: 4
+
 #################### Metrics ###############################
 # RSpecは専用のDSLで記述する性質上、
 # 1つのブロックあたりの行数を25行以下に書き換えるのは現実的ではないため無効

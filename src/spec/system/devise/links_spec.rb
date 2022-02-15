@@ -1,5 +1,5 @@
 require "rails_helper"
-require "support/shared_devise_link_spec"
+require "support/shared_devise_link"
 
 RSpec.describe "Links", type: :system do
   describe "ログイン画面" do

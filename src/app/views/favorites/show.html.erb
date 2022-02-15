@@ -1,0 +1,42 @@
+<div class="flex-grow-1">
+  <section class="px-3">
+    <% if @favorites.empty? %>
+      <section class="border p-5 mx-auto mt-5 bg-color bg-width">
+        <h1 class="title mb-4">お気に入り店舗</h1>
+        <p>
+          <%= link_to "検索履歴画面", search_history_path(current_user.id) %>
+          でお気に入りを設定することができます。<br>
+          お気に入りに設定した店舗には、次回の来店用にメモを残すことができるようになります。
+        </p>
+      </section>
+    <% else %>
+      <section class="row mt-3">
+        <section class="col-md">
+          <% @favorites.each_with_index do |dependent_shop, i| %>
+            <% if i < 5 %>
+              <div class="list-box">
+                <%= render "favorites/list", dependent_shop: dependent_shop %>
+              </div>
+            <% end %>
+          <% end %>
+        </section>
+
+        <section class="col-md">
+          <% @favorites.each_with_index do |dependent_shop, i| %>
+            <% if i >= 5 %>
+              <div class="list-box">
+                <%= render "favorites/list", dependent_shop: dependent_shop %>
+              </div>
+            <% end %>
+          <% end %>
+        </section>
+      </section>
+    </section>
+
+    <div class="d-flex">
+      <section class="mx-auto mt-3">
+        <%= paginate @favorites %>
+      </section>
+    </div>
+  <% end %>
+</div>
