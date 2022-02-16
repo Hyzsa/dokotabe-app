@@ -16,7 +16,8 @@ Rails.application.routes.draw do
   end
 
   resources :search_histories, only: [:show]
-  resource :favorite, only: [:show, :create, :destroy] do
+
+  resources :favorites, only: [:show, :create, :destroy] do
     resources :memos
   end
 end

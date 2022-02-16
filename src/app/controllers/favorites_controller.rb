@@ -1,5 +1,6 @@
 class FavoritesController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_if_login_user, only: [:show]
   before_action :find_same_shop_history, only: [:create, :destroy]
 
   def show

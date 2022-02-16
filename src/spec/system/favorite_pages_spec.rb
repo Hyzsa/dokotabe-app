@@ -8,8 +8,8 @@ RSpec.describe "favorite", type: :system do
       example "お気に入り画面の要素が正しく表示されること" do
         log_in_as(user)
 
-        click_link "お気に入り", href: favorite_path
-        expect(page).to have_current_path favorite_path
+        click_link "お気に入り", href: favorite_path(user)
+        expect(page).to have_current_path favorite_path(user)
         expect(page).to have_selector "h1", text: "お気に入り店舗"
         expect(page).to have_link "検索履歴画面", href: search_history_path(user.id)
       end
@@ -25,14 +25,14 @@ RSpec.describe "favorite", type: :system do
 
         log_in_as(user)
 
-        click_link "お気に入り", href: favorite_path
-        expect(page).to have_current_path favorite_path
+        click_link "お気に入り", href: favorite_path(user)
+        expect(page).to have_current_path favorite_path(user)
         expect(page).to have_no_selector "h1", text: "お気に入り店舗"
         expect(page).to have_selector ".shop-photo img"
-        expect(page).to have_link "", href: favorite_path(history_id: dependent_shops[0].id, redirect: true)
+        expect(page).to have_link "", href: favorite_path(user, history_id: dependent_shops[0].id, redirect: true)
         expect(page).to have_selector "p", text: "店舗名："
         expect(page).to have_link dependent_shops[0].shop_name.to_s, href: dependent_shops[0].shop_url
-        expect(page).to have_link "Memo", href: "#"
+        expect(page).to have_link "Memo", href: favorite_memos_path(dependent_shops[0].favorite)
         expect(page).to have_selector "p", text: "【画像提供：ホットペッパー グルメ】"
       end
     end
@@ -49,8 +49,8 @@ RSpec.describe "favorite", type: :system do
             create(:favorite, user_id: user.id, search_history_id: history.id, shop_id: history.shop_id)
           end
 
-          click_link "お気に入り", href: favorite_path
-          expect(page).to have_current_path favorite_path
+          click_link "お気に入り", href: favorite_path(user)
+          expect(page).to have_current_path favorite_path(user)
           expect(page).to have_selector ".pagination"
         end
       end
@@ -62,8 +62,8 @@ RSpec.describe "favorite", type: :system do
             create(:favorite, user_id: user.id, search_history_id: history.id, shop_id: history.shop_id)
           end
 
-          click_link "お気に入り", href: favorite_path
-          expect(page).to have_current_path favorite_path
+          click_link "お気に入り", href: favorite_path(user)
+          expect(page).to have_current_path favorite_path(user)
           expect(page).to have_no_selector ".pagination"
         end
       end
@@ -76,96 +76,96 @@ RSpec.describe "favorite", type: :system do
           create(:favorite, user_id: user.id, search_history_id: history.id, shop_id: history.shop_id)
         end
 
-        click_link "お気に入り", href: favorite_path
-        expect(page).to have_current_path favorite_path
+        click_link "お気に入り", href: favorite_path(user)
+        expect(page).to have_current_path favorite_path(user)
         expect(page).to have_selector ".pagination"
 
         # ページネーションの表示状態を確認する
         expect(all(".shop-photo").size).to eq(10)
-        expect(page).to have_no_link "«", href: favorite_path
-        expect(page).to have_no_link "‹", href: favorite_path
+        expect(page).to have_no_link "«", href: favorite_path(user)
+        expect(page).to have_no_link "‹", href: favorite_path(user)
         expect(page).to have_selector ".page-item.active", text: "1"
-        expect(page).to have_link "2", href: favorite_path(page: 2)
-        expect(page).to have_link "›", href: favorite_path(page: 2)
-        expect(page).to have_link "»", href: favorite_path(page: 2)
+        expect(page).to have_link "2", href: favorite_path(user, page: 2)
+        expect(page).to have_link "›", href: favorite_path(user, page: 2)
+        expect(page).to have_link "»", href: favorite_path(user, page: 2)
 
         # ページネーションの[2]ボタンをクリックし、次ページに遷移する
         click_link("2")
-        expect(page).to have_current_path favorite_path(page: 2)
+        expect(page).to have_current_path favorite_path(user, page: 2)
 
         # ページネーションの表示状態を確認する
         expect(all(".shop-photo").size).to eq(5)
-        expect(page).to have_link "«", href: favorite_path
-        expect(page).to have_link "‹", href: favorite_path
-        expect(page).to have_link "1", href: favorite_path
+        expect(page).to have_link "«", href: favorite_path(user)
+        expect(page).to have_link "‹", href: favorite_path(user)
+        expect(page).to have_link "1", href: favorite_path(user)
         expect(page).to have_selector ".page-item.active", text: "2"
-        expect(page).to have_no_link "›", href: favorite_path(page: 2)
-        expect(page).to have_no_link "»", href: favorite_path(page: 2)
+        expect(page).to have_no_link "›", href: favorite_path(user, page: 2)
+        expect(page).to have_no_link "»", href: favorite_path(user, page: 2)
 
         # ページネーションの[1]ボタンをクリックし、前ページに遷移する
         click_link("1")
-        expect(page).to have_current_path favorite_path
+        expect(page).to have_current_path favorite_path(user)
 
         # ページネーションの表示状態を確認する
         expect(all(".shop-photo").size).to eq(10)
-        expect(page).to have_no_link "«", href: favorite_path
-        expect(page).to have_no_link "‹", href: favorite_path
+        expect(page).to have_no_link "«", href: favorite_path(user)
+        expect(page).to have_no_link "‹", href: favorite_path(user)
         expect(page).to have_selector ".page-item.active", text: "1"
-        expect(page).to have_link "2", href: favorite_path(page: 2)
-        expect(page).to have_link "›", href: favorite_path(page: 2)
-        expect(page).to have_link "»", href: favorite_path(page: 2)
+        expect(page).to have_link "2", href: favorite_path(user, page: 2)
+        expect(page).to have_link "›", href: favorite_path(user, page: 2)
+        expect(page).to have_link "»", href: favorite_path(user, page: 2)
 
         # ページネーションの[›]ボタンをクリックし、次ページに遷移する
         click_link("›")
-        expect(page).to have_current_path favorite_path(page: 2)
+        expect(page).to have_current_path favorite_path(user, page: 2)
 
         # ページネーションの表示状態を確認する
         expect(all(".shop-photo").size).to eq(5)
-        expect(page).to have_link "«", href: favorite_path
-        expect(page).to have_link "‹", href: favorite_path
-        expect(page).to have_link "1", href: favorite_path
+        expect(page).to have_link "«", href: favorite_path(user)
+        expect(page).to have_link "‹", href: favorite_path(user)
+        expect(page).to have_link "1", href: favorite_path(user)
         expect(page).to have_selector ".page-item.active", text: "2"
-        expect(page).to have_no_link "›", href: favorite_path(page: 2)
-        expect(page).to have_no_link "»", href: favorite_path(page: 2)
+        expect(page).to have_no_link "›", href: favorite_path(user, page: 2)
+        expect(page).to have_no_link "»", href: favorite_path(user, page: 2)
 
         # ページネーションの[‹]ボタンをクリックし、前ページに遷移する
         click_link("‹")
-        expect(page).to have_current_path favorite_path
+        expect(page).to have_current_path favorite_path(user)
 
         # ページネーションの表示状態を確認する
         expect(all(".shop-photo").size).to eq(10)
-        expect(page).to have_no_link "«", href: favorite_path
-        expect(page).to have_no_link "‹", href: favorite_path
+        expect(page).to have_no_link "«", href: favorite_path(user)
+        expect(page).to have_no_link "‹", href: favorite_path(user)
         expect(page).to have_selector ".page-item.active", text: "1"
-        expect(page).to have_link "2", href: favorite_path(page: 2)
-        expect(page).to have_link "›", href: favorite_path(page: 2)
-        expect(page).to have_link "»", href: favorite_path(page: 2)
+        expect(page).to have_link "2", href: favorite_path(user, page: 2)
+        expect(page).to have_link "›", href: favorite_path(user, page: 2)
+        expect(page).to have_link "»", href: favorite_path(user, page: 2)
 
         # ページネーションの[»]ボタンをクリックし、次ページに遷移する
         click_link("»")
-        expect(page).to have_current_path favorite_path(page: 2)
+        expect(page).to have_current_path favorite_path(user, page: 2)
 
         # ページネーションの表示状態を確認する
         expect(all(".shop-photo").size).to eq(5)
-        expect(page).to have_link "«", href: favorite_path
-        expect(page).to have_link "‹", href: favorite_path
-        expect(page).to have_link "1", href: favorite_path
+        expect(page).to have_link "«", href: favorite_path(user)
+        expect(page).to have_link "‹", href: favorite_path(user)
+        expect(page).to have_link "1", href: favorite_path(user)
         expect(page).to have_selector ".page-item.active", text: "2"
-        expect(page).to have_no_link "›", href: favorite_path(page: 2)
-        expect(page).to have_no_link "»", href: favorite_path(page: 2)
+        expect(page).to have_no_link "›", href: favorite_path(user, page: 2)
+        expect(page).to have_no_link "»", href: favorite_path(user, page: 2)
 
         # ページネーションの[«]ボタンをクリックし、前ページに遷移する
         click_link("«")
-        expect(page).to have_current_path favorite_path
+        expect(page).to have_current_path favorite_path(user)
 
         # ページネーションの表示状態を確認する
         expect(all(".shop-photo").size).to eq(10)
-        expect(page).to have_no_link "«", href: favorite_path
-        expect(page).to have_no_link "‹", href: favorite_path
+        expect(page).to have_no_link "«", href: favorite_path(user)
+        expect(page).to have_no_link "‹", href: favorite_path(user)
         expect(page).to have_selector ".page-item.active", text: "1"
-        expect(page).to have_link "2", href: favorite_path(page: 2)
-        expect(page).to have_link "›", href: favorite_path(page: 2)
-        expect(page).to have_link "»", href: favorite_path(page: 2)
+        expect(page).to have_link "2", href: favorite_path(user, page: 2)
+        expect(page).to have_link "›", href: favorite_path(user, page: 2)
+        expect(page).to have_link "»", href: favorite_path(user, page: 2)
       end
     end
   end
@@ -177,15 +177,15 @@ RSpec.describe "favorite", type: :system do
       history = create(:search_history, user_id: user.id)
       favorite = create(:favorite, user_id: user.id, search_history_id: history.id, shop_id: history.shop_id)
 
-      click_link "お気に入り", href: favorite_path
-      expect(page).to have_current_path favorite_path
+      click_link "お気に入り", href: favorite_path(user)
+      expect(page).to have_current_path favorite_path(user)
       expect(all(".shop-photo").size).to eq(1)
 
       # お気に入りを解除する
       expect do
         # お気に入りを解除確認で[キャンセル]を選択する
         dismiss_confirm("お気に入りを解除するとメモ情報も完全に削除されます。\n本当に削除しますか？") do
-          click_link "", href: favorite_path(history_id: favorite.search_history_id, redirect: true)
+          click_link "", href: favorite_path(user, history_id: favorite.search_history_id, redirect: true)
         end
         sleep(0.5) # 処理待ち
         expect(all(".shop-photo").size).to eq(1)
@@ -194,7 +194,7 @@ RSpec.describe "favorite", type: :system do
       expect do
         # お気に入りを解除確認で[OK]を選択する
         accept_confirm("お気に入りを解除するとメモ情報も完全に削除されます。\n本当に削除しますか？") do
-          click_link "", href: favorite_path(history_id: favorite.search_history_id, redirect: true)
+          click_link "", href: favorite_path(user, history_id: favorite.search_history_id, redirect: true)
         end
         sleep(0.5) # 処理待ち
         expect(all(".shop-photo").size).to eq(0)
