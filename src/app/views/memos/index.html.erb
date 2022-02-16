@@ -18,6 +18,8 @@
         <p class="m-0 credit">【画像提供：ホットペッパー グルメ】</p>
       </div>
 
+      <%= render "layouts/flash" %>
+
       <%= form_with model: [@favorite, @memo] do |f| %>
         <div class="form-floating">
           <%= f.text_area :content, class: "form-control", placeholder: "メモ", id: "floatingTextarea2", style: "height: 100px" %>
@@ -37,7 +39,7 @@
 
       <ul>
         <% @memos.each do |memo| %>
-          <p><%= memo.content %></p>
+          <%= render "memos/memo", memo: memo %>
         <% end %>
       </ul>
     </section>
