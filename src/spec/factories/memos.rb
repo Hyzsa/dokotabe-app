@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :memo do
-    favorite_id { 1 }
-    content { "MyText" }
+    association :favorite
+    content { "a" * 140 }
   end
 end
