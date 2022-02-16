@@ -1,6 +1,7 @@
 <div class="flex-grow-1 p-2">
   <section class="row">
     <section class="col-md mb-3">
+      <%# 店舗情報 %>
       <div class="title-box mb-3">
         <div class="d-flex align-items-center">
           <div class="shop-photo">
@@ -18,8 +19,10 @@
         <p class="m-0 credit">【画像提供：ホットペッパー グルメ】</p>
       </div>
 
+      <%# フラッシュメッセージ %>
       <%= render "layouts/flash" %>
 
+      <%# メモ投稿フォーム %>
       <%= form_with model: [@favorite, @memo] do |f| %>
         <div class="form-floating">
           <%= f.text_area :content, class: "form-control", placeholder: "メモ", id: "floatingTextarea2", style: "height: 150px" %>
@@ -34,6 +37,7 @@
       <% end %>
     </section>
 
+    <%# メモ一覧 %>
     <section class="col-md">
       <ul class="p-0">
         <% @memos.each do |memo| %>
@@ -41,6 +45,7 @@
         <% end %>
       </ul>
 
+      <%# ページネーション %>
       <div class="d-flex">
         <section class="mx-auto">
           <%= paginate @memos %>
