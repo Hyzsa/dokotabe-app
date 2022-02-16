@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     get '/users', to: 'devise/registrations#new'
   end
 
-  resources :search_histories, only: [:show]
+  resource :search_history, only: [:show]
 
   resources :favorites, only: [:show, :create, :destroy] do
     resources :memos

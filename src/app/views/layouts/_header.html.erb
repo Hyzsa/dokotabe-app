@@ -23,7 +23,7 @@
           <li class="nav-item dropdown">
             <%= link_to " アカウント", "#", class: "nav-link dropdown-toggle bi bi-person", id: "navbarDropdownMenuLink", role: "button", "data-bs-toggle": "dropdown", "aria-expanded": "false" %>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><%= link_to "検索履歴", search_history_path(current_user), class: "dropdown-item" %></li>
+              <li><%= link_to "検索履歴", search_history_path, class: "dropdown-item" %></li>
               <li><%= link_to "設定", settings_path, class: "dropdown-item border-bottom" %></li>
               <li><%= link_to " ログアウト", destroy_user_session_path, method: "delete", class: "dropdown-item bi bi-box-arrow-left" %></li>
             </ul>
