@@ -1,4 +1,6 @@
 class MemosController < ApplicationController
+  before_action :current_user_favorite_shop
+
   def index
     @memo = Memo.new
     @favorite = Favorite.find(params[:favorite_id])
@@ -20,6 +22,12 @@ class MemosController < ApplicationController
   end
 
   private
+
+  # ログイン中のユーザーのお気に入り店舗かを確認する。
+  def current_user_favorite_shop
+    favorite = Favorite.find(params[:favorite_id])
+    redirect_to favorite_url(current_user) unless current_user.id == favorite.user_id
+  end
 
   def memo_params
     params.require(:memo).permit(:content)
