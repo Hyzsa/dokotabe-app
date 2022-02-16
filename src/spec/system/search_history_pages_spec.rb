@@ -13,7 +13,7 @@ RSpec.describe "Search History", type: :system do
       expect(page).to have_current_path search_history_path(user.id)
 
       expect(all(".list-box").size).to eq history_num
-      expect(all(".list-box .history-photo").size).to eq history_num
+      expect(all(".list-box .shop-photo").size).to eq history_num
       expect(all(".list-box .credit").size).to eq history_num
     end
   end
@@ -52,7 +52,7 @@ RSpec.describe "Search History", type: :system do
         expect(page).to have_selector ".pagination"
 
         # ページネーションの表示状態を確認する
-        expect(all(".history-photo").size).to eq(10)
+        expect(all(".shop-photo").size).to eq(10)
         expect(page).to have_no_link "«", href: search_history_path(user.id)
         expect(page).to have_no_link "‹", href: search_history_path(user.id)
         expect(page).to have_selector ".page-item.active", text: "1"
@@ -65,7 +65,7 @@ RSpec.describe "Search History", type: :system do
         expect(page).to have_current_path search_history_path(user.id, page: 2)
 
         # ページネーションの表示状態を確認する
-        expect(all(".history-photo").size).to eq(5)
+        expect(all(".shop-photo").size).to eq(5)
         expect(page).to have_link "«", href: search_history_path(user.id)
         expect(page).to have_link "‹", href: search_history_path(user.id)
         expect(page).to have_link "1", href: search_history_path(user.id)
@@ -78,7 +78,7 @@ RSpec.describe "Search History", type: :system do
         expect(page).to have_current_path search_history_path(user.id)
 
         # ページネーションの表示状態を確認する
-        expect(all(".history-photo").size).to eq(10)
+        expect(all(".shop-photo").size).to eq(10)
         expect(page).to have_no_link "«", href: search_history_path(user.id)
         expect(page).to have_no_link "‹", href: search_history_path(user.id)
         expect(page).to have_selector ".page-item.active", text: "1"
@@ -91,7 +91,7 @@ RSpec.describe "Search History", type: :system do
         expect(page).to have_current_path search_history_path(user.id, page: 2)
 
         # ページネーションの表示状態を確認する
-        expect(all(".history-photo").size).to eq(5)
+        expect(all(".shop-photo").size).to eq(5)
         expect(page).to have_link "«", href: search_history_path(user.id)
         expect(page).to have_link "‹", href: search_history_path(user.id)
         expect(page).to have_link "1", href: search_history_path(user.id)
@@ -104,7 +104,7 @@ RSpec.describe "Search History", type: :system do
         expect(page).to have_current_path search_history_path(user.id)
 
         # ページネーションの表示状態を確認する
-        expect(all(".history-photo").size).to eq(10)
+        expect(all(".shop-photo").size).to eq(10)
         expect(page).to have_no_link "«", href: search_history_path(user.id)
         expect(page).to have_no_link "‹", href: search_history_path(user.id)
         expect(page).to have_selector ".page-item.active", text: "1"
@@ -117,7 +117,7 @@ RSpec.describe "Search History", type: :system do
         expect(page).to have_current_path search_history_path(user.id, page: 2)
 
         # ページネーションの表示状態を確認する
-        expect(all(".history-photo").size).to eq(5)
+        expect(all(".shop-photo").size).to eq(5)
         expect(page).to have_link "«", href: search_history_path(user.id)
         expect(page).to have_link "‹", href: search_history_path(user.id)
         expect(page).to have_link "1", href: search_history_path(user.id)
@@ -130,7 +130,7 @@ RSpec.describe "Search History", type: :system do
         expect(page).to have_current_path search_history_path(user.id)
 
         # ページネーションの表示状態を確認する
-        expect(all(".history-photo").size).to eq(10)
+        expect(all(".shop-photo").size).to eq(10)
         expect(page).to have_no_link "«", href: search_history_path(user.id)
         expect(page).to have_no_link "‹", href: search_history_path(user.id)
         expect(page).to have_selector ".page-item.active", text: "1"

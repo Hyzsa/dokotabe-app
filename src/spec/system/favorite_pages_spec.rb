@@ -28,7 +28,7 @@ RSpec.describe "favorite", type: :system do
         click_link "お気に入り", href: favorite_path
         expect(page).to have_current_path favorite_path
         expect(page).to have_no_selector "h1", text: "お気に入り店舗"
-        expect(page).to have_selector ".history-photo img"
+        expect(page).to have_selector ".shop-photo img"
         expect(page).to have_link "", href: favorite_path(history_id: dependent_shops[0].id, redirect: true)
         expect(page).to have_selector "p", text: "店舗名："
         expect(page).to have_link dependent_shops[0].shop_name.to_s, href: dependent_shops[0].shop_url
@@ -81,7 +81,7 @@ RSpec.describe "favorite", type: :system do
         expect(page).to have_selector ".pagination"
 
         # ページネーションの表示状態を確認する
-        expect(all(".history-photo").size).to eq(10)
+        expect(all(".shop-photo").size).to eq(10)
         expect(page).to have_no_link "«", href: favorite_path
         expect(page).to have_no_link "‹", href: favorite_path
         expect(page).to have_selector ".page-item.active", text: "1"
@@ -94,7 +94,7 @@ RSpec.describe "favorite", type: :system do
         expect(page).to have_current_path favorite_path(page: 2)
 
         # ページネーションの表示状態を確認する
-        expect(all(".history-photo").size).to eq(5)
+        expect(all(".shop-photo").size).to eq(5)
         expect(page).to have_link "«", href: favorite_path
         expect(page).to have_link "‹", href: favorite_path
         expect(page).to have_link "1", href: favorite_path
@@ -107,7 +107,7 @@ RSpec.describe "favorite", type: :system do
         expect(page).to have_current_path favorite_path
 
         # ページネーションの表示状態を確認する
-        expect(all(".history-photo").size).to eq(10)
+        expect(all(".shop-photo").size).to eq(10)
         expect(page).to have_no_link "«", href: favorite_path
         expect(page).to have_no_link "‹", href: favorite_path
         expect(page).to have_selector ".page-item.active", text: "1"
@@ -120,7 +120,7 @@ RSpec.describe "favorite", type: :system do
         expect(page).to have_current_path favorite_path(page: 2)
 
         # ページネーションの表示状態を確認する
-        expect(all(".history-photo").size).to eq(5)
+        expect(all(".shop-photo").size).to eq(5)
         expect(page).to have_link "«", href: favorite_path
         expect(page).to have_link "‹", href: favorite_path
         expect(page).to have_link "1", href: favorite_path
@@ -133,7 +133,7 @@ RSpec.describe "favorite", type: :system do
         expect(page).to have_current_path favorite_path
 
         # ページネーションの表示状態を確認する
-        expect(all(".history-photo").size).to eq(10)
+        expect(all(".shop-photo").size).to eq(10)
         expect(page).to have_no_link "«", href: favorite_path
         expect(page).to have_no_link "‹", href: favorite_path
         expect(page).to have_selector ".page-item.active", text: "1"
@@ -146,7 +146,7 @@ RSpec.describe "favorite", type: :system do
         expect(page).to have_current_path favorite_path(page: 2)
 
         # ページネーションの表示状態を確認する
-        expect(all(".history-photo").size).to eq(5)
+        expect(all(".shop-photo").size).to eq(5)
         expect(page).to have_link "«", href: favorite_path
         expect(page).to have_link "‹", href: favorite_path
         expect(page).to have_link "1", href: favorite_path
@@ -159,7 +159,7 @@ RSpec.describe "favorite", type: :system do
         expect(page).to have_current_path favorite_path
 
         # ページネーションの表示状態を確認する
-        expect(all(".history-photo").size).to eq(10)
+        expect(all(".shop-photo").size).to eq(10)
         expect(page).to have_no_link "«", href: favorite_path
         expect(page).to have_no_link "‹", href: favorite_path
         expect(page).to have_selector ".page-item.active", text: "1"
@@ -179,7 +179,7 @@ RSpec.describe "favorite", type: :system do
 
       click_link "お気に入り", href: favorite_path
       expect(page).to have_current_path favorite_path
-      expect(all(".history-photo").size).to eq(1)
+      expect(all(".shop-photo").size).to eq(1)
 
       # お気に入りを解除する
       expect do
@@ -188,7 +188,7 @@ RSpec.describe "favorite", type: :system do
           click_link "", href: favorite_path(history_id: favorite.search_history_id, redirect: true)
         end
         sleep(0.5) # 処理待ち
-        expect(all(".history-photo").size).to eq(1)
+        expect(all(".shop-photo").size).to eq(1)
       end.to change { Favorite.count }.by(0)
 
       expect do
@@ -197,7 +197,7 @@ RSpec.describe "favorite", type: :system do
           click_link "", href: favorite_path(history_id: favorite.search_history_id, redirect: true)
         end
         sleep(0.5) # 処理待ち
-        expect(all(".history-photo").size).to eq(0)
+        expect(all(".shop-photo").size).to eq(0)
       end.to change { Favorite.count }.by(-1)
     end
   end

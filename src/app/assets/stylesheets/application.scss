@@ -102,7 +102,17 @@
   }
 }
 
-/* 検索履歴画面
+/* 設定画面
+-------------------------------- */
+.settings {
+  width: 95%;
+}
+
+.unsubscribe-btn {
+  width: 90%;
+}
+
+/* 検索履歴画面・お気に入り画面
 -------------------------------- */
 .list-box {
   padding: 0.5rem 1rem;
@@ -117,7 +127,7 @@
   }
 }
 
-.history-photo {
+.shop-photo {
   width: 90px;
   height: 90px;
   background-color: #191818;
@@ -175,18 +185,7 @@
   }
 }
 
-/* 設定画面
--------------------------------- */
-.settings {
-  width: 95%;
-}
-
-.unsubscribe-btn {
-  width: 90%;
-}
-
-/* お気に入り画面
--------------------------------- */
+/* お気に入り画面 */
 .memo-btn a {
   display: block;
   position: relative;
