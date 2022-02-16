@@ -248,9 +248,13 @@
 /* メモ一覧画面 */
 .title-box {
   padding: 0.5rem;
-  background: #ffffff;
-  border: solid 8px #333;
-  position: relative;
+  border-top: 4px solid #d8dcdc;
+  border-right: 4px solid #666;
+  border-bottom: 4px solid #333;
+  border-left: 4px solid #868888;
+  border-radius: 0;
+  background-image: -webkit-linear-gradient(135deg, #ccc 0%, #868888 20%, #d8dcdc 34%, white 53%, #ccc 100%);
+  background-image: linear-gradient(-45deg, #ccc 0%, #868888 20%, #d8dcdc 34%, white 53%, #ccc 100%);
 }
 
 .memo {
@@ -258,7 +262,7 @@
   margin: 0 0 0.8rem 15px;
   padding: 7px 10px;
   min-height: 48px;
-  width: 80%;
+  width: 90%;
   color: #555;
   font-size: 16px;
   background: #dbf0ff;
