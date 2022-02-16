@@ -1,6 +1,6 @@
 <div class="flex-grow-1 p-2">
   <section class="row">
-    <section class="col-md mb-2">
+    <section class="col-md mb-3">
       <div class="title-box mb-3">
         <div class="d-flex align-items-center">
           <div class="shop-photo">
@@ -22,7 +22,7 @@
 
       <%= form_with model: [@favorite, @memo] do |f| %>
         <div class="form-floating">
-          <%= f.text_area :content, class: "form-control", placeholder: "メモ", id: "floatingTextarea2", style: "height: 100px" %>
+          <%= f.text_area :content, class: "form-control", placeholder: "メモ", id: "floatingTextarea2", style: "height: 150px" %>
           <label for="floatingTextarea2">＊140文字以内＊</label>
         </div>
 
@@ -35,13 +35,17 @@
     </section>
 
     <section class="col-md">
-      <h1 class="title bg-color p-2">メモ 一覧</h1>
-
-      <ul>
+      <ul class="p-0">
         <% @memos.each do |memo| %>
           <%= render "memos/memo", memo: memo %>
         <% end %>
       </ul>
+
+      <div class="d-flex">
+        <section class="mx-auto">
+          <%= paginate @memos %>
+        </section>
+      </div>
     </section>
   </section>
 </div>

@@ -2,9 +2,10 @@ class MemosController < ApplicationController
   def index
     @memo = Memo.new
     @favorite = Favorite.find(params[:favorite_id])
-
     @shop_info = @favorite.search_history
-    @memos = @favorite.memos
+
+    # 最新のメモが先頭になるように並び替える。
+    @memos = @favorite.memos.order(id: "DESC").page(params[:page]).per(10)
   end
 
   def create
