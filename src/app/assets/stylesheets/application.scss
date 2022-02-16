@@ -16,7 +16,7 @@
 }
 
 .bg-color {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
   border-radius: 20px;
 }
 
@@ -243,6 +243,14 @@
       border-right: 2px solid #f2f2f2;
     }
   }
+}
+
+/* メモ一覧画面 */
+.title-box {
+  padding: 0.5em 1em;
+  background: #ffffff;
+  border-left: solid 10px #333;
+  position: relative;
 }
 
 ///////////////////////////////////

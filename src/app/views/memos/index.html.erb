@@ -1,1 +1,45 @@
-<h1>Memo</h1>
+<div class="flex-grow-1 p-2">
+  <section class="row">
+    <section class="col-md mb-2">
+      <div class="title-box mb-3">
+        <div class="d-flex align-items-center">
+          <div class="shop-photo">
+            <img src="<%= @shop_info.shop_photo %>" alt="店舗写真">
+          </div>
+
+          <div class="d-flex">
+            <p class="ms-2 text-nowrap">店舗名：</p>
+            <a href="<%= @shop_info.shop_url %>" target="_blank" rel="noopener noreferrer">
+              <p class="m-0 fw-normal"><%= @shop_info.shop_name %></p>
+            </a>
+          </div>
+        </div>
+
+        <p class="m-0 credit">【画像提供：ホットペッパー グルメ】</p>
+      </div>
+
+      <%= form_with model: [@favorite, @memo] do |f| %>
+        <div class="form-floating">
+          <%= f.text_area :content, class: "form-control", placeholder: "メモ", id: "floatingTextarea2", style: "height: 100px" %>
+          <label for="floatingTextarea2">＊140文字以内＊</label>
+        </div>
+
+        <div class="w-50 mt-1 ms-auto">
+          <%= button_tag(type: "submit", id: "search", class: "btn btn-primary w-100") do %>
+            <i class="bi bi-pen"> メモ</i>
+          <% end %>
+        </div>
+      <% end %>
+    </section>
+
+    <section class="col-md">
+      <h1 class="title bg-color p-2">メモ 一覧</h1>
+
+      <ul>
+        <% @memos.each do |memo| %>
+          <p><%= memo.content %></p>
+        <% end %>
+      </ul>
+    </section>
+  </section>
+</div>
