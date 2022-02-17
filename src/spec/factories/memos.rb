@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :memo do
     association :favorite
-    content { "a" * 140 }
+    content { "My Content" }
   end
 end

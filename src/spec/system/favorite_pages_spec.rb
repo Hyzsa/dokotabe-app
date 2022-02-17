@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "favorite", type: :system do
+RSpec.describe "Favorite Pages", type: :system do
   let(:user) { create(:user) }
 
   describe "レイアウト確認" do
