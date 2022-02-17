@@ -1,7 +1,7 @@
 <li class="mb-2 d-flex align-items-center">
-  <div class="history-photo">
+  <div class="shop-photo">
     <img src="<%= dependent_shop.shop_photo %>" alt="店舗写真">
-    <%= link_to "", favorite_path(history_id: dependent_shop.id, redirect: true), method: :delete, remote: true, class: "bi bi-heart-fill favorite", data: { confirm: "お気に入りを解除するとメモ情報も完全に削除されます。\n本当に削除しますか？" } %>
+    <%= link_to "", favorite_path(current_user, history_id: dependent_shop.id, redirect: true), method: :delete, remote: true, class: "bi bi-heart-fill favorite", data: { confirm: "お気に入りを解除するとメモ情報も完全に削除されます。\n本当に削除しますか？" } %>
   </div>
 
   <div class="p-2 w-100">
@@ -13,7 +13,7 @@
     </div>
 
     <div class="memo-btn">
-      <%= link_to "Memo", "#" %>
+      <%= link_to "Memo", favorite_memos_path(dependent_shop.favorite) %>
     </div>
   </div>
 </li>

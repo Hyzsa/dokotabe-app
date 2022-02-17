@@ -16,7 +16,7 @@
 }
 
 .bg-color {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
   border-radius: 20px;
 }
 
@@ -102,7 +102,17 @@
   }
 }
 
-/* 検索履歴画面
+/* 設定画面
+-------------------------------- */
+.settings {
+  width: 95%;
+}
+
+.unsubscribe-btn {
+  width: 90%;
+}
+
+/* 検索履歴画面・お気に入り画面
 -------------------------------- */
 .list-box {
   padding: 0.5rem 1rem;
@@ -117,7 +127,7 @@
   }
 }
 
-.history-photo {
+.shop-photo {
   width: 90px;
   height: 90px;
   background-color: #191818;
@@ -175,18 +185,7 @@
   }
 }
 
-/* 設定画面
--------------------------------- */
-.settings {
-  width: 95%;
-}
-
-.unsubscribe-btn {
-  width: 90%;
-}
-
-/* お気に入り画面
--------------------------------- */
+/* お気に入り画面 */
 .memo-btn a {
   display: block;
   position: relative;
@@ -243,6 +242,61 @@
       border-top: 2px solid #f2f2f2;
       border-right: 2px solid #f2f2f2;
     }
+  }
+}
+
+/* メモ一覧画面 */
+.title-box {
+  position: relative;
+  padding: 0.5rem;
+  border-top: 4px solid #d8dcdc;
+  border-right: 4px solid #666;
+  border-bottom: 4px solid #333;
+  border-left: 4px solid #868888;
+  border-radius: 0;
+  background-image: -webkit-linear-gradient(135deg, #ccc 0%, #868888 20%, #d8dcdc 34%, white 53%, #ccc 100%);
+  background-image: linear-gradient(-45deg, #ccc 0%, #868888 20%, #d8dcdc 34%, white 53%, #ccc 100%);
+}
+
+.memo {
+  position: relative;
+  margin: 0 0 0.8rem 15px;
+  padding: 7px 10px;
+  min-height: 48px;
+  width: 90%;
+  color: #555;
+  font-size: 16px;
+  background: #dbf0ff;
+  border-radius: 5px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.6);
+
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -30px;
+    margin-top: -15px;
+    border: 15px solid transparent;
+    border-right: 15px solid #dbf0ff;
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+    font-size: 0.8rem;
+  }
+
+  li {
+    list-style: none;
+  }
+}
+
+.bi-trash {
+  color: #a5a5a5b6;
+
+  &:hover {
+    color: #dc3444;
   }
 }
 

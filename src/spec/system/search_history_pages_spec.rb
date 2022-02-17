@@ -9,11 +9,11 @@ RSpec.describe "Search History", type: :system do
       create_list(:search_history, history_num, user_id: user.id)
 
       log_in_as(user)
-      visit search_history_path(user.id)
-      expect(page).to have_current_path search_history_path(user.id)
+      visit search_history_path
+      expect(page).to have_current_path search_history_path
 
       expect(all(".list-box").size).to eq history_num
-      expect(all(".list-box .history-photo").size).to eq history_num
+      expect(all(".list-box .shop-photo").size).to eq history_num
       expect(all(".list-box .credit").size).to eq history_num
     end
   end
@@ -27,7 +27,7 @@ RSpec.describe "Search History", type: :system do
           create_list(:search_history, 11, user_id: user.id)
 
           click_link "検索履歴"
-          expect(page).to have_current_path search_history_path(user.id)
+          expect(page).to have_current_path search_history_path
           expect(page).to have_selector ".pagination"
         end
       end
@@ -37,7 +37,7 @@ RSpec.describe "Search History", type: :system do
           create_list(:search_history, 10, user_id: user.id)
 
           click_link "検索履歴"
-          expect(page).to have_current_path search_history_path(user.id)
+          expect(page).to have_current_path search_history_path
           expect(page).to have_no_selector ".pagination"
         end
       end
@@ -48,95 +48,95 @@ RSpec.describe "Search History", type: :system do
         create_list(:search_history, 15, user_id: user.id)
 
         click_link "検索履歴"
-        expect(page).to have_current_path search_history_path(user.id)
+        expect(page).to have_current_path search_history_path
         expect(page).to have_selector ".pagination"
 
         # ページネーションの表示状態を確認する
-        expect(all(".history-photo").size).to eq(10)
-        expect(page).to have_no_link "«", href: search_history_path(user.id)
-        expect(page).to have_no_link "‹", href: search_history_path(user.id)
+        expect(all(".shop-photo").size).to eq(10)
+        expect(page).to have_no_link "«", href: search_history_path
+        expect(page).to have_no_link "‹", href: search_history_path
         expect(page).to have_selector ".page-item.active", text: "1"
-        expect(page).to have_link "2", href: search_history_path(user.id, page: 2)
-        expect(page).to have_link "›", href: search_history_path(user.id, page: 2)
-        expect(page).to have_link "»", href: search_history_path(user.id, page: 2)
+        expect(page).to have_link "2", href: search_history_path(page: 2)
+        expect(page).to have_link "›", href: search_history_path(page: 2)
+        expect(page).to have_link "»", href: search_history_path(page: 2)
 
         # ページネーションの[2]ボタンをクリックし、次ページに遷移する
         click_link("2")
-        expect(page).to have_current_path search_history_path(user.id, page: 2)
+        expect(page).to have_current_path search_history_path(page: 2)
 
         # ページネーションの表示状態を確認する
-        expect(all(".history-photo").size).to eq(5)
-        expect(page).to have_link "«", href: search_history_path(user.id)
-        expect(page).to have_link "‹", href: search_history_path(user.id)
-        expect(page).to have_link "1", href: search_history_path(user.id)
+        expect(all(".shop-photo").size).to eq(5)
+        expect(page).to have_link "«", href: search_history_path
+        expect(page).to have_link "‹", href: search_history_path
+        expect(page).to have_link "1", href: search_history_path
         expect(page).to have_selector ".page-item.active", text: "2"
-        expect(page).to have_no_link "›", href: search_history_path(user.id, page: 2)
-        expect(page).to have_no_link "»", href: search_history_path(user.id, page: 2)
+        expect(page).to have_no_link "›", href: search_history_path(page: 2)
+        expect(page).to have_no_link "»", href: search_history_path(page: 2)
 
         # ページネーションの[1]ボタンをクリックし、前ページに遷移する
         click_link("1")
-        expect(page).to have_current_path search_history_path(user.id)
+        expect(page).to have_current_path search_history_path
 
         # ページネーションの表示状態を確認する
-        expect(all(".history-photo").size).to eq(10)
-        expect(page).to have_no_link "«", href: search_history_path(user.id)
-        expect(page).to have_no_link "‹", href: search_history_path(user.id)
+        expect(all(".shop-photo").size).to eq(10)
+        expect(page).to have_no_link "«", href: search_history_path
+        expect(page).to have_no_link "‹", href: search_history_path
         expect(page).to have_selector ".page-item.active", text: "1"
-        expect(page).to have_link "2", href: search_history_path(user.id, page: 2)
-        expect(page).to have_link "›", href: search_history_path(user.id, page: 2)
-        expect(page).to have_link "»", href: search_history_path(user.id, page: 2)
+        expect(page).to have_link "2", href: search_history_path(page: 2)
+        expect(page).to have_link "›", href: search_history_path(page: 2)
+        expect(page).to have_link "»", href: search_history_path(page: 2)
 
         # ページネーションの[›]ボタンをクリックし、次ページに遷移する
         click_link("›")
-        expect(page).to have_current_path search_history_path(user.id, page: 2)
+        expect(page).to have_current_path search_history_path(page: 2)
 
         # ページネーションの表示状態を確認する
-        expect(all(".history-photo").size).to eq(5)
-        expect(page).to have_link "«", href: search_history_path(user.id)
-        expect(page).to have_link "‹", href: search_history_path(user.id)
-        expect(page).to have_link "1", href: search_history_path(user.id)
+        expect(all(".shop-photo").size).to eq(5)
+        expect(page).to have_link "«", href: search_history_path
+        expect(page).to have_link "‹", href: search_history_path
+        expect(page).to have_link "1", href: search_history_path
         expect(page).to have_selector ".page-item.active", text: "2"
-        expect(page).to have_no_link "›", href: search_history_path(user.id, page: 2)
-        expect(page).to have_no_link "»", href: search_history_path(user.id, page: 2)
+        expect(page).to have_no_link "›", href: search_history_path(page: 2)
+        expect(page).to have_no_link "»", href: search_history_path(page: 2)
 
         # ページネーションの[‹]ボタンをクリックし、前ページに遷移する
         click_link("‹")
-        expect(page).to have_current_path search_history_path(user.id)
+        expect(page).to have_current_path search_history_path
 
         # ページネーションの表示状態を確認する
-        expect(all(".history-photo").size).to eq(10)
-        expect(page).to have_no_link "«", href: search_history_path(user.id)
-        expect(page).to have_no_link "‹", href: search_history_path(user.id)
+        expect(all(".shop-photo").size).to eq(10)
+        expect(page).to have_no_link "«", href: search_history_path
+        expect(page).to have_no_link "‹", href: search_history_path
         expect(page).to have_selector ".page-item.active", text: "1"
-        expect(page).to have_link "2", href: search_history_path(user.id, page: 2)
-        expect(page).to have_link "›", href: search_history_path(user.id, page: 2)
-        expect(page).to have_link "»", href: search_history_path(user.id, page: 2)
+        expect(page).to have_link "2", href: search_history_path(page: 2)
+        expect(page).to have_link "›", href: search_history_path(page: 2)
+        expect(page).to have_link "»", href: search_history_path(page: 2)
 
         # ページネーションの[»]ボタンをクリックし、次ページに遷移する
         click_link("»")
-        expect(page).to have_current_path search_history_path(user.id, page: 2)
+        expect(page).to have_current_path search_history_path(page: 2)
 
         # ページネーションの表示状態を確認する
-        expect(all(".history-photo").size).to eq(5)
-        expect(page).to have_link "«", href: search_history_path(user.id)
-        expect(page).to have_link "‹", href: search_history_path(user.id)
-        expect(page).to have_link "1", href: search_history_path(user.id)
+        expect(all(".shop-photo").size).to eq(5)
+        expect(page).to have_link "«", href: search_history_path
+        expect(page).to have_link "‹", href: search_history_path
+        expect(page).to have_link "1", href: search_history_path
         expect(page).to have_selector ".page-item.active", text: "2"
-        expect(page).to have_no_link "›", href: search_history_path(user.id, page: 2)
-        expect(page).to have_no_link "»", href: search_history_path(user.id, page: 2)
+        expect(page).to have_no_link "›", href: search_history_path(page: 2)
+        expect(page).to have_no_link "»", href: search_history_path(page: 2)
 
         # ページネーションの[«]ボタンをクリックし、前ページに遷移する
         click_link("«")
-        expect(page).to have_current_path search_history_path(user.id)
+        expect(page).to have_current_path search_history_path
 
         # ページネーションの表示状態を確認する
-        expect(all(".history-photo").size).to eq(10)
-        expect(page).to have_no_link "«", href: search_history_path(user.id)
-        expect(page).to have_no_link "‹", href: search_history_path(user.id)
+        expect(all(".shop-photo").size).to eq(10)
+        expect(page).to have_no_link "«", href: search_history_path
+        expect(page).to have_no_link "‹", href: search_history_path
         expect(page).to have_selector ".page-item.active", text: "1"
-        expect(page).to have_link "2", href: search_history_path(user.id, page: 2)
-        expect(page).to have_link "›", href: search_history_path(user.id, page: 2)
-        expect(page).to have_link "»", href: search_history_path(user.id, page: 2)
+        expect(page).to have_link "2", href: search_history_path(page: 2)
+        expect(page).to have_link "›", href: search_history_path(page: 2)
+        expect(page).to have_link "»", href: search_history_path(page: 2)
       end
     end
   end
@@ -152,12 +152,12 @@ RSpec.describe "Search History", type: :system do
 
       click_link "アカウント"
       click_link "検索履歴"
-      expect(page).to have_current_path search_history_path(user.id)
+      expect(page).to have_current_path search_history_path
 
       # お気に入り設定用のリンクがあることを確認する
       5.times do |n|
-        expect(page).to have_link "", href: favorite_path(history_id: histories[n].id)
-        expect(page).to have_link "", href: favorite_path(history_id: other_shop_histories[n].id)
+        expect(page).to have_link "", href: favorites_path(history_id: histories[n].id)
+        expect(page).to have_link "", href: favorites_path(history_id: other_shop_histories[n].id)
       end
 
       # お気に入り状態を確認する
@@ -167,7 +167,7 @@ RSpec.describe "Search History", type: :system do
 
       # 1番目に表示されている店舗をお気に入りに登録する
       expect do
-        click_link "", href: favorite_path(history_id: histories[0].id)
+        click_link "", href: favorites_path(history_id: histories[0].id)
         sleep(0.5) # ajax処理待ち
       end.to change { Favorite.count }.by(1)
 
@@ -180,7 +180,7 @@ RSpec.describe "Search History", type: :system do
       expect do
         # お気に入りを解除確認で[キャンセル]を選択する
         dismiss_confirm("お気に入りを解除するとメモ情報も完全に削除されます。\n本当に削除しますか？") do
-          click_link "", href: favorite_path(history_id: histories[1].id)
+          click_link "", href: favorite_path(user, history_id: histories[1].id)
         end
         sleep(0.5) # ajax処理待ち
       end.to change { Favorite.count }.by(0)
@@ -188,7 +188,7 @@ RSpec.describe "Search History", type: :system do
       expect do
         # お気に入りを解除確認で[OK]を選択する
         accept_confirm("お気に入りを解除するとメモ情報も完全に削除されます。\n本当に削除しますか？") do
-          click_link "", href: favorite_path(history_id: histories[1].id)
+          click_link "", href: favorite_path(user, history_id: histories[1].id)
         end
         sleep(0.5) # ajax処理待ち
 
@@ -211,10 +211,10 @@ RSpec.describe "Search History", type: :system do
 
       click_link "アカウント"
       click_link "検索履歴"
-      expect(page).to have_current_path search_history_path(user1.id)
+      expect(page).to have_current_path search_history_path
 
       # ユーザー1のお気に入り状態を確認する
-      expect(page).to have_link "", href: favorite_path(history_id: user1_history.id)
+      expect(page).to have_link "", href: favorites_path(history_id: user1_history.id)
 
       expect(all("a[data-method=post]").size).to eq 1
       expect(all("a[data-method=delete]").size).to eq 0
@@ -222,7 +222,7 @@ RSpec.describe "Search History", type: :system do
 
       # ユーザー1のお気に入りに登録する
       expect do
-        click_link "", href: favorite_path(history_id: user1_history.id)
+        click_link "", href: favorites_path(history_id: user1_history.id)
         sleep(0.5) # ajax処理待ち
       end.to change { Favorite.count }.by(1)
 
@@ -238,10 +238,10 @@ RSpec.describe "Search History", type: :system do
 
       click_link "アカウント"
       click_link "検索履歴"
-      expect(page).to have_current_path search_history_path(user2.id)
+      expect(page).to have_current_path search_history_path
 
       # ユーザー2のお気に入り状態に影響していないことを確認する
-      expect(page).to have_link "", href: favorite_path(history_id: user2_history.id)
+      expect(page).to have_link "", href: favorites_path(history_id: user2_history.id)
 
       expect(all("a[data-method=post]").size).to eq 1
       expect(all("a[data-method=delete]").size).to eq 0

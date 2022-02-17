@@ -1,6 +1,7 @@
 class Favorite < ApplicationRecord
   belongs_to :user
   belongs_to :search_history
+  has_many :memos, dependent: :destroy
 
   validates :shop_id, presence: true
   validate :same_shop_cannot_be_a_favorite
