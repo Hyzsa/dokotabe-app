@@ -188,7 +188,7 @@ RSpec.describe "Memo Pages", type: :system do
       expect(all(".memo").size).to eq(1)
     end
 
-    example "メモの削除ができること", js:true do
+    example "メモの削除ができること", js: true do
       favorite = create(:favorite, user_id: user.id)
       memo = create(:memo, favorite_id: favorite.id)
 

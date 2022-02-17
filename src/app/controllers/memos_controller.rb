@@ -23,7 +23,6 @@ class MemosController < ApplicationController
   end
 
   def destroy
-    favorite = Favorite.find(params[:favorite_id])
     memo = Memo.find(params[:id])
     memo.destroy
 
