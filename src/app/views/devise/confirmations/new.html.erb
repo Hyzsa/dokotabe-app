@@ -1,7 +1,9 @@
+<%# 認証メール再送信画面 %>
 <div class="flex-grow-1">
   <section class="p-5 mx-auto mt-5 bg-color bg-width">
     <h1 class="title mb-4">認証メール</h1>
 
+    <%# 再送信フォーム %>
     <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -15,6 +17,7 @@
       </div>
     <% end %>
 
+    <%# deviseリンク %>
     <div class="form-text">
       <%= render "devise/shared/links" %>
     </div>

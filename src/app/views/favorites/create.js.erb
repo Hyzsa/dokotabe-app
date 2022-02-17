@@ -1,3 +1,5 @@
+<%# お気に入り登録 %>
 <% @same_shop_histories.each do |history| %>
+  <%# 同店舗の検索履歴を再描画 %>
   $("#shop_<%= history.id %>").html("<%= escape_javascript(render "search_histories/list", history: history) %>")
 <% end %>

@@ -1,9 +1,14 @@
+<%# 検索履歴画面 - リストのパーシャル %>
 <li class="mb-2 d-flex align-items-center">
   <div class="shop-photo">
     <img src="<%= history.shop_photo %>" alt="店舗写真">
+    <%# お気に入りに登録されている場合 %>
     <% if current_user.favorite_shop?(history.shop_id) %>
+      <%# お気に入り解除のリンク %>
       <%= link_to "", favorite_path(current_user, history_id: history.id), method: :delete, remote: true, class: "bi bi-heart-fill favorite", data: { confirm: "お気に入りを解除するとメモ情報も完全に削除されます。\n本当に削除しますか？" } %>
+    <%# お気に入りに登録されていない場合 %>
     <% else %>
+      <%# お気に入り追加のリンク %>
       <%= link_to "", favorites_path(history_id: history.id), method: :post, remote: true, class: "bi bi-heart-fill" %>
     <% end %>
   </div>

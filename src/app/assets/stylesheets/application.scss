@@ -35,6 +35,16 @@
   color: #dc3444;
 }
 
+/* ヘッダー
+-------------------------------- */
+.navbar .active {
+  text-decoration: underline;
+}
+
+#logo:hover {
+  opacity: 0.8;
+}
+
 /* ホーム画面
 -------------------------------- */
 .service-name {
@@ -254,8 +264,22 @@
   border-bottom: 4px solid #333;
   border-left: 4px solid #868888;
   border-radius: 0;
-  background-image: -webkit-linear-gradient(135deg, #ccc 0%, #868888 20%, #d8dcdc 34%, white 53%, #ccc 100%);
-  background-image: linear-gradient(-45deg, #ccc 0%, #868888 20%, #d8dcdc 34%, white 53%, #ccc 100%);
+  background-image: -webkit-linear-gradient(
+    135deg,
+    #ccc 0%,
+    #868888 20%,
+    #d8dcdc 34%,
+    white 53%,
+    #ccc 100%
+  );
+  background-image: linear-gradient(
+    -45deg,
+    #ccc 0%,
+    #868888 20%,
+    #d8dcdc 34%,
+    white 53%,
+    #ccc 100%
+  );
 }
 
 .memo {
@@ -269,7 +293,6 @@
   background: #dbf0ff;
   border-radius: 5px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.6);
-
 
   &:before {
     content: "";

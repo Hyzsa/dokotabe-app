@@ -1,8 +1,10 @@
+<%# 検索履歴画面 %>
 <div class="flex-grow-1">
   <section class="px-3">
     <section class="row mt-3">
       <section class="col-md">
         <% @histories.each_with_index do |history, i| %>
+          <%# 左列に先頭の5件を表示 %>
           <% if i < 5 %>
             <div class="list-box" id="shop_<%= history.id %>">
               <%= render "search_histories/list", history: history %>
@@ -13,6 +15,7 @@
 
       <section class="col-md">
         <% @histories.each_with_index do |history, i| %>
+          <%# 右列に残りの5件を表示 %>
           <% if i >= 5 %>
             <div class="list-box" id="shop_<%= history.id %>">
               <%= render "search_histories/list", history: history %>
@@ -23,6 +26,7 @@
     </section>
   </section>
 
+  <%# ページネーション %>
   <div class="d-flex">
     <section class="mx-auto mt-3">
       <%= paginate @histories %>

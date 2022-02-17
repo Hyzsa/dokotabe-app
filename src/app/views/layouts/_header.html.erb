@@ -1,6 +1,7 @@
+<%# ヘッダー %>
 <nav class="navbar navbar-expand-md navbar-light">
   <div class="container-fluid p-0">
-    <%= link_to image_tag("logo.png", alt: "DokoTabeのロゴ", width: "110", height: "30"), root_path, class: "navbar-brand" %>
+    <%= link_to image_tag("logo.png", alt: "DokoTabeのロゴ", width: "110", height: "30"), root_path, class: "navbar-brand", id: "logo" %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -15,6 +16,7 @@
           <%= link_to " お問い合わせ", contact_path, class: "nav-link bi bi-chat-right-text", id: "contact" %>
         </li>
 
+        <%# ログインしてる場合 %>
         <% if user_signed_in? %>
           <li class="nav-item">
             <%= link_to " お気に入り", favorite_path(current_user), class: "nav-link bi bi-heart", id: "favorite" %>
@@ -22,12 +24,14 @@
 
           <li class="nav-item dropdown">
             <%= link_to " アカウント", "#", class: "nav-link dropdown-toggle bi bi-person", id: "navbarDropdownMenuLink", role: "button", "data-bs-toggle": "dropdown", "aria-expanded": "false" %>
+            <%# アカウントのプルダウンリスト %>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li><%= link_to "検索履歴", search_history_path, class: "dropdown-item" %></li>
               <li><%= link_to "設定", settings_path, class: "dropdown-item border-bottom" %></li>
               <li><%= link_to " ログアウト", destroy_user_session_path, method: "delete", class: "dropdown-item bi bi-box-arrow-left" %></li>
             </ul>
           </li>
+        <%# ログインしてない場合 %>
         <% else %>
           <li class="nav-item">
             <%= link_to " ログイン", new_user_session_path, class: "nav-link bi bi-box-arrow-in-right", id: "login" %>

@@ -1,5 +1,7 @@
+<%# お気に入り画面 %>
 <div class="flex-grow-1">
   <section class="px-3">
+    <%# お気に入りが0件だった場合の画面 %>
     <% if @favorites.empty? %>
       <section class="border p-5 mx-auto mt-5 bg-color bg-width">
         <h1 class="title mb-4">お気に入り店舗</h1>
@@ -9,10 +11,12 @@
           お気に入りに設定した店舗には、次回の来店用にメモを残すことができるようになります。
         </p>
       </section>
+    <%# お気に入りが1件以上ある場合の画面 %>
     <% else %>
       <section class="row mt-3">
         <section class="col-md">
           <% @favorites.each_with_index do |dependent_shop, i| %>
+            <%# 左列に先頭の5件を表示 %>
             <% if i < 5 %>
               <div class="list-box">
                 <%= render "favorites/list", dependent_shop: dependent_shop %>
@@ -23,6 +27,7 @@
 
         <section class="col-md">
           <% @favorites.each_with_index do |dependent_shop, i| %>
+            <%# 右列に残りの5件を表示 %>
             <% if i >= 5 %>
               <div class="list-box">
                 <%= render "favorites/list", dependent_shop: dependent_shop %>
@@ -33,6 +38,7 @@
       </section>
     </section>
 
+    <%# ページネーション %>
     <div class="d-flex">
       <section class="mx-auto mt-3">
         <%= paginate @favorites %>
