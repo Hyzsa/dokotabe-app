@@ -1,5 +1,8 @@
 <div class="memo mx-auto">
   <li>
-    <p><%= memo.content %></p>
+    <p>
+      <%= simple_format(memo.content) %>
+      <%= link_to "", favorite_memo_path(memo.favorite_id, memo), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "bi bi-trash" %>
+    </p>
   </li>
 </div>

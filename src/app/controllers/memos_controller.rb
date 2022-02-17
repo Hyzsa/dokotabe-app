@@ -21,15 +21,26 @@ class MemosController < ApplicationController
     end
   end
 
+  def destroy
+    favorite = Favorite.find(params[:favorite_id])
+    memo = Memo.find(params[:id])
+    memo.destroy
+
+    redirect_to favorite_memos_url
+  end
+
   private
 
+  def memo_params
+    params.require(:memo).permit(:content)
+  end
+
+  # ----------------------------
+  # before_action
+  # ----------------------------
   # ログイン中のユーザーのお気に入り店舗かを確認する。
   def current_user_favorite_shop
     favorite = Favorite.find(params[:favorite_id])
     redirect_to favorite_url(current_user) unless current_user.id == favorite.user_id
-  end
-
-  def memo_params
-    params.require(:memo).permit(:content)
   end
 end
