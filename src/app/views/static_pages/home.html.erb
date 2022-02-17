@@ -1,3 +1,4 @@
+<%# ホーム画面 %>
 <div class="mb-5 flex-grow-1 d-flex flex-column justify-content-center">
   <h1 class="service-name">
     <img src="/assets/title.png" alt="タイトル：DokoTabe">
@@ -7,6 +8,7 @@
 
   <%= render "layouts/flash" %>
 
+  <%# 検索フォーム %>
   <%= form_with(url: search_path, scope: :selected, html: { onsubmit: "return false", name: "shop_search_form" }) do |f| %>
     <section class="row">
       <section class="col-md mb-4">
@@ -21,6 +23,7 @@
         <%= f.select :budget, budget_option, {}, { class: "form-select text-wrap" } %>
       </section>
 
+      <%# 緯度・経度 用の隠しフィールド %>
       <%= f.hidden_field(:latitude, value: "") %>
       <%= f.hidden_field(:longitude, value: "") %>
 

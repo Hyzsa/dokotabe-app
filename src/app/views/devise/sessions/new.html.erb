@@ -1,7 +1,9 @@
+<%# ログイン画面 %>
 <div class="flex-grow-1">
   <section class="p-5 mx-auto mt-5 bg-color bg-width">
     <h1 class="title mb-4">ログイン</h1>
 
+    <%# ログインフォーム %>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <%= render "layouts/flash" %>
 
@@ -27,6 +29,7 @@
       </div>
     <% end %>
 
+    <%# deviseリンク %>
     <div class="form-text">
       <%= render "devise/shared/links" %>
     </div>

@@ -1,7 +1,9 @@
+<%# メモ一覧画面 - リスト（メモ）のパーシャル %>
 <div class="memo mx-auto">
   <li>
     <p>
       <%= simple_format(memo.content) %>
+      <%# メモ削除リンク %>
       <%= link_to "", favorite_memo_path(memo.favorite_id, memo), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "bi bi-trash" %>
     </p>
   </li>
