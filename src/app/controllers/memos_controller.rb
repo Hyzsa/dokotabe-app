@@ -1,4 +1,5 @@
 class MemosController < ApplicationController
+  before_action :authenticate_user!
   before_action :current_user_favorite_shop
 
   def index
