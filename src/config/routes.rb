@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   get '/settings/unsubscribe', to: 'setting_pages#unsubscribe', as: 'unsubscribe'
 
   get '/users/edit', to: 'static_pages#home'
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
   devise_scope :user do
     get '/users', to: 'devise/registrations#new'
     post '/users/guest_sign_in', to: 'users/sessions#guest_sign_in'
