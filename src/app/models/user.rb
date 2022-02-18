@@ -8,8 +8,8 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorite_shops, through: :favorites, source: :search_history
 
-  # ゲストユーザーを探す。
-  # ：見つからなければ生成する。
+  # ゲストユーザーのレコードを返す。
+  # └ 見つからなければ作成して返す。
   def self.guest
     find_or_create_by!(email: "guest@example.com") do |user|
       user.password = SecureRandom.urlsafe_base64
@@ -17,7 +17,18 @@ class User < ApplicationRecord
     end
   end
 
-  # 店舗をお気に入りにしているかを判定する。
+  # 検索結果をユーザーの検索履歴として保存する。
+  def save_search_result(shop_info)
+    search_histories.create(
+      shop_id: shop_info[:id],
+      shop_name: shop_info[:name],
+      shop_photo: shop_info[:photo][:pc][:m],
+      shop_url: shop_info[:urls][:pc],
+      displayed_date: Time.current
+    )
+  end
+
+  # ユーザーが店舗をお気に入りにしてたらtrueを返す。
   def favorite_shop?(shop_id)
     favorites.exists?(shop_id: shop_id)
   end
