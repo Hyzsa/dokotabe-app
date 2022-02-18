@@ -1,6 +1,14 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :ensure_not_guest_user, only: :destroy
 
+  def destroy
+    super
+    destroy_internal
+  end
+
+  def destroy_internal
+  end
+
   # ----------------------------
   # before_action
   # ----------------------------
