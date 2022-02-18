@@ -12,6 +12,7 @@ RSpec.describe "Sessions", type: :system do
       expect(page).to have_selector "label[for=user_password]", text: "パスワード"
       expect(page).to have_selector "input#user_password"
       expect(page).to have_button "ログイン"
+      expect(page).to have_link "ゲストログイン", href: users_guest_sign_in_path
     end
   end
 
@@ -81,6 +82,28 @@ RSpec.describe "Sessions", type: :system do
           expect(page).to have_no_selector(".dropdown-toggle", text: "アカウント")
           expect(page).to have_no_link "ログアウト"
         end
+      end
+    end
+
+    describe "ゲストログイン" do
+      before do
+        visit root_path
+        click_link "ログイン"
+        click_link "ゲストログイン", href: users_guest_sign_in_path
+      end
+
+      example "ゲストユーザーでログインできること" do
+        expect(page).to have_current_path root_path
+        expect(page).to have_content "ゲストユーザーとしてログインしました。"
+      end
+
+      example "ゲストユーザーがログアウトできること" do
+        expect(page).to have_current_path root_path
+        expect(page).to have_content "ゲストユーザーとしてログインしました。"
+
+        click_link "ログアウト"
+        expect(page).to have_current_path root_path
+        expect(page).to have_content "ログアウトしました。"
       end
     end
   end
