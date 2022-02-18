@@ -8,7 +8,7 @@ class SearchesController < ApplicationController
       redirect_to root_url
     else
       # ユーザーがログインしていれば検索結果を保存する。
-      save_search_result(shop_info) if user_signed_in?
+      current_user.save_search_result(shop_info) if user_signed_in?
 
       @extracted_shop_info = extract_required_shop_information(shop_info)
       redirect_to search_result_url(shop_info: @extracted_shop_info)
