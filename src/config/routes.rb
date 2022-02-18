@@ -11,7 +11,8 @@ Rails.application.routes.draw do
 
   get '/users/edit', to: 'static_pages#home'
   devise_for :users, controllers: {
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    passwords: 'users/passwords'
   }
   devise_scope :user do
     get '/users', to: 'devise/registrations#new'
