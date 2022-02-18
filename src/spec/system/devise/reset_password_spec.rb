@@ -126,5 +126,25 @@ RSpec.describe "Reset Password", type: :system do
         expect(page).to have_content "このページにはアクセスできません。パスワード再設定メールのリンクからアクセスされた場合には、URL をご確認ください。"
       end
     end
+
+    example "ゲストユーザーはパスワード再設定できないこと" do
+      # ゲストユーザーでログインする。
+      log_in_as_guest
+
+      # ログアウトする。
+      click_link "アカウント"
+      click_link "ログアウト"
+      expect(page).to have_current_path root_path
+      expect(page).to have_content "ログアウトしました。"
+
+      click_link "ログイン"
+
+      # パスワード変更メールを送信する
+      click_link "パスワードを忘れた方はこちら"
+      fill_in "メールアドレス", with: "guest@example.com"
+      expect { click_button "再設定用メールを送信する" }.to change { ActionMailer::Base.deliveries.size }.by(0)
+      expect(page).to have_current_path new_user_session_path
+      expect(page).to have_content "ゲストユーザーのパスワード再設定はできません。"
+    end
   end
 end

@@ -8,7 +8,16 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorite_shops, through: :favorites, source: :search_history
 
-  # 店舗をお気に入りにしているかを判定する
+  # ゲストユーザーを探す。
+  # ：見つからなければ生成する。
+  def self.guest
+    find_or_create_by!(email: "guest@example.com") do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.confirmed_at = Time.current
+    end
+  end
+
+  # 店舗をお気に入りにしているかを判定する。
   def favorite_shop?(shop_id)
     favorites.exists?(shop_id: shop_id)
   end

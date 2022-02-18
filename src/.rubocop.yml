@@ -77,8 +77,13 @@ Style/StringLiteralsInInterpolation:
 
 # ガード節を使用してるかのチェック
 # 4行以上の場合にチェックするように設定
-GuardClause:
+Style/GuardClause:
   MinBodyLength: 4
+
+# 条件式の方を意識させたい場合には
+# 後置の if/unless を使わない方が分かりやすいので無効
+Style/IfUnlessModifier:
+  Enabled: false
 
 #################### Metrics ###############################
 # RSpecは専用のDSLで記述する性質上、

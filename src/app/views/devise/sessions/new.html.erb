@@ -24,10 +24,17 @@
         </div>
       <% end %>
 
-      <div class="actions mb-2">
+      <div class="actions">
         <%= f.submit "ログイン", class: "w-100 btn btn-primary"  %>
       </div>
     <% end %>
+
+    <p class="text-center my-1"><em>or</em></p>
+
+    <%# ゲストログイン %>
+    <div class="w-100 btn btn-danger mb-2">
+      <%= link_to " ゲストログイン", users_guest_sign_in_path, method: :post, type: "button", class: "guest-login" %>
+    </div>
 
     <%# deviseリンク %>
     <div class="form-text">
