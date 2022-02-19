@@ -20,17 +20,17 @@
     <% end %>
 
     <div class="field my-3">
-      <%= f.label :password, value: "新しいパスワード", class: "form-label" %>
+      <%= f.label :password, "新しいパスワード", class: "form-label" %>
       <%= f.password_field :password, autocomplete: "new-password", class: "w-100 form-control", placeholder: "6文字以上 or 空白(変更しない)" %>
     </div>
 
     <div class="field mb-3">
-      <%= f.label :password_confirmation, value: "新しいパスワード（確認用）", class: "form-label" %>
+      <%= f.label :password_confirmation, "新しいパスワード（確認用）", class: "form-label" %>
       <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-100 form-control", placeholder: "6文字以上" %>
     </div>
 
     <div class="field mb-3">
-      <%= f.label :current_password, value: "現在のパスワード ※必須", class: "form-label text-danger" %>
+      <%= f.label :current_password, "現在のパスワード ※必須", class: "form-label text-danger" %>
       <%= f.password_field :current_password, autocomplete: "current-password", class: "w-100 form-control" %>
     </div>
 
