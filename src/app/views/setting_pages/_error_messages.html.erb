@@ -1,0 +1,12 @@
+<%# バリデーションエラーメッセージ（設定画面用） %>
+<% if session[:error].present? %>
+  <div id="error_explanation">
+    <ul>
+      <% session[:error].each do |message| %>
+        <li class="validation-error"><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <%# 一度表示したら削除する %>
+  <% session[:error] = nil %>
+<% end %>
