@@ -1,0 +1,41 @@
+<%# 設定画面 - ユーザー情報編集画面のパーシャル %>
+<section>
+  <h2 class="fw-bold fst-italic">ユーザー情報編集</h2>
+
+  <%# ユーザー情報編集フォーム %>
+  <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
+    <%= render "setting_pages/error_messages" %>
+
+    <div class="field">
+      <%= f.label :email, class: "form-label" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-100 form-control" %>
+    </div>
+
+    <%# unconfirmed_emailカラムにオブジェクトが存在する場合 %>
+    <% if @user.pending_reconfirmation? %>
+      <div>
+        <i class="bi bi-exclamation-triangle"></i>
+        <span class="text-decoration-underline">変更確認待ち：<%= @user.unconfirmed_email %></span>
+      </div>
+    <% end %>
+
+    <div class="field my-3">
+      <%= f.label :password, "新しいパスワード", class: "form-label" %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "w-100 form-control", placeholder: "6文字以上 or 空白(変更しない)" %>
+    </div>
+
+    <div class="field mb-3">
+      <%= f.label :password_confirmation, "新しいパスワード（確認用）", class: "form-label" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-100 form-control", placeholder: "6文字以上" %>
+    </div>
+
+    <div class="field mb-3">
+      <%= f.label :current_password, "現在のパスワード ※必須", class: "form-label text-danger" %>
+      <%= f.password_field :current_password, autocomplete: "current-password", class: "w-100 form-control" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "変更する", class: "w-100 btn btn-primary" %>
+    </div>
+  <% end %>
+</section>

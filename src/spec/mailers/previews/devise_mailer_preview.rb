@@ -5,7 +5,10 @@ class DeviseMailerPreview < ActionMailer::Preview
   end
 
   # def email_changed
-  #   Devise::Mailer.email_changed(User.new)
+  #   user = User.new
+  #   user.email = "after@example.com"
+  #   user.unconfirmed_email = "before@example.com"
+  #   Devise::Mailer.email_changed(user)
   # end
 
   # def password_change

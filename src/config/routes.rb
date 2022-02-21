@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get '/settings', to: 'setting_pages#settings'
   get '/settings/unsubscribe', to: 'setting_pages#unsubscribe', as: 'unsubscribe'
+  get '/settings/user_info_edit', to: 'setting_pages#user_info_edit', as: 'user_info_edit'
 
   get '/users/edit', to: 'static_pages#home'
   devise_for :users, controllers: {

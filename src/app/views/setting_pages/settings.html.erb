@@ -6,17 +6,22 @@
     <section class="row">
       <section class="col-md-4 mb-2">
         <div class="list-group">
+          <%# ユーザー情報編集画面へのリンク %>
+          <%= link_to "ユーザー情報編集", user_info_edit_path, id: "edit", class: "list-group-item list-group-item-action active", remote: true %>
           <%# 退会画面へのリンク %>
-          <%= link_to "退会", unsubscribe_path, class: "list-group-item list-group-item-action active", remote: true %>
+          <%= link_to "退会", unsubscribe_path, id: "unsubscribe", class: "list-group-item list-group-item-action", remote: true %>
         </div>
       </section>
 
       <section class="col-md-8">
-        <section class="content-area bg-white p-4 rounded">
-          <%# デフォルトで退会画面が表示されるのはよろしくないので、他が追加されたらそちらをデフォルトにする。 %>
-          <%= render "setting_pages/unsubscribe" %>
+        <section class="content-area bg-white p-4 mb-3 rounded">
+          <%# デフォルトでユーザー情報編集画面を表示 %>
+          <%= render "setting_pages/user_info_edit" %>
         </section>
       </section>
     </section>
   </section>
 </div>
+
+<%# 選択されたリンクを有効化する %>
+<%= javascript_pack_tag "setting" %>
