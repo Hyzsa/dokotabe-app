@@ -1,13 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  before_action :ensure_not_guest_user, only: :destroy
-
-  def destroy
-    super
-    destroy_internal
-  end
-
-  def destroy_internal
-  end
+  before_action :ensure_not_guest_user, only: [:update, :destroy]
 
   # 既存のupdate関数は、変更失敗時にdeviseが用意している編集画面に飛んでしまうためオーバーライド
   def update
@@ -30,15 +22,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def destroy
+    super
+    destroy_internal
+  end
+
+  def destroy_internal
+  end
+
   private
 
   # ----------------------------
   # before_action
   # ----------------------------
-  # アカウント削除前にゲストユーザーではないことを確認する。
+  # ゲストユーザーではないことを確認する。
   def ensure_not_guest_user
     if resource.email == "guest@example.com"
-      redirect_to root_path, alert: "ゲストユーザーは削除できません。"
+      redirect_to root_path, alert: "ゲストユーザーの更新・削除はできません。"
     end
   end
 end

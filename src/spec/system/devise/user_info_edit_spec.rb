@@ -154,5 +154,23 @@ RSpec.describe "User Info Edit", type: :system, js: true do
       expect(page).to have_current_path root_path
       expect(page).to have_content "ログインしました。"
     end
+
+    example "ゲストユーザーは編集できないこと" do
+      # ゲストユーザーでログインする。
+      log_in_as_guest
+
+      click_link "アカウント"
+      click_link "設定"
+      expect(page).to have_current_path settings_path
+
+      # [ユーザー情報編集]リストを選択する
+      click_link "ユーザー情報編集", href: user_info_edit_path
+      expect(page).to have_selector "h2", text: "ユーザー情報編集"
+
+      # [変更する]ボタンを選択する。
+      click_button "変更する"
+      expect(page).to have_current_path root_path
+      expect(page).to have_content "ゲストユーザーの更新・削除はできません。"
+    end
   end
 end
