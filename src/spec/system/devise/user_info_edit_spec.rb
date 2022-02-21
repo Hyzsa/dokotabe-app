@@ -5,14 +5,10 @@ RSpec.describe "User Info Edit", type: :system, js: true do
     let(:user) { create(:user) }
 
     before do
-      ActionMailer::Base.deliveries.clear
       log_in_as(user)
 
-      click_link "アカウント"
-      click_link "設定"
-      expect(page).to have_current_path settings_path
+      visit settings_path
       click_link "ユーザー情報編集", href: user_info_edit_path
-      expect(page).to have_selector "h2", text: "ユーザー情報編集"
     end
 
     example "メールアドレス未入力の場合エラーになること" do
@@ -110,7 +106,7 @@ RSpec.describe "User Info Edit", type: :system, js: true do
       # 本人確認する
       mail = ActionMailer::Base.deliveries.last
       url = extract_url(mail)
-      path = url[/\/users.*/] # 相対パスに変換（絶対パスだとvisitに失敗する）
+      path = url[%r{/users.*}] # 相対パスに変換（絶対パスだとvisitに失敗する）
       visit path
       expect(page).to have_current_path root_path
       expect(page).to have_content "メールアドレスが確認できました。"
