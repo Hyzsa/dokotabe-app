@@ -4,21 +4,12 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    command: bundle exec puma -C config/puma.rb
+    command: bundle exec puma -C config/puma.rb -e production
     volumes:
       - ./src:/myapp
       - public_data:/myapp/public
       - tmp_data:/myapp/tmp
       - log_data:/myapp/log
-    depends_on:
-      - db
-      - chrome
-  db:
-    image: postgres
-    volumes:
-      - ./src/tmp/db:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_PASSWORD=password
   web:
     build:
       context: .
@@ -30,10 +21,6 @@ services:
       - 80:80
     depends_on:
       - app
-  chrome:
-    image: selenium/standalone-chrome:latest
-    ports:
-      - "4444:4444"
 volumes:
   public_data:
   tmp_data:
