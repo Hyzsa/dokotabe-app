@@ -4,6 +4,8 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+    environment:
+      RAILS_ENV: production
     command: bundle exec puma -C config/puma.rb -e production
     volumes:
       - ./src:/myapp
