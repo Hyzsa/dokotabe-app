@@ -54,8 +54,9 @@ jobs:
     machine:
       image: circleci/classic:edge
     steps:
-      - checkout
       - add_ssh_keys:
+          fingerprints:
+            - "19:b5:48:89:37:3a:01:d0:cc:93:e9:95:34:94:83:4b"
       - run:
           name: SSH connection to EC2
           command: ssh ${USER_NAME}@${HOST_NAME}
