@@ -50,29 +50,29 @@ jobs:
           command: bundle exec rspec
 
   # EC2 に SSH 接続・デプロイを実行
-  deploy:
-    machine:
-      image: circleci/classic:edge
-    steps:
-      - checkout
-      - add_ssh_keys:
-          fingerprints:
-            - "19:b5:48:89:37:3a:01:d0:cc:93:e9:95:34:94:83:4b"
-      - run:
-          name: Git pull
-          command: ssh ${USER_NAME}@${HOST_NAME} 'cd /rails/dokotabe-app && git pull origin main'
-      - run:
-          name: Clean docker
-          command: ssh ${USER_NAME}@${HOST_NAME} 'cd /rails/dokotabe-app && docker-compose -f docker-compose.production.yml down && docker system prune -af'
-      - run:
-          name: Docker build
-          command: ssh ${USER_NAME}@${HOST_NAME} 'cd /rails/dokotabe-app && docker-compose -f docker-compose.production.yml build'
-      - run:
-          name: Docker up
-          command: ssh ${USER_NAME}@${HOST_NAME} 'cd /rails/dokotabe-app && docker-compose -f docker-compose.production.yml up -d'
-      - run:
-          name: Database setup
-          command: ssh ${USER_NAME}@${HOST_NAME} 'cd /rails/dokotabe-app && docker-compose exec app rails db:migrate RAILS_ENV=production'
+  # deploy:
+  #   machine:
+  #     image: circleci/classic:edge
+  #   steps:
+  #     - checkout
+  #     - add_ssh_keys:
+  #         fingerprints:
+  #           - "19:b5:48:89:37:3a:01:d0:cc:93:e9:95:34:94:83:4b"
+  #     - run:
+  #         name: Git pull
+  #         command: ssh ${USER_NAME}@${HOST_NAME} 'cd /rails/dokotabe-app && git pull origin main'
+  #     - run:
+  #         name: Clean docker
+  #         command: ssh ${USER_NAME}@${HOST_NAME} 'cd /rails/dokotabe-app && docker-compose -f docker-compose.production.yml down && docker system prune -af'
+  #     - run:
+  #         name: Docker build
+  #         command: ssh ${USER_NAME}@${HOST_NAME} 'cd /rails/dokotabe-app && docker-compose -f docker-compose.production.yml build'
+  #     - run:
+  #         name: Docker up
+  #         command: ssh ${USER_NAME}@${HOST_NAME} 'cd /rails/dokotabe-app && docker-compose -f docker-compose.production.yml up -d'
+  #     - run:
+  #         name: Database setup
+  #         command: ssh ${USER_NAME}@${HOST_NAME} 'cd /rails/dokotabe-app && docker-compose exec app rails db:migrate RAILS_ENV=production'
 
 workflows:
   version: 2
@@ -83,9 +83,9 @@ workflows:
           requires:
             - build
       # mainブランチにpushされた場合のみdeployジョブを実行する
-      - deploy:
-          requires:
-            - test
-          # filters:
-          #   branches:
-          #     only: main
+      # - deploy:
+      #     requires:
+      #       - test
+      #     filters:
+      #       branches:
+      #         only: main
