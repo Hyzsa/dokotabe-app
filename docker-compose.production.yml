@@ -8,17 +8,17 @@ services:
       RAILS_ENV: production
     command: bundle exec puma -C config/puma.rb -e production
     volumes:
-      - ./src:/myapp
-      - public_data:/myapp/public
-      - tmp_data:/myapp/tmp
-      - log_data:/myapp/log
+      - ./src:/app
+      - public_data:/app/public
+      - tmp_data:/app/tmp
+      - log_data:/app/log
   web:
     build:
       context: .
       dockerfile: ./nginx/Dockerfile
     volumes:
-      - public_data:/myapp/public
-      - tmp_data:/myapp/tmp
+      - public_data:/app/public
+      - tmp_data:/app/tmp
     ports:
       - 80:80
     depends_on:
