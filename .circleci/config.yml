@@ -8,48 +8,48 @@ orbs:
   aws-ecs: circleci/aws-ecs@2.2.1
 
 jobs:
-  # build:
-  #   docker:
-  #     - image: cimg/ruby:2.7.5-node
-  #   working_directory: ~/dokotabe-app/src
-  #   steps:
-  #     - checkout:
-  #         path: ~/dokotabe-app
-  #     - ruby/install-deps
-  #     - node/install-packages:
-  #         pkg-manager: yarn
+  build:
+    docker:
+      - image: cimg/ruby:2.7.5-node
+    working_directory: ~/dokotabe-app/src
+    steps:
+      - checkout:
+          path: ~/dokotabe-app
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
 
-  # test:
-  #   docker:
-  #     - image: cimg/ruby:2.7.5-node
-  #     - image: circleci/postgres:13.5
-  #       environment:
-  #         POSTGRES_USER: postgres
-  #         POSTGRES_HOST_AUTH_METHOD: trust
-  #         POSTGRES_DB: app_test
-  #     - image: selenium/standalone-chrome:latest
-  #       name: chrome
-  #   environment:
-  #     BUNDLE_JOBS: "3"
-  #     BUNDLE_RETRY: "3"
-  #     APP_DATABASE_HOST: "127.0.0.1"
-  #     RAILS_ENV: test
-  #   working_directory: ~/dokotabe-app/src
-  #   steps:
-  #     - checkout:
-  #         path: ~/dokotabe-app
-  #     - ruby/install-deps
-  #     - node/install-packages:
-  #         pkg-manager: yarn
-  #     - run:
-  #         name: Database setup
-  #         command: bundle exec rails db:migrate
-  #     - run:
-  #         name: RuboCop
-  #         command: bundle exec rubocop
-  #     - run:
-  #         name: RSpec
-  #         command: bundle exec rspec
+  test:
+    docker:
+      - image: cimg/ruby:2.7.5-node
+      - image: circleci/postgres:13.5
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_DB: app_test
+      - image: selenium/standalone-chrome:latest
+        name: chrome
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      APP_DATABASE_HOST: "127.0.0.1"
+      RAILS_ENV: test
+    working_directory: ~/dokotabe-app/src
+    steps:
+      - checkout:
+          path: ~/dokotabe-app
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
+      - run:
+          name: Database setup
+          command: bundle exec rails db:migrate
+      - run:
+          name: RuboCop
+          command: bundle exec rubocop
+      - run:
+          name: RSpec
+          command: bundle exec rspec
 
   build-and-push-image-for-dokotabe:
     machine:
@@ -84,18 +84,18 @@ workflows:
   version: 2
   build_test_and_deploy:
     jobs:
-      # - build
-      # - test:
-      #     requires:
-      #       - build
-      # mainブランチにpushされた場合のみdeployジョブを実行する
+      - build
+      - test:
+          requires:
+            - build
+      # mainブランチにpushされたときのみデプロイ
       - build-and-push-image-for-dokotabe
-        # requires:
-        #   - test
-        # filters:
-        #   branches:
-        #     only: main
-      # ECSのdokotabe-clustorを更新
+        requires:
+          - test
+        filters:
+          branches:
+            only: main
+      # ECSの更新
       - aws-ecs/deploy-service-update:
           aws-region: AWS_REGION
           family: "dokotabe"
