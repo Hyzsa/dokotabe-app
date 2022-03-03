@@ -67,7 +67,7 @@ jobs:
           create-repo: true
           dockerfile: ./nginx/Dockerfile
           repo: dokotabe-web
-          tag: "${CIRCLE_SHA1}"
+          tag: "latest"
 
 workflows:
   version: 2
