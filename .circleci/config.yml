@@ -87,6 +87,7 @@ workflows:
         #     only: main
       # ECSのnginxコンテナを更新
       - aws-ecs/deploy-service-update:
+          aws-region: AWS_REGION
           family: "dokotabe" # ECSのタスク定義名
           cluster-name: "dokotabe-clustor" #ECSのクラスターのARN
           service-name: "dokotabe-service-for-ecs" #サービス名
