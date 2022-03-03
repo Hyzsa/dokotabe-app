@@ -68,7 +68,7 @@ jobs:
           create-repo: true
           dockerfile: ./nginx/Dockerfile
           repo: dokotabe-web
-          tag: "latest"
+          tag: "${CIRCLE_SHA1}"
       # ECRにrailsコンテナをプッシュ
       - aws-ecr/build-and-push-image:
           account-url: AWS_ECR_ACCOUNT_URL
@@ -78,7 +78,7 @@ jobs:
           create-repo: true
           dockerfile: ./Dockerfile
           repo: dokotabe-app
-          tag: "latest"
+          tag: "${CIRCLE_SHA1}"
 
 workflows:
   version: 2
@@ -101,6 +101,15 @@ workflows:
           family: "dokotabe" # ECSのタスク定義名
           cluster-name: "dokotabe-clustor" #ECSのクラスターのARN
           service-name: "dokotabe-service-for-ecs" #サービス名
-          container-image-name-updates: "container=dokotabe-web,tag=latest"
+          container-image-name-updates: "container=dokotabe-web,tag=${CIRCLE_SHA1}"
+          requires:
+            - build-and-push-image-for-dokotabe
+      # ECSのRailsコンテナを更新
+      - aws-ecs/deploy-service-update:
+          aws-region: AWS_REGION
+          family: "dokotabe" # ECSのタスク定義名
+          cluster-name: "dokotabe-clustor" #ECSのクラスターのARN
+          service-name: "dokotabe-service-for-ecs" #サービス名
+          container-image-name-updates: "container=dokotabe-app,tag=${CIRCLE_SHA1}"
           requires:
             - build-and-push-image-for-dokotabe
