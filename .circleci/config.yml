@@ -101,6 +101,6 @@ workflows:
           family: "dokotabe"
           cluster-name: "dokotabe-clustor"
           service-name: "dokotabe-service-for-ecs"
-          container-image-name-updates: "container=nginx, image-and-tag=dokotabe-web:latest, container=rails, image-and-tag=dokotabe-app:latest"
+          container-image-name-updates: "container=nginx, image-and-tag=${NGINX_IMAGE}, container=rails, image-and-tag=${RAILS_IMAGE}"
           requires:
             - build-and-push-image-for-dokotabe
