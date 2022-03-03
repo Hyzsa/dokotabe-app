@@ -51,7 +51,7 @@ jobs:
           name: RSpec
           command: bundle exec rspec
 
-  build-and-push-image-for-dokotabe:
+  build_and_push_image_for_dokotabe:
     machine:
       image: circleci/classic:edge
     steps:
@@ -89,12 +89,12 @@ workflows:
           requires:
             - build
       # mainブランチにpushされたときのみデプロイ
-      - build-and-push-image-for-dokotabe
-        requires:
-          - test
-        filters:
-          branches:
-            only: main
+      - build_and_push_image_for_dokotabe:
+          requires:
+            - test
+          filters:
+            branches:
+              only: main
       # ECSの更新
       - aws-ecs/deploy-service-update:
           aws-region: AWS_REGION
@@ -103,4 +103,4 @@ workflows:
           service-name: "dokotabe-service-for-ecs"
           container-image-name-updates: "container=nginx, image-and-tag=${NGINX_IMAGE}, container=rails, image-and-tag=${RAILS_IMAGE}"
           requires:
-            - build-and-push-image-for-dokotabe
+            - build_and_push_image_for_dokotabe
