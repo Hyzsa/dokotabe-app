@@ -68,6 +68,13 @@ jobs:
           dockerfile: ./nginx/Dockerfile
           repo: dokotabe-web
           tag: "latest"
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
+          family: "dokotabe:8" # ECSのタスク定義名
+          cluster-name: "${ECS_ARN}" #ECSのクラスターのARN
+          service-name: "dokotabe-service-for-ecs" #サービス名
+          container-image-name-updates: "container=dokotabe-web,tag=latest"
 
 workflows:
   version: 2
