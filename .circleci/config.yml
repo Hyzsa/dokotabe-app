@@ -68,7 +68,7 @@ jobs:
           create-repo: true
           dockerfile: ./nginx/Dockerfile
           repo: dokotabe-web
-          tag: "nginx-latest"
+          tag: "latest"
       # ECRにrailsコンテナをプッシュ
       - aws-ecr/build-and-push-image:
           account-url: AWS_ECR_ACCOUNT_URL
@@ -78,7 +78,7 @@ jobs:
           create-repo: true
           dockerfile: ./Dockerfile
           repo: dokotabe-app
-          tag: "rails-latest"
+          tag: "latest"
 
 workflows:
   version: 2
@@ -95,21 +95,12 @@ workflows:
         # filters:
         #   branches:
         #     only: main
-      # ECSのnginxコンテナを更新
+      # ECSのdokotabe-clustorを更新
       - aws-ecs/deploy-service-update:
           aws-region: AWS_REGION
-          family: "dokotabe" # ECSのタスク定義名
-          cluster-name: "dokotabe-clustor" #ECSのクラスターのARN
-          service-name: "dokotabe-service-for-ecs" #サービス名
-          container-image-name-updates: "container=nginx,tag=nginx-latest"
-          requires:
-            - build-and-push-image-for-dokotabe
-      # ECSのRailsコンテナを更新
-      - aws-ecs/deploy-service-update:
-          aws-region: AWS_REGION
-          family: "dokotabe" # ECSのタスク定義名
-          cluster-name: "dokotabe-clustor" #ECSのクラスターのARN
-          service-name: "dokotabe-service-for-ecs" #サービス名
-          container-image-name-updates: "container=rails,tag=rails-latest"
+          family: "dokotabe"
+          cluster-name: "dokotabe-clustor"
+          service-name: "dokotabe-service-for-ecs"
+          container-image-name-updates: "container=nginx, image-and-tag=dokotabe-web:latest, container=rails, image-and-tag=dokotabe-app:latest"
           requires:
             - build-and-push-image-for-dokotabe

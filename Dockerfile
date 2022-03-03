@@ -13,12 +13,12 @@ COPY ./src $RAILS_ROOT
 # bundle install
 RUN bundle config --local set path 'vendor/bundle' && bundle install
 
+COPY start.sh /start.sh
+RUN chmod 744 /start.sh
+CMD ["sh", "/start.sh"]
+
 # コンテナを起動するたびに実行されるスクリプトを追加
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
-
-COPY start.sh /start.sh
-RUN chmod 744 /start.sh
-CMD ["sh", "/start.sh"]
