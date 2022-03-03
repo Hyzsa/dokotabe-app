@@ -12,10 +12,8 @@ WORKDIR $RAILS_ROOT
 COPY ./src $RAILS_ROOT
 # bundle install
 RUN bundle config --local set path 'vendor/bundle' && bundle install
-
-COPY start.sh /start.sh
-RUN chmod 744 /start.sh
-CMD ["sh", "/start.sh"]
+# compile
+RUN bundle exec rails assets:precompile
 
 # コンテナを起動するたびに実行されるスクリプトを追加
 COPY entrypoint.sh /usr/bin/
