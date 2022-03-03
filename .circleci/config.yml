@@ -59,6 +59,7 @@ jobs:
           path: ~/dokotabe-app
       - aws-cli/install:
           override-installed: true
+      # ECRにnginxコンテナをプッシュ
       - aws-ecr/build-and-push-image:
           account-url: AWS_ECR_ACCOUNT_URL
           region: AWS_REGION
@@ -68,13 +69,6 @@ jobs:
           dockerfile: ./nginx/Dockerfile
           repo: dokotabe-web
           tag: "latest"
-      - aws-ecs/deploy-service-update:
-          requires:
-            - aws-ecr/build-and-push-image
-          family: "dokotabe:8" # ECSのタスク定義名
-          cluster-name: "${ECS_ARN}" #ECSのクラスターのARN
-          service-name: "dokotabe-service-for-ecs" #サービス名
-          container-image-name-updates: "container=dokotabe-web,tag=latest"
 
 workflows:
   version: 2
@@ -91,3 +85,11 @@ workflows:
         # filters:
         #   branches:
         #     only: main
+      # ECSのnginxコンテナを更新
+      - aws-ecs/deploy-service-update:
+          family: "dokotabe" # ECSのタスク定義名
+          cluster-name: "${ECS_ARN}" #ECSのクラスターのARN
+          service-name: "dokotabe-service-for-ecs" #サービス名
+          container-image-name-updates: "container=dokotabe-web,tag=latest"
+          requires:
+            - nginx-deploy
