@@ -51,7 +51,7 @@ jobs:
   #         name: RSpec
   #         command: bundle exec rspec
 
-  nginx-deploy:
+  build-and-push-image-for-dokotabe:
     machine:
       image: circleci/classic:edge
     steps:
@@ -69,6 +69,16 @@ jobs:
           dockerfile: ./nginx/Dockerfile
           repo: dokotabe-web
           tag: "latest"
+      # ECRにrailsコンテナをプッシュ
+      - aws-ecr/build-and-push-image:
+          account-url: AWS_ECR_ACCOUNT_URL
+          region: AWS_REGION
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          create-repo: true
+          dockerfile: ./Dockerfile
+          repo: dokotabe-app
+          tag: "latest"
 
 workflows:
   version: 2
@@ -79,7 +89,7 @@ workflows:
       #     requires:
       #       - build
       # mainブランチにpushされた場合のみdeployジョブを実行する
-      - nginx-deploy
+      - build-and-push-image-for-dokotabe
         # requires:
         #   - test
         # filters:
@@ -93,4 +103,4 @@ workflows:
           service-name: "dokotabe-service-for-ecs" #サービス名
           container-image-name-updates: "container=dokotabe-web,tag=latest"
           requires:
-            - nginx-deploy
+            - build-and-push-image-for-dokotabe
