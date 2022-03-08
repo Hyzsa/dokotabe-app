@@ -36,6 +36,9 @@ gem 'devise'
 # deviseの日本語化
 gem 'devise-i18n'
 
+# AWSのSESを利用してメールを送信
+gem 'aws-sdk-rails'
+
 # Railsの日本語化(バリデーションエラー)
 gem 'rails-i18n'
 
