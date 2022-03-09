@@ -52,7 +52,7 @@ https://dokotabe.com/
   - Nginx（Web サーバー）
   - Puma（アプリケーションサーバー）
 - インフラ
-  - AWS（VPC,ECS,ECR,EC2,RDS,Route53,ALB,ACM,IAM）
+  - AWS（VPC,ECS,ECR,EC2,RDS,Route53,ALB,ACM,SES,IAM）
   - Docker 20.10.7
   - PostgreSQL 14.1
 - その他
@@ -74,6 +74,8 @@ https://dokotabe.com/
 ## 追加予定機能
 
 - メモ機能の Ajax 化
+- ユーザー管理画面の追加（管理者のみ）
+- アクセス数解析ツールの導入
 
 ## 著者
 
